@@ -57,7 +57,7 @@ public class Player3DPlatformerMovement : MonoBehaviour
     [SerializeField] private float airTime = 0.1f;
     private float airTimeCounter;
 
-    // Facing direction
+    
     [SerializeField] public bool isFacingRight = false;
     [SerializeField] public bool isMovingRight = false; // public for the weapon rotation
     private Vector3 moveDirection;
