@@ -1326,6 +1326,7 @@ GameObject:
   - component: {fileID: 549823256}
   - component: {fileID: 549823258}
   - component: {fileID: 549823257}
+  - component: {fileID: 549823259}
   m_Layer: 5
   m_Name: DestructionUI
   m_TagString: Untagged
@@ -1391,6 +1392,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 549823255}
   m_CullTransparentMesh: 1
+--- !u!114 &549823259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549823255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 791b70aa0d4b8684ca956ed5da2fb0b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 559086991}
+  GrabAndThrowScore: 200
+  DoubleJumpScore: 500
+  ChargeThrowScore: 900
 --- !u!1 &559086989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1448,7 +1465,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1080300
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 312e8159a8ce04740ae620d852419126, type: 2}
   m_sharedMaterial: {fileID: 8343378089386515521, guid: 312e8159a8ce04740ae620d852419126, type: 2}
