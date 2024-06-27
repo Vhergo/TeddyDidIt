@@ -11,7 +11,7 @@ public class RagdollController : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private Rigidbody hips; //from ragdoll model
-    [SerializeField] private Animator ani; //from animation modle
+    [SerializeField] private Animator anim; //from animation modle
 
     [Header("Movement")]
     [SerializeField] private float maxSpeed = 20f;
@@ -70,7 +70,7 @@ public class RagdollController : MonoBehaviour
     {
         float targetSpeed = moveDirection.x * maxSpeed; //calculate speed
         AnimateMovement(targetSpeed); //animate
-        hips.velocity = new(0, hips.velocity.y, targetSpeed); //move player
+        hips.velocity = new(targetSpeed, hips.velocity.y, 0); //move player
     }
 
     void AnimateMovement(float speed)
@@ -81,11 +81,11 @@ public class RagdollController : MonoBehaviour
             //animate idle in direction
             if (!facingLeft)
             {
-                ani.Play("TeddyIdleRight", 0);
+                anim.Play("TeddyIdleRight", 0);
             }
             else
             {
-                ani.Play("TeddyIdleLeft", 0);
+                anim.Play("TeddyIdleLeft", 0);
             }
             hips.velocity = new(0, hips.velocity.y); // freeze x to prevent sliding
             return;
@@ -94,25 +94,25 @@ public class RagdollController : MonoBehaviour
         //player is moving
         //check if direction is changing
         if (speed < 0 && !facingLeft)
-        {     
-            ani.Play("TeddyTurnLeft", 1);           
+        {
+            anim.Play("TeddyTurnLeft", 1);           
             facingLeft = true;
         }
         //changing direction to right
         else if (speed > 0 && facingLeft)
-        {          
-            ani.Play("TeddyTurnRight", 1);   
+        {
+            anim.Play("TeddyTurnRight", 1);   
             facingLeft = false;
         }
 
         //animate walk in direction
         if (facingLeft)
         {
-            ani.Play("TeddyWalkLeft", 0);
+            anim.Play("TeddyWalkLeft", 0);
         }
         else
         {
-            ani.Play("TeddyWalkRight", 0);
+            anim.Play("TeddyWalkRight", 0);
         }
     }
 
