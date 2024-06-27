@@ -8,6 +8,7 @@ public class GrabAndThrowSystem : MonoBehaviour
     public static GrabAndThrowSystem Instance { get; private set; }
 
     [SerializeField] private Transform grabPos;
+    [SerializeField] private Transform throwTarget;
     [SerializeField] private float grabRadius = 2f;
     [SerializeField] private float throwForce = 10f;
     [SerializeField] private float cooldownTime = 1f;
@@ -132,14 +133,8 @@ public class GrabAndThrowSystem : MonoBehaviour
             rb.isKinematic = false;
             col.enabled = true;
 
-            Vector3 mousePos = Mouse.current.position.ReadValue();
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
-            worldPos.z = grabPos.position.z;
-            GameObject.CreatePrimitive(PrimitiveType.Sphere).transform.position = worldPos;
-
-            Vector3 throwDirection = (worldPos - grabPos.position).normalized;
-
-            rb.AddForce(throwDirection * throwForce, ForceMode.Impulse);
+            Vector3 throwDirection = throwTarget.position - grabPos.position;
+            rb.AddForce(throwDirection.normalized * throwForce, ForceMode.Impulse);
             grabbedObject = null;
         }
 

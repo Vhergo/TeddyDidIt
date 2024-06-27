@@ -13,16 +13,12 @@ public class DialogueSystem : MonoBehaviour
 
     [SerializeField] private List<Dialogue> dialogues = new List<Dialogue>();
 
-    public enum Side
-    {
-        Left,
-        Right
-    }
+    public enum Side { Left, Right }
 
     [Header("Dialogue UI")]
     [SerializeField] private GameObject mom;
     [SerializeField] private GameObject dad;
-    [SerializeField] private GameObject kid;
+    [SerializeField] private GameObject timmy;
     private GameObject currentSpeaker;
 
     [SerializeField] private TMP_Text dialogueText;
@@ -59,28 +55,27 @@ public class DialogueSystem : MonoBehaviour
         print("Initializing speakers");
         mom.SetActive(false);
         dad.SetActive(false);
-        kid.SetActive(false);
+        timmy.SetActive(false);
         dialogueText.text = "...";
         dialogueText.horizontalAlignment = HorizontalAlignmentOptions.Center;
     }
 
     private void UpdateDialogueUI(Dialogue dialogue)
     {
-        SetSpeakerName(dialogue.speakerName);
+        SetSpeakerName(dialogue.speaker);
         dialogueText.text = dialogue.dialogueText;
     }
 
     public void StartDialogue()
     {
-        SetDialogue(currentDialogueIndex);
+        SetDialogue(GetDialogue(currentDialogueIndex));
         UpdateDialogueUI(currentDialogue);
     }
 
     public void NextDialogue()
     {
         if (currentDialogueIndex < dialogues.Count - 1) {
-            SetDialogue(++currentDialogueIndex);
-            UpdateDialogueUI(currentDialogue);
+            SetDialogue(GetDialogue(++currentDialogueIndex));
         }else {
             Debug.Log("End of dialogue");
         }
@@ -89,43 +84,45 @@ public class DialogueSystem : MonoBehaviour
     public void PreviousDialogue()
     {
         if (currentDialogueIndex > 0) {
-            SetDialogue(--currentDialogueIndex);
-            UpdateDialogueUI(currentDialogue);
+            SetDialogue(GetDialogue(--currentDialogueIndex));
         }else {
             Debug.Log("Start of dialogue");
         }
     }
 
-    private void SetDialogue(int index)
+    public void SetDialogue(Dialogue dialogue)
     {
-        currentDialogue = dialogues[index];
+        currentDialogue = dialogue;
+        UpdateDialogueUI(currentDialogue);
     }
+
+    private Dialogue GetDialogue(int index) => dialogues[index];
 
     private void SetSpeakerName(Speaker speaker)
     {
         switch (speaker) {
-            case Speaker.Mom:
+            case Speaker.Mother:
                 dad.SetActive(false);
-                kid.SetActive(false);
+                timmy.SetActive(false);
 
                 mom.SetActive(true);
                 mom.transform.GetChild(0).GetComponent<TMP_Text>().text = momName;
                 dialogueText.horizontalAlignment = HorizontalAlignmentOptions.Right;
                 break;
-            case Speaker.Dad:
+            case Speaker.Father:
                 mom.SetActive(false);
-                kid.SetActive(false);
+                timmy.SetActive(false);
 
                 dad.SetActive(true);
                 dad.transform.GetChild(0).GetComponent<TMP_Text>().text = dadName;
                 dialogueText.horizontalAlignment = HorizontalAlignmentOptions.Right;
                 break;
-            case Speaker.Kid:
+            case Speaker.Timmy:
                 mom.SetActive(false);
                 dad.SetActive(false);
 
-                kid.SetActive(true);
-                kid.transform.GetChild(0).GetComponent<TMP_Text>().text = kidName;
+                timmy.SetActive(true);
+                timmy.transform.GetChild(0).GetComponent<TMP_Text>().text = kidName;
                 dialogueText.horizontalAlignment = HorizontalAlignmentOptions.Left;
                 break;
         }
