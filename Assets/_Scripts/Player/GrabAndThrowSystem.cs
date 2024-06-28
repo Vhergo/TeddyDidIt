@@ -15,6 +15,8 @@ public class GrabAndThrowSystem : MonoBehaviour
     private bool onCooldown;
     private bool hasGrabbed;
 
+    private ObjectScoring objectScoringScript;
+
     private GameObject grabbedObject;
 
     private ProgressStage progressStage;
@@ -79,6 +81,7 @@ public class GrabAndThrowSystem : MonoBehaviour
             Debug.Log("Grab Input");
             TryGetObjectToThrow(out GameObject objectToThrow);
             grabbedObject = objectToThrow;
+           objectScoringScript = grabbedObject.GetComponent<ObjectScoring>();
             if (grabbedObject != null) GrabObject();
         }
     }
@@ -118,6 +121,7 @@ public class GrabAndThrowSystem : MonoBehaviour
             col.enabled = false;
             grabbedObject.transform.position = grabPos.position;
             grabbedObject.transform.parent = grabPos;
+            objectScoringScript.isGrabbed = true;
         }
     }
 
@@ -135,6 +139,7 @@ public class GrabAndThrowSystem : MonoBehaviour
 
             Vector3 throwDirection = throwTarget.position - grabPos.position;
             rb.AddForce(throwDirection.normalized * throwForce, ForceMode.Impulse);
+
             grabbedObject = null;
         }
 

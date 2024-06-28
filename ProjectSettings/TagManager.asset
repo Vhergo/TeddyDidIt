@@ -7,6 +7,11 @@ TagManager:
   - Settings
   - Sliders
   - Audio Toggles
+  - OfficeSupplies
+  - Toys
+  - Food
+  - Clothing
+  - SportsEquipment
   layers:
   - Default
   - TransparentFX
@@ -18,7 +23,6 @@ TagManager:
   - Wall
   - Grabbable
   - noSelfCollision
-  - 
   - 
   - 
   - 

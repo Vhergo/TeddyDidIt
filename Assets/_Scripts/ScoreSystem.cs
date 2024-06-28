@@ -11,6 +11,8 @@ public class ScoreSystem : MonoBehaviour
     [SerializeField] private int DoubleJumpScore;
     [SerializeField] private int ChargeThrowScore;
 
+    private Dictionary<string,int> score_book = new Dictionary<string,int>();
+
     public static ScoreSystem Instance;
     private int score = 0;
 
@@ -23,7 +25,25 @@ public class ScoreSystem : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        score_book.Add("Food", 15);
+        score_book.Add("Clothing", 20);
+        score_book.Add("OfficeSupplies", 10);
+        score_book.Add("Toys", 25);
+        score_book.Add("SportsEquipment", 30);
+
+    }
+
+    public void addScore(String tag1, String tag2)
+    {
+        score = score + score_book[tag1] + score_book[tag2];
+        scoreText.text = score.ToString("#,#");
+        checkThreshhold();
+    }
+
     [ContextMenu("Add Score")]
+
     public void addScore()
     {
         score += 100;
