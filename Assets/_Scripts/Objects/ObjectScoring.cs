@@ -23,8 +23,12 @@ public class ObjectScoring : MonoBehaviour
     {
         if (collision.gameObject.layer == 8 && isGrabbed)
         {
-            ScoreSystem.Instance.addScore(gameObject.tag, collision.gameObject.tag);
+            Vector3 collisionDir = collision.contacts[0].point - transform.position;
+            float speed = Vector3.Dot(collisionDir.normalized, collision.relativeVelocity);
+            speed = Mathf.Abs(speed/50);
+            ScoreSystem.Instance.addScore(speed+1.0f,gameObject.tag, collision.gameObject.tag);
             isGrabbed = false;
+            Debug.Log(speed.ToString());
         }
     }
 }
