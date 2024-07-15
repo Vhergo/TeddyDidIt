@@ -10,6 +10,8 @@ public class Boss : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private Transform firePoint;
     [SerializeField] private SkinnedMeshRenderer faceMesh;
+    [SerializeField] private Animator ani;
+    [SerializeField] private BossAniEvent aniEvent;
 
     [Header("Projectile Variants")]
     [SerializeField] private GameObject slowPea;
@@ -70,13 +72,13 @@ public class Boss : MonoBehaviour
                 {
                     yield return new WaitForSeconds(Random.Range(minIntervalForSlow, maxIntervalForSlow));
                     slowPeasFired++; //increment counter
-                    Fire(slowPea); //fire slow pea          
+                    StartCoroutine("FireProcess", slowPea); //fire slow pea
                 }
                 else
                 {
                     yield return new WaitForSeconds(Random.Range(minIntervalForFast, maxIntervalForFast));
                     slowPeasFired = 0; //reset counter
-                    Fire(fastPea); //fire fast pea                 
+                    StartCoroutine("FireProcess", fastPea); //fire fast pea
                 }
                 
             }
@@ -87,7 +89,24 @@ public class Boss : MonoBehaviour
         }     
     }  
 
-    //fire given projectile
+    //play attack animation and fire projectile
+    private IEnumerator FireProcess(GameObject peaVariant)
+    {
+        //play attack animation
+        ani.SetTrigger("fire");
+
+        //wait for animation event before firing projectile at right timing
+        while (aniEvent.onAttack == false)
+            yield return null;
+
+        //reset event trigger
+        aniEvent.ResetAttack();
+
+        //fire projectile
+        Fire(peaVariant);
+    }
+
+    //fire projectile
     private void Fire(GameObject peaVariant)
     {
         //get chosen projectile from pool
@@ -95,7 +114,7 @@ public class Boss : MonoBehaviour
 
         //initialize projectile
         Projectile projectileScript = projectile.GetComponent<Projectile>();
-        projectileScript.Fire(target);   
+        projectileScript.Fire(target);
     }
     #endregion
 
