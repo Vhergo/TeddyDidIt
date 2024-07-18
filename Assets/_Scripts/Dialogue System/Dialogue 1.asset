@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2276a3e293bd02243a4ccb33400f4b3a, type: 3}
   m_Name: Dialogue 1
   m_EditorClassIdentifier: 
+  dialogueName: Test name
   speakerName: 0
   dialogueText: Oh my goodness, honey come look what <insert kid's name here> did!
