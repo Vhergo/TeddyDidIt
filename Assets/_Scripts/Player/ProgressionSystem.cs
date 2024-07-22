@@ -13,6 +13,7 @@ public class ProgressionSystem : MonoBehaviour
 
     private ProgressStage currentState;
 
+    public static Action OnProgressionChanged;
     public static Action OnGrabAndThrowEnabled;
     public static Action OnDoubleJumpEnabled;
     public static Action OnChargeThrowEnabled;
@@ -37,11 +38,13 @@ public class ProgressionSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
             SetProgressionStage(ProgressStage.Base);
-        } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            SetProgressionStage(ProgressStage.GrabAndThrow);
+        }else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            SetProgressionStage(ProgressStage.Punch);
         } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
-            SetProgressionStage(ProgressStage.DoubleJump);
+            SetProgressionStage(ProgressStage.GrabAndThrow);
         } else if (Input.GetKeyDown(KeyCode.Alpha4)) {
+            SetProgressionStage(ProgressStage.DoubleJump);
+        } else if (Input.GetKeyDown(KeyCode.Alpha5)) {
             SetProgressionStage(ProgressStage.ChargeThrow);
         }
     }
@@ -56,25 +59,29 @@ public class ProgressionSystem : MonoBehaviour
     public void SetProgressionStage(ProgressStage stage)
     {
         Debug.Log("Entering Stage: " + stage.ToString());
-        switch(stage) {
+        switch (stage) {
             case ProgressStage.Base:
                 currentState = ProgressStage.Base;
                 ActivateUIIndicator(0);
                 break;
+            case ProgressStage.Punch:
+                currentState = ProgressStage.Punch;
+                ActivateUIIndicator(1);
+                break;
             case ProgressStage.GrabAndThrow:
                 currentState = ProgressStage.GrabAndThrow;
                 OnGrabAndThrowEnabled?.Invoke();
-                ActivateUIIndicator(1);
+                ActivateUIIndicator(2);
                 break;
             case ProgressStage.DoubleJump:
                 currentState = ProgressStage.DoubleJump;
                 OnDoubleJumpEnabled?.Invoke();
-                ActivateUIIndicator(2);
+                ActivateUIIndicator(3);
                 break;
             case ProgressStage.ChargeThrow:
                 currentState = ProgressStage.ChargeThrow;
                 OnChargeThrowEnabled?.Invoke();
-                ActivateUIIndicator(3);
+                ActivateUIIndicator(4);
                 break;
         }
     }
@@ -86,6 +93,7 @@ public class ProgressionSystem : MonoBehaviour
 
     private void ActivateUIIndicator(int index)
     {
+        OnProgressionChanged?.Invoke();
         progressionIndicators[index].transform.GetChild(0).GetComponent<Image>().enabled = true;
     }
 }
@@ -94,6 +102,7 @@ public class ProgressionSystem : MonoBehaviour
 public enum ProgressStage
 {
     Base,
+    Punch,
     GrabAndThrow,
     DoubleJump,
     ChargeThrow
