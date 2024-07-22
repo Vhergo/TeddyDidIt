@@ -18,10 +18,10 @@ public class Projectile : MonoBehaviour
             Invoke("DestroyProjectile", timeToSelfDestroy);
     }
 
-    public void Fire(Transform target, float strengthMultiplier)
+    public void Fire(Transform target)
     {
         //move towards player
-        rb.velocity = (target.position - transform.position).normalized * strength * strengthMultiplier;
+        rb.velocity = (target.position - transform.position).normalized * strength;
     }
 
     private void DestroyProjectile()
