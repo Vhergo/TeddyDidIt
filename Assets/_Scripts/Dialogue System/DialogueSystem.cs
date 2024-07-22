@@ -45,9 +45,9 @@ public class DialogueSystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha5)) NextDialogue();
-        if (Input.GetKeyDown(KeyCode.Alpha6)) PreviousDialogue();
-        if (Input.GetKeyDown(KeyCode.Alpha7)) StartDialogue();
+        if (Input.GetKeyDown(KeyCode.J)) NextDialogue();
+        if (Input.GetKeyDown(KeyCode.K)) PreviousDialogue();
+        if (Input.GetKeyDown(KeyCode.L)) StartDialogue();
     }
 
     private void InitializeSpeakers()

@@ -45,11 +45,11 @@ public class Player3DPlatformerMovement : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float maxSpeed = 20f;
     [SerializeField] private float acceleration = 5f;
-    [SerializeField] private float decceleration = 5f;
+    [SerializeField] private float deceleration = 5f;
     [SerializeField] private bool conserveMomentum;
     private float originalMaxSpeed;
     private float accelForce;
-    private float deccelForce;
+    private float decelForce;
 
     // In-air speed control
     [Range(0.01f, 1)][SerializeField] private float accelInAir = 1f;
@@ -234,9 +234,9 @@ public class Player3DPlatformerMovement : MonoBehaviour
 
         float accelRate;
         if (airTimeCounter > 0) {
-            accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? accelForce : deccelForce;
+            accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? accelForce : decelForce;
         } else {
-            accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? accelForce * accelInAir : deccelForce * deccelInAir;
+            accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? accelForce * accelInAir : decelForce * deccelInAir;
         }
 
         ConserveMomentum(targetSpeed, accelRate);
@@ -485,20 +485,25 @@ public class Player3DPlatformerMovement : MonoBehaviour
             rb = GetComponent<Rigidbody>();
             rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
             rb.constraints = RigidbodyConstraints.FreezeRotation; // Freeze X, Y, and Z rotation
-            rb.constraints = RigidbodyConstraints.FreezePositionZ; // Freeze Z position
+            rb.constraints |= RigidbodyConstraints.FreezePositionZ; // Freeze Z position
         }
 
+        if (tr == null) {
+            tr = GetComponent<TrailRenderer>();
+        }
+
+        // Calculate gravity strength based on jump height and time to apex
+        gravityStrength = -(2 * jumpHeight) / (jumpTimeToApex * jumpTimeToApex);
+
+        // Calculate jump force based on gravity
+        jumpForce = Mathf.Sqrt(2 * Mathf.Abs(gravityStrength) * jumpHeight);
+
+        // Ensure acceleration and deceleration are within bounds
         accelForce = (50 * acceleration) / maxSpeed;
-        deccelForce = (50 * decceleration) / maxSpeed;
+        decelForce = (50 * deceleration) / maxSpeed;
 
         acceleration = Mathf.Clamp(acceleration, 0.01f, maxSpeed);
-        decceleration = Mathf.Clamp(decceleration, 0.01f, maxSpeed);
-
-        gravityStrength = -(2 * jumpHeight) / (jumpTimeToApex * jumpTimeToApex);
-        gravityScale = gravityStrength / Physics.gravity.y;
-        rb.drag = gravityScale;
-
-        jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics.gravity.y * rb.drag));
+        deceleration = Mathf.Clamp(deceleration, 0.01f, maxSpeed);
 
         tempJumpLimit = toggleDoubleJumpOff ? 1 : jumpLimit;
         jumpCounter = tempJumpLimit;

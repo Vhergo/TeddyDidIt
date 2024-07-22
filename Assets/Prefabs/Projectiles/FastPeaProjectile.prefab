@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 3613342179966307641}
   - component: {fileID: 8297034007182093720}
   m_Layer: 0
-  m_Name: ProjectileVariant2
-  m_TagString: Untagged
+  m_Name: FastPeaProjectile
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1673ea90afeb0a74a93e2eaf7646d9a5, type: 2}
+  - {fileID: 2100000, guid: f0fbbecc7c7efa0489cdf721ad3506ff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selfDestroy: 1
   timeToSelfDestroy: 10
-  strength: 8
+  strength: 10
 --- !u!135 &3613342179966307641
 SphereCollider:
   m_ObjectHideFlags: 0

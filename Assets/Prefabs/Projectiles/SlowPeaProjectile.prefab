@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 3613342179966307641}
   - component: {fileID: 8297034007182093720}
   m_Layer: 0
-  m_Name: ProjectileVariant1
-  m_TagString: Untagged
+  m_Name: SlowPeaProjectile
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 301611966b0bcfd49b68f627968fc33f, type: 2}
+  - {fileID: 2100000, guid: 3bb8940cb17db534eb3f3dbfc45cbd20, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
