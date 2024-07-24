@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2276a3e293bd02243a4ccb33400f4b3a, type: 3}
+  m_Name: Dialogue 10
+  m_EditorClassIdentifier: 
+  orderNumber: 10
+  speaker: 5
+  dialogueText: "(Timmy notices his parents looking at the mess he made in his bedroom.
+    He knows just as well as they do, that this isn\u2019t good. But what if, Timmy
+    could find a way out of trouble? What if Timmy could find someone else to blame
+    for his messy room?)"
