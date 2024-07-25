@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 25
   m_EditorClassIdentifier: 
   orderNumber: 25
-  speaker: 1
+  speaker: 2
   dialogueText: "I fear that side-eye more than anything\u2026"
+  autoplayDuration: 0

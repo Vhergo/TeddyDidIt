@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue 29
   m_EditorClassIdentifier: 
   orderNumber: 29
-  speaker: 0
+  speaker: 1
   dialogueText: "I noticed your LEGO\u2019s are all over the place, was that Teddy\u2019s
     doing as well?"
+  autoplayDuration: 0

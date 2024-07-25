@@ -16,3 +16,4 @@ MonoBehaviour:
   speaker: 3
   dialogueText: "There\u2019s nothing more important in my life, he\u2019s all I
     have\u2026"
+  autoplayDuration: 0

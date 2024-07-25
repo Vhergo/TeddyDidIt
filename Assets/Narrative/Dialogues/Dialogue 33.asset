@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 33
   m_EditorClassIdentifier: 
   orderNumber: 33
-  speaker: 0
+  speaker: 1
   dialogueText: "(gasps) ... Your precious LEGO castle you spent so long on building\u2026"
+  autoplayDuration: 0

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 23
   m_EditorClassIdentifier: 
   orderNumber: 23
-  speaker: 1
+  speaker: 2
   dialogueText: "Playing with toys is considered \u2018tidying up\u2019?"
+  autoplayDuration: 0

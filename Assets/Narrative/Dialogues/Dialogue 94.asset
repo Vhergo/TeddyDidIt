@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 94
   m_EditorClassIdentifier: 
   orderNumber: 94
-  speaker: 2
+  speaker: 0
   dialogueText: "Thanks, Mother! It\u2019s delicious!"
+  autoplayDuration: 0

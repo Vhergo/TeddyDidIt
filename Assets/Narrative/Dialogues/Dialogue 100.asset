@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue 100
   m_EditorClassIdentifier: 
   orderNumber: 100
-  speaker: 2
+  speaker: 0
   dialogueText: "Hehe, me and Teddy are busy rebuilding our LEGO castle together!
     He\u2019s waiting for me to finish eating."
+  autoplayDuration: 0

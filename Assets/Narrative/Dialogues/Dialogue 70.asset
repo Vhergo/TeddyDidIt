@@ -15,3 +15,4 @@ MonoBehaviour:
   orderNumber: 70
   speaker: 3
   dialogueText: "I\u2019m almost there\u2026 Almost, Timmy\u2026"
+  autoplayDuration: 0

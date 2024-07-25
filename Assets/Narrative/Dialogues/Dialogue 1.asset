@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 1
   m_EditorClassIdentifier: 
   orderNumber: 1
-  speaker: 1
+  speaker: 2
   dialogueText: Did you hear that noise, darling?
+  autoplayDuration: 0

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 98
   m_EditorClassIdentifier: 
   orderNumber: 98
-  speaker: 2
+  speaker: 0
   dialogueText: (Mother notices Timmy is in a hurry)
+  autoplayDuration: 0

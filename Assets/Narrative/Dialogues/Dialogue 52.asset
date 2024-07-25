@@ -15,3 +15,4 @@ MonoBehaviour:
   orderNumber: 52
   speaker: 5
   dialogueText: (Father & Mother exit the room and head back downstairs)
+  autoplayDuration: 0

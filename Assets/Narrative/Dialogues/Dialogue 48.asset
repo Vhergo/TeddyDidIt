@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 48
   m_EditorClassIdentifier: 
   orderNumber: 48
-  speaker: 1
+  speaker: 2
   dialogueText: Understood?
+  autoplayDuration: 0

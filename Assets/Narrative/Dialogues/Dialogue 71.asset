@@ -15,3 +15,4 @@ MonoBehaviour:
   orderNumber: 71
   speaker: 3
   dialogueText: "Finally, I made it\u2026"
+  autoplayDuration: 0

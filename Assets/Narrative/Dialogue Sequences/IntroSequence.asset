@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1660f9f709275e1429ac5ddb2da71118, type: 3}
+  m_Name: IntroSequence
+  m_EditorClassIdentifier: 
+  sequenceName: Intro Sequence
+  autoplay: 1
+  dialogueSequence:
+  - {fileID: 11400000, guid: 0234a272602741748b5a49b3716213d1, type: 2}
+  - {fileID: 11400000, guid: 641e0d89e30a0d64a85ea6d8fa17f4a5, type: 2}
+  - {fileID: 11400000, guid: 286b16a9caec1424da216d91f82111d4, type: 2}
+  - {fileID: 11400000, guid: 4bfa2c4ec29d4184596ef3f4c92e9da3, type: 2}
+  - {fileID: 11400000, guid: 1c876203f138a5448acb478747454c81, type: 2}
+  - {fileID: 11400000, guid: 40c7caed23bd6a3479da91352cd2c0f1, type: 2}
+  - {fileID: 11400000, guid: 7851165312606264e8244da3488c1505, type: 2}
+  - {fileID: 11400000, guid: 964ddbc8c9256c7428c8d1d732fb83c2, type: 2}
+  - {fileID: 11400000, guid: 491a2dfa163b61f4eb9213669d6fffd5, type: 2}
+  nextSequence: {fileID: 11400000, guid: 5315e4a6b2c9c624eb8d115e91f73d01, type: 2}

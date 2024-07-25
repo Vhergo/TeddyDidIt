@@ -15,3 +15,4 @@ MonoBehaviour:
   orderNumber: 55
   speaker: 3
   dialogueText: Today is the day.
+  autoplayDuration: 0

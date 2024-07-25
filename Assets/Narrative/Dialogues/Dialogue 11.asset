@@ -16,3 +16,4 @@ MonoBehaviour:
   speaker: 5
   dialogueText: (Timmy looks at Teddy, his favorite teddy bear, sleeping peacefully
     under the bed.)
+  autoplayDuration: 0

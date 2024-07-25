@@ -15,3 +15,4 @@ MonoBehaviour:
   orderNumber: 79
   speaker: 3
   dialogueText: Ignorant I may be, scared am I not.
+  autoplayDuration: 0

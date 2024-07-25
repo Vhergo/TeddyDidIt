@@ -15,3 +15,4 @@ MonoBehaviour:
   orderNumber: 61
   speaker: 3
   dialogueText: I have to do it, for Timmy, for me, for us
+  autoplayDuration: 0

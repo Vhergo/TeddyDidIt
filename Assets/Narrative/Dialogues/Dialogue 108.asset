@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 108
   m_EditorClassIdentifier: 
   orderNumber: 108
-  speaker: 0
+  speaker: 1
   dialogueText: (softly) From one small boy to another
+  autoplayDuration: 0

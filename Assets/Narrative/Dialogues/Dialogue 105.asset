@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 105
   m_EditorClassIdentifier: 
   orderNumber: 105
-  speaker: 1
+  speaker: 2
   dialogueText: MY SMALL BOY IS BECOMING A MAN! (starts crying)
+  autoplayDuration: 0

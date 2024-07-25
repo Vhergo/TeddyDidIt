@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 42
   m_EditorClassIdentifier: 
   orderNumber: 42
-  speaker: 0
+  speaker: 1
   dialogueText: "Father is right, pumpkin\u2026"
+  autoplayDuration: 0

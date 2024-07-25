@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 9
   m_EditorClassIdentifier: 
   orderNumber: 9
-  speaker: 0
+  speaker: 1
   dialogueText: "\u2026"
+  autoplayDuration: 0

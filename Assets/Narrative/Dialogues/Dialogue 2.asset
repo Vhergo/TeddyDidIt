@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 2
   m_EditorClassIdentifier: 
   orderNumber: 2
-  speaker: 0
+  speaker: 1
   dialogueText: Yes, honey, I wonder what little Timmy is up to now.
+  autoplayDuration: 0

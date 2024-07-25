@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 36
   m_EditorClassIdentifier: 
   orderNumber: 36
-  speaker: 1
+  speaker: 2
   dialogueText: There are even LEGO pieces under your bed???
+  autoplayDuration: 0

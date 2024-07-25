@@ -3,9 +3,9 @@ using System;
 [Serializable]
 public enum Speaker
 {
+    Timmy,
     Mother,
     Father,
-    Timmy,
     Teddy,
     King,
     Narration

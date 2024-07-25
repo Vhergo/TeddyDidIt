@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 109
   m_EditorClassIdentifier: 
   orderNumber: 109
-  speaker: 1
+  speaker: 2
   dialogueText: Hm?
+  autoplayDuration: 0

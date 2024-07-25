@@ -15,3 +15,4 @@ MonoBehaviour:
   orderNumber: 89
   speaker: 3
   dialogueText: "Muster up the last of my remaining strength\u2026"
+  autoplayDuration: 0

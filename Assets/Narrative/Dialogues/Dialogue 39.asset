@@ -16,3 +16,4 @@ MonoBehaviour:
   speaker: 5
   dialogueText: (Father & Mother whisper to each other, while Timmy sits on the floor
     waiting in anticipation)
+  autoplayDuration: 0

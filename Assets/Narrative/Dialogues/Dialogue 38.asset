@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 38
   m_EditorClassIdentifier: 
   orderNumber: 38
-  speaker: 1
+  speaker: 2
   dialogueText: "(sigh) Give me and Mother a moment to converse real quick\u2026"
+  autoplayDuration: 0

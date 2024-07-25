@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 44
   m_EditorClassIdentifier: 
   orderNumber: 44
-  speaker: 1
+  speaker: 2
   dialogueText: Timmy.
+  autoplayDuration: 0

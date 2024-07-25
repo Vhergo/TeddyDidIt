@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue 95
   m_EditorClassIdentifier: 
   orderNumber: 95
-  speaker: 2
+  speaker: 0
   dialogueText: "It really ended up growing on me, not to mention it\u2019s really
     healthy too!"
+  autoplayDuration: 0

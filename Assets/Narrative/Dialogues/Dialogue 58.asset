@@ -15,3 +15,4 @@ MonoBehaviour:
   orderNumber: 58
   speaker: 3
   dialogueText: Truth is, I have something worth fighting for.
+  autoplayDuration: 0

@@ -15,3 +15,4 @@ MonoBehaviour:
   orderNumber: 62
   speaker: 3
   dialogueText: The entrance to the castle, I can see it.
+  autoplayDuration: 0

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 34
   m_EditorClassIdentifier: 
   orderNumber: 34
-  speaker: 0
+  speaker: 1
   dialogueText: What was Teddy doing to it???
+  autoplayDuration: 0

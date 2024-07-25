@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1660f9f709275e1429ac5ddb2da71118, type: 3}
+  m_Name: PostBossSequence
+  m_EditorClassIdentifier: 
+  sequenceName: Post Boss Sequence
+  autoplay: 1
+  dialogueSequence:
+  - {fileID: 11400000, guid: c04a4c8ab7296ab45b11014c5519e14d, type: 2}
+  - {fileID: 11400000, guid: d0cab0721d2658b45a4a9896083bf94f, type: 2}
+  - {fileID: 11400000, guid: db441a90bd791ed428a1359f7921cf56, type: 2}
+  - {fileID: 11400000, guid: c18a602fb9feb51489c26c444ca3c74e, type: 2}
+  - {fileID: 11400000, guid: 46f7763044afa704da79389e3f8cbc70, type: 2}
+  - {fileID: 11400000, guid: 2f5766cbd0f58664c88524c4720e972d, type: 2}
+  - {fileID: 11400000, guid: 70548e2a67229c245a80d4ae6e34b18e, type: 2}
+  - {fileID: 11400000, guid: 0368a3cf4c894bb4c8d35b3493477392, type: 2}
+  - {fileID: 11400000, guid: e7181c401c11d7e4382b357da8c1f3b3, type: 2}
+  - {fileID: 11400000, guid: 8558cf71e03b4a24c87af18b0fb47ad9, type: 2}
+  - {fileID: 11400000, guid: 28288ac5f8aa5ba4a8b8a0b914383e28, type: 2}
+  nextSequence: {fileID: 11400000, guid: e98db358abc31474fb83e4010e94e63f, type: 2}

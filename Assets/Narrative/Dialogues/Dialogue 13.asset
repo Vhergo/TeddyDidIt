@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue 13
   m_EditorClassIdentifier: 
   orderNumber: 13
-  speaker: 1
+  speaker: 2
   dialogueText: What??? Stop making up stories, you owe us an explanation! (slight
     anger behind his voice, raised)
+  autoplayDuration: 0

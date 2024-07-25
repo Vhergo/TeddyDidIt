@@ -15,3 +15,4 @@ MonoBehaviour:
   orderNumber: 64
   speaker: 3
   dialogueText: "There\u2019s toys everywhere\u2026"
+  autoplayDuration: 0

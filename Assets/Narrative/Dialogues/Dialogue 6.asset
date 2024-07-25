@@ -15,3 +15,4 @@ MonoBehaviour:
   orderNumber: 6
   speaker: 5
   dialogueText: "(Both parents arrive at Timmy\u2019s room, his door is already open)"
+  autoplayDuration: 0

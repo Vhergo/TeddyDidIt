@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 50
   m_EditorClassIdentifier: 
   orderNumber: 50
-  speaker: 1
+  speaker: 2
   dialogueText: Now get to cleaning this mess up, pronto.
+  autoplayDuration: 0

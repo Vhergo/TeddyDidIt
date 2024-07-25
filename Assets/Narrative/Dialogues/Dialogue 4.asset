@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue 4
   m_EditorClassIdentifier: 
   orderNumber: 4
-  speaker: 0
+  speaker: 1
   dialogueText: Oh honey, you and your jokes. I really did end up marrying a jokester,
     huh? (giggles)
+  autoplayDuration: 0

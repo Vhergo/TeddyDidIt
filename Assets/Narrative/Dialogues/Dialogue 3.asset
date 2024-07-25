@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue 3
   m_EditorClassIdentifier: 
   orderNumber: 3
-  speaker: 1
+  speaker: 2
   dialogueText: "Let\u2019s go have a look, make sure it isn\u2019t anything serious,
     like him turning his bedroom into a mess again."
+  autoplayDuration: 0

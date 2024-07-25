@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 16
   m_EditorClassIdentifier: 
   orderNumber: 16
-  speaker: 2
+  speaker: 0
   dialogueText: (nods)
+  autoplayDuration: 0

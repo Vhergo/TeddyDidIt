@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue 37
   m_EditorClassIdentifier: 
   orderNumber: 37
-  speaker: 2
+  speaker: 0
   dialogueText: "Yeah, Teddy threw them all over the place. I don\u2019t know why
     he was being like that..."
+  autoplayDuration: 0

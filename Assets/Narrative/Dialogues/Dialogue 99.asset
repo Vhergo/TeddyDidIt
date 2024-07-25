@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 99
   m_EditorClassIdentifier: 
   orderNumber: 99
-  speaker: 0
+  speaker: 1
   dialogueText: Oh? And where are you heading, young man?
+  autoplayDuration: 0

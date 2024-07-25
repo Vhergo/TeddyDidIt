@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 51
   m_EditorClassIdentifier: 
   orderNumber: 51
-  speaker: 2
+  speaker: 0
   dialogueText: (nods)
+  autoplayDuration: 0

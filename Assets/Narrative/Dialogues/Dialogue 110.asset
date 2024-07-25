@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 110
   m_EditorClassIdentifier: 
   orderNumber: 110
-  speaker: 0
+  speaker: 1
   dialogueText: I love you, honey
+  autoplayDuration: 0

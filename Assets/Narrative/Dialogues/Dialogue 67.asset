@@ -15,3 +15,4 @@ MonoBehaviour:
   orderNumber: 67
   speaker: 3
   dialogueText: The training has paid off.
+  autoplayDuration: 0

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1660f9f709275e1429ac5ddb2da71118, type: 3}
+  m_Name: EndingSequence
+  m_EditorClassIdentifier: 
+  sequenceName: Ending Sequence
+  autoplay: 1
+  dialogueSequence:
+  - {fileID: 11400000, guid: 9d58ce52c8801dc43be2f45da85cd61d, type: 2}
+  - {fileID: 11400000, guid: 9d6de92ee9393eb458ae2ab67e1dd884, type: 2}
+  - {fileID: 11400000, guid: 091772f9dfb35df40b90fe44c1aca857, type: 2}
+  - {fileID: 11400000, guid: 2bd20227b30202f40b1b5d4da685d7c7, type: 2}
+  - {fileID: 11400000, guid: 5c5d1eac9d166bd4d8a5fe9e41f80d04, type: 2}
+  - {fileID: 11400000, guid: 2f1ffe500528840438fa10d71f14ecb3, type: 2}
+  - {fileID: 11400000, guid: 21fe238d1ddbf8845816d0c58d801993, type: 2}
+  - {fileID: 11400000, guid: 561e1572509d6444694d7ac85eba4871, type: 2}
+  - {fileID: 11400000, guid: db7356a846d4e9c4d8a25592a7096863, type: 2}
+  - {fileID: 11400000, guid: 576e9e002a6e3e94caa5a5c3ed10d05b, type: 2}
+  - {fileID: 11400000, guid: e148a266708f56d46a4a1b45f2559fbd, type: 2}
+  - {fileID: 11400000, guid: cca94115884d51c42b30b5f53a732976, type: 2}
+  - {fileID: 11400000, guid: 8200aa86b5c21dc4481bd973b8eec283, type: 2}
+  - {fileID: 11400000, guid: 52380d6b2fc751549b562376ad292672, type: 2}
+  - {fileID: 11400000, guid: 3911156e279f0b94f9ff58d5780c36fb, type: 2}
+  - {fileID: 11400000, guid: 08a96cec36f58af49be9a2586760966a, type: 2}
+  - {fileID: 11400000, guid: ce2aeec391bcb964088c6b6668f3dcfb, type: 2}
+  - {fileID: 11400000, guid: 4195e35a9470320458024ccebf631aa3, type: 2}
+  - {fileID: 11400000, guid: 42e313ae18be8674999cb87f3bde3cda, type: 2}

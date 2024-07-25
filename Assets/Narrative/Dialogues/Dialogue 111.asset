@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 111
   m_EditorClassIdentifier: 
   orderNumber: 111
-  speaker: 1
+  speaker: 2
   dialogueText: (sniffs) I love you too, darling.
+  autoplayDuration: 0

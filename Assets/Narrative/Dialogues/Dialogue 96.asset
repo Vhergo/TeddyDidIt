@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 96
   m_EditorClassIdentifier: 
   orderNumber: 96
-  speaker: 1
+  speaker: 2
   dialogueText: "That\u2019s my boy!"
+  autoplayDuration: 0

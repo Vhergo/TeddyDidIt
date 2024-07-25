@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 107
   m_EditorClassIdentifier: 
   orderNumber: 107
-  speaker: 0
+  speaker: 1
   dialogueText: No need to cry.. (hugs Father)
+  autoplayDuration: 0

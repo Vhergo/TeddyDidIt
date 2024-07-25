@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue 27
   m_EditorClassIdentifier: 
   orderNumber: 27
-  speaker: 2
+  speaker: 0
   dialogueText: "I haven\u2019t been playing with Teddy recently, so he got really
     upset with me and decided to make a mess out of my room."
+  autoplayDuration: 0

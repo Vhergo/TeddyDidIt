@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 106
   m_EditorClassIdentifier: 
   orderNumber: 106
-  speaker: 0
+  speaker: 1
   dialogueText: "Awww honey\u2026."
+  autoplayDuration: 0

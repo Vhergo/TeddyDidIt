@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 104
   m_EditorClassIdentifier: 
   orderNumber: 104
-  speaker: 1
+  speaker: 2
   dialogueText: "He actually managed to finish all of his veggies\u2026"
+  autoplayDuration: 0

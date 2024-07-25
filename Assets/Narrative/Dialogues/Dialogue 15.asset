@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue 15
   m_EditorClassIdentifier: 
   orderNumber: 15
-  speaker: 0
+  speaker: 1
   dialogueText: "(directly talking to Timmy and addressing him as \u2018little pumpkin\u2019,
     trying to deflate the scenario)"
+  autoplayDuration: 0

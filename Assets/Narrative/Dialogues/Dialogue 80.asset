@@ -15,3 +15,4 @@ MonoBehaviour:
   orderNumber: 80
   speaker: 4
   dialogueText: "TRY ALL YOU WANT, IT\u2019S FUTILE! HAHAHAHAH"
+  autoplayDuration: 0

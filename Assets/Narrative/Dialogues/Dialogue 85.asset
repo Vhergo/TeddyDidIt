@@ -15,3 +15,4 @@ MonoBehaviour:
   orderNumber: 85
   speaker: 3
   dialogueText: "Ah\u2026"
+  autoplayDuration: 0

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 45
   m_EditorClassIdentifier: 
   orderNumber: 45
-  speaker: 2
+  speaker: 0
   dialogueText: "Yes, Father\u2026?"
+  autoplayDuration: 0

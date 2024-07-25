@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 18
   m_EditorClassIdentifier: 
   orderNumber: 18
-  speaker: 0
-  dialogueText: 'Mother:'
+  speaker: 1
+  dialogueText: We're all ears.
+  autoplayDuration: 0

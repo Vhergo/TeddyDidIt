@@ -15,3 +15,4 @@ MonoBehaviour:
   orderNumber: 74
   speaker: 3
   dialogueText: Me! I am here to reclaim what is mine.
+  autoplayDuration: 0

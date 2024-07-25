@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Dialogue 47
   m_EditorClassIdentifier: 
   orderNumber: 47
-  speaker: 0
+  speaker: 1
   dialogueText: "Remember, pumpkin, we\u2019re doing it to teach you a lesson. We
     want you to take responsibility for what \u2018Teddy\u2019 has done, he is your
     friend after all."
+  autoplayDuration: 0

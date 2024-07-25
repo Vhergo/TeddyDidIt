@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 93
   m_EditorClassIdentifier: 
   orderNumber: 93
-  speaker: 0
+  speaker: 1
   dialogueText: "Awwwwww\u2026 is our big boy enjoying his broccoli?"
+  autoplayDuration: 0
