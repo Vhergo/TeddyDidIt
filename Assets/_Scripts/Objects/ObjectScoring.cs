@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ObjectScoring : MonoBehaviour
 {
-    [SerializeField] private Rigidbody rb;
     public bool isGrabbed = false;
 
     // Start is called before the first frame update

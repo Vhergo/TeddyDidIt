@@ -10,6 +10,8 @@ public class ScoreSystem : MonoBehaviour
     [SerializeField] private int GrabAndThrowScore;
     [SerializeField] private int DoubleJumpScore;
     [SerializeField] private int ChargeThrowScore;
+    [SerializeField] private AudioSource destroySound;
+
 
     private Dictionary<string,int> score_book = new Dictionary<string,int>();
 
@@ -27,12 +29,12 @@ public class ScoreSystem : MonoBehaviour
 
     private void Start()
     {
+        score_book.Add("Legos", 5);
         score_book.Add("Food", 5);
         score_book.Add("Clothing", 10);
         score_book.Add("OfficeSupplies", 5);
         score_book.Add("Toys", 15);
         score_book.Add("SportsEquipment", 15);
-
     }
 
     public void addScore(float scalar, String tag1, String tag2)
@@ -41,6 +43,7 @@ public class ScoreSystem : MonoBehaviour
         scoreToAdd = Mathf.Floor(scalar * scoreToAdd);
         score = score + (int) scoreToAdd;
         scoreText.text = score.ToString("#,#");
+        destroySound.Play();
         checkThreshhold();
     }
 

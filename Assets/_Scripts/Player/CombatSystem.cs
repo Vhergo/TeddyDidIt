@@ -16,6 +16,7 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private float punchCooldown = 0.5f;
     [SerializeField] private float punchForce = 10f;
     [SerializeField] private float punchRadius = 2f;
+    [SerializeField] private AudioSource punchSound;
     private bool punchOnCooldown;
 
     [Header("Grab and Throw"), Space(10)]
@@ -27,8 +28,11 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private float grabRadius = 2f;
     [SerializeField] private float throwForce = 10f;
     [SerializeField] private float cooldownTime = 1f;
+    [SerializeField] private AudioSource throwSound;
     private bool onCooldown;
     private bool hasGrabbed;
+
+    private ObjectScoring objectScoringScript;
 
     private GameObject grabbedObject;
 
@@ -95,6 +99,7 @@ public class CombatSystem : MonoBehaviour
     {
         Debug.Log("PUNCH");
         punchOnCooldown = true;
+        punchSound.Play();
 
         Vector3 punchDirection = (throwTarget.position - grabPos.position).normalized;
         Vector3 punchPoint = grabPos.position + punchDirection * punchRadius;
@@ -131,7 +136,11 @@ public class CombatSystem : MonoBehaviour
             Debug.Log("Grab Input");
             TryGetObjectToThrow(out GameObject objectToThrow);
             grabbedObject = objectToThrow;
-            if (grabbedObject != null) GrabObject();
+            if (grabbedObject != null)
+            {
+                objectScoringScript = grabbedObject.GetComponent<ObjectScoring>();
+                GrabObject();
+            }
         }
     }
 
@@ -171,6 +180,7 @@ public class CombatSystem : MonoBehaviour
             col.enabled = false;
             grabbedObject.transform.position = grabPos.position;
             grabbedObject.transform.parent = grabPos;
+            objectScoringScript.isGrabbed = true;
         }
         StartCoroutine(HandGrabAnimation());
     }
@@ -207,6 +217,7 @@ public class CombatSystem : MonoBehaviour
             Vector3 throwDirection = throwTarget.position - grabPos.position;
             rb.AddForce(throwDirection.normalized * throwForce, ForceMode.Impulse);
             grabbedObject = null;
+            throwSound.Play();
         }
 
         Invoke("ResetThrowCooldown", cooldownTime);

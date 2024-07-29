@@ -11,9 +11,12 @@ GameObject:
   - component: {fileID: 8865964459430214402}
   - component: {fileID: 3720233675807706616}
   - component: {fileID: 7893597483264675022}
-  m_Layer: 0
+  - component: {fileID: 1279879449555828834}
+  - component: {fileID: 8372229911970462953}
+  - component: {fileID: -3606684552493095007}
+  m_Layer: 8
   m_Name: BaseballFigurine
-  m_TagString: Untagged
+  m_TagString: Toys
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +45,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4460721505110115672}
-  m_Mesh: {fileID: 1388283571759356221, guid: 0eb0a5c372f2cc44ba22b3e65208b04f, type: 3}
+  m_Mesh: {fileID: -5546347261141537002, guid: dc5ba9d86e5781c4e802ffebe2810e20, type: 3}
 --- !u!23 &7893597483264675022
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -85,6 +88,67 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1279879449555828834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4460721505110115672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081648cbfe8e9a9408cb27dec828497a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGrabbed: 0
+--- !u!54 &8372229911970462953
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4460721505110115672}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0.1
+  m_AngularDrag: 0.005
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 8
+  m_CollisionDetection: 1
+--- !u!65 &-3606684552493095007
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4460721505110115672}
+  m_Material: {fileID: 13400000, guid: b9c6033a772973e4a8c99a0dd55b0905, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.8935618, y: 5.792495, z: 1.790656}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8149886699719277584
 GameObject:
   m_ObjectHideFlags: 0
