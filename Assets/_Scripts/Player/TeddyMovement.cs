@@ -24,7 +24,7 @@ public class TeddyMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Vector3 groundDetectionSize = new(1f, 0.2f, 1f);
-    private bool isJumping = true;
+    private bool isJumping = false;
     private bool inAir = false;
     private bool inJumpAnim = false;
 
