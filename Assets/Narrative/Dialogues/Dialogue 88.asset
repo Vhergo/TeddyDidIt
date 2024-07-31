@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 88
   speaker: 3
   dialogueText: "I have to get back to the bed\u2026 before he comes back from school\u2026"
-  autoplayDuration: 0
+  autoplayDuration: 1

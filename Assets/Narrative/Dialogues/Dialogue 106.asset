@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 106
   speaker: 1
   dialogueText: "Awww honey\u2026."
-  autoplayDuration: 0
+  autoplayDuration: 1

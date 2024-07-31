@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 5
   speaker: 5
   dialogueText: "(Parents proceed to Timmy\u2019s bedroom)"
-  autoplayDuration: 0
+  autoplayDuration: 1

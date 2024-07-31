@@ -43,10 +43,10 @@ GameObject:
   - component: {fileID: 3562433485981664738}
   - component: {fileID: 4963939137211088235}
   - component: {fileID: 5985411761497333789}
+  - component: {fileID: 2814030750022333670}
   - component: {fileID: 3017564849955282956}
   - component: {fileID: 3514948487103154002}
   - component: {fileID: 8366182319821270550}
-  - component: {fileID: 2814030750022333670}
   m_Layer: 0
   m_Name: Teddy
   m_TagString: Player
@@ -205,6 +205,29 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &2814030750022333670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687319180677217945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebda726d858a971429cff295a64fdc2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 4963939137211088235}
+  anim: {fileID: 3514948487103154002}
+  maxSpeed: 10
+  jumpForce: 60
+  groundCheck: {fileID: 3750239101430303307}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  groundDetectionSize: {x: 0.01, y: 1, z: 0.01}
+  gravityScale: 60
+  forceMode: 0
 --- !u!114 &3017564849955282956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +244,7 @@ MonoBehaviour:
   leftHand: {fileID: 2205439939953676188}
   punchSimulator: {fileID: 657963635069732207, guid: 6db6fda5222189544bd8d196271ef867, type: 3}
   punchCooldown: 0.5
-  punchForce: 10
+  punchForce: 30
   punchRadius: 2
   throwTarget: {fileID: 0}
   grabPos: {fileID: 4201165314519563713}
@@ -267,29 +290,6 @@ MonoBehaviour:
   - m_Rig: {fileID: 1949369367850735270}
     m_Active: 1
   m_Effectors: []
---- !u!114 &2814030750022333670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 687319180677217945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebda726d858a971429cff295a64fdc2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 4963939137211088235}
-  anim: {fileID: 3514948487103154002}
-  maxSpeed: 10
-  jumpForce: 60
-  groundCheck: {fileID: 3750239101430303307}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  groundDetectionSize: {x: 0.01, y: 1, z: 0.01}
-  gravityScale: 60
-  forceMode: 0
 --- !u!1 &1163184967888679460
 GameObject:
   m_ObjectHideFlags: 0

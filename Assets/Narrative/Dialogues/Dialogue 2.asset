@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 2
   speaker: 1
   dialogueText: Yes, honey, I wonder what little Timmy is up to now.
-  autoplayDuration: 0
+  autoplayDuration: 1

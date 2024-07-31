@@ -16,4 +16,4 @@ MonoBehaviour:
   speaker: 1
   dialogueText: "I noticed your LEGO\u2019s are all over the place, was that Teddy\u2019s
     doing as well?"
-  autoplayDuration: 0
+  autoplayDuration: 1

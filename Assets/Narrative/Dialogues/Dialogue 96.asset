@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 96
   speaker: 2
   dialogueText: "That\u2019s my boy!"
-  autoplayDuration: 0
+  autoplayDuration: 1

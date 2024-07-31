@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 93
   speaker: 1
   dialogueText: "Awwwwww\u2026 is our big boy enjoying his broccoli?"
-  autoplayDuration: 0
+  autoplayDuration: 1

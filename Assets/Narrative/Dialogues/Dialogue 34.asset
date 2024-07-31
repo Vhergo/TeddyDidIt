@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 34
   speaker: 1
   dialogueText: What was Teddy doing to it???
-  autoplayDuration: 0
+  autoplayDuration: 1

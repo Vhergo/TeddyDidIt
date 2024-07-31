@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 31
   speaker: 0
   dialogueText: Teddy was running around like crazy and bumped into everything
-  autoplayDuration: 0
+  autoplayDuration: 1

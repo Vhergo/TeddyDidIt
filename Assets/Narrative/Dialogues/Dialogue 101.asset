@@ -16,4 +16,4 @@ MonoBehaviour:
   speaker: 1
   dialogueText: "(smiles) Go on now, don\u2019t make ol\u2019 Teddy wait! I\u2019m
     sure he\u2019s excited to be able to play with you again!"
-  autoplayDuration: 0
+  autoplayDuration: 1

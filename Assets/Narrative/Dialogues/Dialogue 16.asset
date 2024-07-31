@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 16
   speaker: 0
   dialogueText: (nods)
-  autoplayDuration: 0
+  autoplayDuration: 1

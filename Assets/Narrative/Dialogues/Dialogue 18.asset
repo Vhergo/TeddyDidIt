@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 18
   speaker: 1
   dialogueText: We're all ears.
-  autoplayDuration: 0
+  autoplayDuration: 1

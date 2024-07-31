@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 48
   speaker: 2
   dialogueText: Understood?
-  autoplayDuration: 0
+  autoplayDuration: 1

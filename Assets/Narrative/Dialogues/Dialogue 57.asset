@@ -16,4 +16,4 @@ MonoBehaviour:
   speaker: 3
   dialogueText: "I\u2019ve trained my body and enhanced my skills, all in order to
     defeat Broccoli King, who resides in his castle, the haunting Vegecastle of Fear."
-  autoplayDuration: 0
+  autoplayDuration: 1

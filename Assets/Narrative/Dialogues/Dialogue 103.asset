@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 103
   speaker: 5
   dialogueText: (Timmy runs off to his room)
-  autoplayDuration: 0
+  autoplayDuration: 1

@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 42
   speaker: 1
   dialogueText: "Father is right, pumpkin\u2026"
-  autoplayDuration: 0
+  autoplayDuration: 1

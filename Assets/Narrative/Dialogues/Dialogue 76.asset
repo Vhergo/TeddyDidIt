@@ -16,4 +16,4 @@ MonoBehaviour:
   speaker: 4
   dialogueText: "WHAT\u2019S A MERE TEDDY BEAR GOING TO DO? HUG ME TILL I CAN\u2019T
     BREATHE ANYMORE?"
-  autoplayDuration: 0
+  autoplayDuration: 1

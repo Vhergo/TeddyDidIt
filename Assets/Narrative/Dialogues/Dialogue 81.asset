@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 81
   speaker: 3
   dialogueText: "Let\u2019s see if veggies really do bleed green!"
-  autoplayDuration: 0
+  autoplayDuration: 1

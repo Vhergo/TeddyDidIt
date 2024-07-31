@@ -16,4 +16,4 @@ MonoBehaviour:
   speaker: 2
   dialogueText: Mother and I have decided to ground you from playing on the DX for
     a week.
-  autoplayDuration: 0
+  autoplayDuration: 1

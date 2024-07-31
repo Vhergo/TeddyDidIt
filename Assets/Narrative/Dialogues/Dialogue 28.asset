@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 28
   speaker: 1
   dialogueText: "Oh dear, that\u2019s horrible! The little rascal\u2026"
-  autoplayDuration: 0
+  autoplayDuration: 1

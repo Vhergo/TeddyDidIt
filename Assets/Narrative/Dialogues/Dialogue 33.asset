@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 33
   speaker: 1
   dialogueText: "(gasps) ... Your precious LEGO castle you spent so long on building\u2026"
-  autoplayDuration: 0
+  autoplayDuration: 1

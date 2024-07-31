@@ -16,4 +16,4 @@ MonoBehaviour:
   speaker: 0
   dialogueText: "Hehe, me and Teddy are busy rebuilding our LEGO castle together!
     He\u2019s waiting for me to finish eating."
-  autoplayDuration: 0
+  autoplayDuration: 1

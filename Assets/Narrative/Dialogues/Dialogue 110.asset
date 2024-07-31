@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 110
   speaker: 1
   dialogueText: I love you, honey
-  autoplayDuration: 0
+  autoplayDuration: 1

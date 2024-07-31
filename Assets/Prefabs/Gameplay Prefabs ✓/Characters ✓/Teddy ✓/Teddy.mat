@@ -104,9 +104,9 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _METALNESS: 0
-    - _MaxBrightness: 2.75
+    - _MaxBrightness: 4
     - _Metallic: 0
-    - _MinBrightness: -0.1
+    - _MinBrightness: 1
     - _Mode: 3
     - _OcclusionStrength: 1
     - _Parallax: 0.02

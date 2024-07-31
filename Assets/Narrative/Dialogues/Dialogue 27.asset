@@ -16,4 +16,4 @@ MonoBehaviour:
   speaker: 0
   dialogueText: "I haven\u2019t been playing with Teddy recently, so he got really
     upset with me and decided to make a mess out of my room."
-  autoplayDuration: 0
+  autoplayDuration: 1

@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 94
   speaker: 0
   dialogueText: "Thanks, Mother! It\u2019s delicious!"
-  autoplayDuration: 0
+  autoplayDuration: 1

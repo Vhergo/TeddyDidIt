@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orderNumber: 10
   speaker: 5
-  dialogueText: "(Timmy notices his parents looking at the mess he made in his bedroom.
-    He knows just as well as they do, that this isn\u2019t good. But what if, Timmy
-    could find a way out of trouble? What if Timmy could find someone else to blame
-    for his messy room?)"
-  autoplayDuration: 0
+  dialogueText: "(Timmy notices his parents alooking at the mess he made in his bedroom.
+    He knows just as well as they do, that this isn\u2019t good. But what if Timmy
+    can find someone else to blame for this mess?)"
+  autoplayDuration: 1

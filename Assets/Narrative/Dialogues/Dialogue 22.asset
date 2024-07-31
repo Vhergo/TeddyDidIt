@@ -16,4 +16,4 @@ MonoBehaviour:
   speaker: 0
   dialogueText: Teddy made a mess out of everything, I was just trying to tidy up
     my room!
-  autoplayDuration: 0
+  autoplayDuration: 1

@@ -16,4 +16,4 @@ MonoBehaviour:
   speaker: 0
   dialogueText: "Know what he did next? He started throwing the LEGO pieces all over
     my room! That\u2019s why they\u2019re everywhere!"
-  autoplayDuration: 0
+  autoplayDuration: 1

@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 111
   speaker: 2
   dialogueText: (sniffs) I love you too, darling.
-  autoplayDuration: 0
+  autoplayDuration: 1

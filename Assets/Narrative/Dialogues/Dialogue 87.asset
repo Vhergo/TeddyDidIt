@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 87
   speaker: 3
   dialogueText: "Really\u2026 tired"
-  autoplayDuration: 0
+  autoplayDuration: 1

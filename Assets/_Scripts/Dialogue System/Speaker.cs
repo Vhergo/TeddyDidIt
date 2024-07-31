@@ -8,5 +8,5 @@ public enum Speaker
     Father,
     Teddy,
     King,
-    Narration
+    Narrator
 }

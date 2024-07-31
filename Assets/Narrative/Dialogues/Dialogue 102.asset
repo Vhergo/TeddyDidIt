@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 102
   speaker: 0
   dialogueText: That makes two of us. (soft smile)
-  autoplayDuration: 0
+  autoplayDuration: 1

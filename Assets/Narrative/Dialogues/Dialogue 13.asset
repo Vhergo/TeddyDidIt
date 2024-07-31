@@ -16,4 +16,4 @@ MonoBehaviour:
   speaker: 2
   dialogueText: What??? Stop making up stories, you owe us an explanation! (slight
     anger behind his voice, raised)
-  autoplayDuration: 0
+  autoplayDuration: 1

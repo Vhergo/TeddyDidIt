@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 107
   speaker: 1
   dialogueText: No need to cry.. (hugs Father)
-  autoplayDuration: 0
+  autoplayDuration: 1

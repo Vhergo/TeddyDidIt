@@ -16,4 +16,4 @@ MonoBehaviour:
   speaker: 0
   dialogueText: "Yeah, Teddy threw them all over the place. I don\u2019t know why
     he was being like that..."
-  autoplayDuration: 0
+  autoplayDuration: 1

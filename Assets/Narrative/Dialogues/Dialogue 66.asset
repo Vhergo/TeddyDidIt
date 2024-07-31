@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 66
   speaker: 3
   dialogueText: "I feel something brew in me\u2026"
-  autoplayDuration: 0
+  autoplayDuration: 1

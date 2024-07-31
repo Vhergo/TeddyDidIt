@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 65
   speaker: 3
   dialogueText: Missing socks??? Are you serious right now, Timmy?
-  autoplayDuration: 0
+  autoplayDuration: 1

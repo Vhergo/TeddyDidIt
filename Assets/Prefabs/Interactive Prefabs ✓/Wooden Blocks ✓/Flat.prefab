@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8827818301290138511}
   - component: {fileID: 4731496722583177146}
   - component: {fileID: -8607185023953716501}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Flat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8919070279057916713}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

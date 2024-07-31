@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 38
   speaker: 2
   dialogueText: "(sigh) Give me and Mother a moment to converse real quick\u2026"
-  autoplayDuration: 0
+  autoplayDuration: 1

@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 82
   speaker: 3
   dialogueText: "I did it\u2026 Timmy, I did it\u2026"
-  autoplayDuration: 0
+  autoplayDuration: 1

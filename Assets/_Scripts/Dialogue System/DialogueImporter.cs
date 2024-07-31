@@ -78,13 +78,13 @@ public class DialogueImporter : EditorWindow
         Dialogue existingDialogue = AssetDatabase.LoadAssetAtPath<Dialogue>(assetPath);
 
         if (existingDialogue != null) {
-            existingDialogue.speaker = Enum.TryParse(speakerName, out Speaker speaker) ? speaker : Speaker.Narration;
+            existingDialogue.speaker = Enum.TryParse(speakerName, out Speaker speaker) ? speaker : Speaker.Narrator;
             existingDialogue.dialogueText = dialogueText;
             EditorUtility.SetDirty(existingDialogue);
         } else {
             Dialogue newDialogue = ScriptableObject.CreateInstance<Dialogue>();
             newDialogue.orderNumber = orderNumber;
-            newDialogue.speaker = Enum.TryParse(speakerName, out Speaker speaker) ? speaker : Speaker.Narration;
+            newDialogue.speaker = Enum.TryParse(speakerName, out Speaker speaker) ? speaker : Speaker.Narrator;
             newDialogue.dialogueText = dialogueText;
 
             if (!Directory.Exists(assetDirectory)) {

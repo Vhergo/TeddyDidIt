@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 25
   speaker: 2
   dialogueText: "I fear that side-eye more than anything\u2026"
-  autoplayDuration: 0
+  autoplayDuration: 1

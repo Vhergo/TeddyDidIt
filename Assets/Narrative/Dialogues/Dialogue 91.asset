@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 91
   speaker: 3
   dialogueText: "Where\u2019s Timmy when I need him\u2026"
-  autoplayDuration: 0
+  autoplayDuration: 1

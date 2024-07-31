@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 69
   speaker: 3
   dialogueText: "I\u2019m getting close, I can sense his green presence\u2026"
-  autoplayDuration: 0
+  autoplayDuration: 1

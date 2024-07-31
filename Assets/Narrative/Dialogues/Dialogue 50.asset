@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 50
   speaker: 2
   dialogueText: Now get to cleaning this mess up, pronto.
-  autoplayDuration: 0
+  autoplayDuration: 1

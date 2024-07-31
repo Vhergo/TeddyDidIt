@@ -16,4 +16,4 @@ MonoBehaviour:
   speaker: 5
   dialogueText: "(They finish talking and finally come to a conclusion, what Timmy\u2019s
     punishment will be.)"
-  autoplayDuration: 0
+  autoplayDuration: 1

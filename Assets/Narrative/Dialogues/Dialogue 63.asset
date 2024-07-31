@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 63
   speaker: 3
   dialogueText: "It\u2019s finally time."
-  autoplayDuration: 0
+  autoplayDuration: 1

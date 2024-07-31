@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 49
   speaker: 0
   dialogueText: "Yes, Father\u2026"
-  autoplayDuration: 0
+  autoplayDuration: 1

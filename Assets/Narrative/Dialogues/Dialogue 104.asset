@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 104
   speaker: 2
   dialogueText: "He actually managed to finish all of his veggies\u2026"
-  autoplayDuration: 0
+  autoplayDuration: 1

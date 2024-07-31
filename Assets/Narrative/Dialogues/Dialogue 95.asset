@@ -16,4 +16,4 @@ MonoBehaviour:
   speaker: 0
   dialogueText: "It really ended up growing on me, not to mention it\u2019s really
     healthy too!"
-  autoplayDuration: 0
+  autoplayDuration: 1

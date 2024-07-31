@@ -8,4 +8,5 @@ public class DialogueSequence : ScriptableObject
     public bool autoplay = false;
     public List<Dialogue> dialogueSequence = new List<Dialogue>();
     public DialogueSequence nextSequence;
+    public Sprite background;
 }

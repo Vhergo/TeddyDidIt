@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 75
   speaker: 4
   dialogueText: HAHAAHAHAHAHAAHAHAHA
-  autoplayDuration: 0
+  autoplayDuration: 1

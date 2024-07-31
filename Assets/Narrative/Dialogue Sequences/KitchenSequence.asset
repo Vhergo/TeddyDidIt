@@ -21,3 +21,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e71a9b869df774c4a8b99182d7815f1e, type: 2}
   - {fileID: 11400000, guid: c43c4c0df1764ec4f9afed25479be399, type: 2}
   nextSequence: {fileID: 11400000, guid: e94cc6752b7781942bdf42bda7be814a, type: 2}
+  background: {fileID: 21300000, guid: 7fb6d4cf2936c0b4cad4e0735ed38849, type: 3}

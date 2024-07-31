@@ -16,4 +16,4 @@ MonoBehaviour:
   speaker: 1
   dialogueText: "Honey, there\u2019s no need to be angry, why not let Timmy tell
     us what happened. You\u2019ll do that for us, right my little pumpkin?"
-  autoplayDuration: 0
+  autoplayDuration: 1

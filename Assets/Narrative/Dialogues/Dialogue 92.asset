@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 92
   speaker: 3
   dialogueText: "A hug could do me really well right now\u2026"
-  autoplayDuration: 0
+  autoplayDuration: 1

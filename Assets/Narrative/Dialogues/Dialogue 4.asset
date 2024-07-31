@@ -16,4 +16,4 @@ MonoBehaviour:
   speaker: 1
   dialogueText: Oh honey, you and your jokes. I really did end up marrying a jokester,
     huh? (giggles)
-  autoplayDuration: 0
+  autoplayDuration: 1

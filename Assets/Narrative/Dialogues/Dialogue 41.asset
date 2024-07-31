@@ -16,4 +16,4 @@ MonoBehaviour:
   speaker: 2
   dialogueText: Well, Timmy, what happened to your room is inexcusable. I hope you
     know that.
-  autoplayDuration: 0
+  autoplayDuration: 1

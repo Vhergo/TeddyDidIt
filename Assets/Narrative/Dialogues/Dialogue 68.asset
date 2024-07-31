@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 68
   speaker: 3
   dialogueText: "I might get stronger if I break some more LEGO\u2019s\u2026"
-  autoplayDuration: 0
+  autoplayDuration: 1

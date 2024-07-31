@@ -16,4 +16,4 @@ MonoBehaviour:
   speaker: 2
   dialogueText: "Let\u2019s go have a look, make sure it isn\u2019t anything serious,
     like him turning his bedroom into a mess again."
-  autoplayDuration: 0
+  autoplayDuration: 1

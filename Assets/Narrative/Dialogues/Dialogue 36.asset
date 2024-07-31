@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 36
   speaker: 2
   dialogueText: There are even LEGO pieces under your bed???
-  autoplayDuration: 0
+  autoplayDuration: 1

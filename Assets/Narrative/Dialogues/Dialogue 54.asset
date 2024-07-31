@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 54
   speaker: 3
   dialogueText: "Teddy: \u2026"
-  autoplayDuration: 0
+  autoplayDuration: 1

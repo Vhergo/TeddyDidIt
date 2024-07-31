@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 23
   speaker: 2
   dialogueText: "Playing with toys is considered \u2018tidying up\u2019?"
-  autoplayDuration: 0
+  autoplayDuration: 1

@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 98
   speaker: 0
   dialogueText: (Mother notices Timmy is in a hurry)
-  autoplayDuration: 0
+  autoplayDuration: 1

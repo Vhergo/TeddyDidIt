@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 108
   speaker: 1
   dialogueText: (softly) From one small boy to another
-  autoplayDuration: 0
+  autoplayDuration: 1

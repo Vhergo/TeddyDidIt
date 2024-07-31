@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 97
   speaker: 0
   dialogueText: (quickly finishes his remaining food)
-  autoplayDuration: 0
+  autoplayDuration: 1

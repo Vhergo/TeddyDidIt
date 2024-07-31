@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 12
   speaker: 0
   dialogueText: (Points at Teddy) Teddy Did It!
-  autoplayDuration: 0
+  autoplayDuration: 1

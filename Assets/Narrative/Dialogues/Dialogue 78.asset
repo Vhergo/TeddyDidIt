@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 78
   speaker: 4
   dialogueText: YOU IGNORANT BEAR!
-  autoplayDuration: 0
+  autoplayDuration: 1

@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 53
   speaker: 0
   dialogueText: What DID happen to my LEGO castle?
-  autoplayDuration: 0
+  autoplayDuration: 1

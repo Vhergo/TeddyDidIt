@@ -16,4 +16,4 @@ MonoBehaviour:
   speaker: 3
   dialogueText: "I\u2019ve been taking advantage of Timmy\u2019s messy room and his
     school times."
-  autoplayDuration: 0
+  autoplayDuration: 1

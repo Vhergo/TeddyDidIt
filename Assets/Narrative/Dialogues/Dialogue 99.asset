@@ -15,4 +15,4 @@ MonoBehaviour:
   orderNumber: 99
   speaker: 1
   dialogueText: Oh? And where are you heading, young man?
-  autoplayDuration: 0
+  autoplayDuration: 1

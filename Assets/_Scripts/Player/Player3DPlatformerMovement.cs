@@ -144,6 +144,9 @@ public class Player3DPlatformerMovement : MonoBehaviour
 
     private void OnEnable()
     {
+        DialogueSystem.OnAutoSequenceStarted += DisableControls;
+        DialogueSystem.OnAutoSequenceEnded += EnableControls;
+
         move = playerControls.Player.Movement;
         jump = playerControls.Player.Jump;
         dash = playerControls.Player.Dash;
@@ -157,6 +160,24 @@ public class Player3DPlatformerMovement : MonoBehaviour
     }
 
     private void OnDisable()
+    {
+        DialogueSystem.OnAutoSequenceStarted -= DisableControls;
+        DialogueSystem.OnAutoSequenceEnded -= EnableControls;
+
+        move.Disable();
+        jump.Disable();
+        dash.Disable();
+    }
+
+    // TEMPORARY ENABLE/DISABLE FOR CUTSCENE TESTING
+    public void EnableControls()
+    {
+        move.Enable();
+        jump.Enable();
+        dash.Enable();
+    }
+
+    public void DisableControls()
     {
         move.Disable();
         jump.Disable();
