@@ -14,19 +14,22 @@ public class TeddyMovement : MonoBehaviour
     [SerializeField] private Animator anim;
 
     [Header("Movement")]
-    [SerializeField] private float maxSpeed = 20f;
+    [SerializeField] private float maxSpeed = 10f;
     private Vector3 moveDirection;
     private bool facingLeft = false;
 
     [Header("Jump")]
-    [SerializeField] private float jumpForce = 48f;
-    
+    [SerializeField] private float jumpForce = 60f; 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Vector3 groundDetectionSize = new(1f, 0.2f, 1f);
     private bool isJumping = false;
     private bool inAir = false;
     private bool inJumpAnim = false;
+
+    public bool allowDoubleJump = false;
+    [SerializeField] private float doubleJumpForce = 50f;
+    private int jumpsLeft = 2;
 
     [Header("Gravity")]
     [SerializeField] private float gravityScale = 1.0f;
@@ -65,6 +68,7 @@ public class TeddyMovement : MonoBehaviour
         MoveInput(); //read movement input
         AnimateMovement(); //animate teddy
         CheckIfLanded();
+        CheckIfWalkedOffEdge();
     }
 
     void FixedUpdate()
@@ -123,29 +127,27 @@ public class TeddyMovement : MonoBehaviour
     #endregion
 
     #region JUMP
-    void JumpInput(InputAction.CallbackContext context) => Jump();
+    void JumpInput(InputAction.CallbackContext context) => TryJump();
 
-    void Jump()
+    void TryJump()
     {
         if (CanJump())
         {
-            isJumping = true; //ensure player can't jump until landed
-            StartCoroutine(JumpTrigger()); //start cooldown for jump input
-            anim.Play("TeddyJump", 0); //play jump animation
-            rb.velocity = new(rb.velocity.x, jumpForce); //add jump force           
+            Jump(jumpForce);
+        }
+        else if (CanDoubleJump())
+        {
+            Jump(doubleJumpForce);
         }
     }
 
-    private bool CanJump()
+    private void Jump(float jumpForce)
     {
-        if (IsGrounded() || isJumping == false) return true;
-
-        return false;
-    }
-
-    private bool IsGrounded()
-    {
-        return Physics.CheckBox(groundCheck.position, groundDetectionSize / 2, Quaternion.identity, groundLayer);
+        jumpsLeft--;
+        isJumping = true; //ensure player can't jump until landed
+        StartCoroutine(JumpTrigger()); //start cooldown for jump input
+        anim.Play("TeddyJump", 0); //play jump animation
+        rb.velocity = new(rb.velocity.x, jumpForce); //add jump force    
     }
 
     //wait to give time for player to jump so ground check doens't think player has landed immediately
@@ -155,6 +157,25 @@ public class TeddyMovement : MonoBehaviour
         inAir = true;
     }
 
+    private bool CanJump()
+    {
+        if (IsGrounded() || isJumping == false) return true;
+
+        return false;
+    }
+
+    private bool CanDoubleJump()
+    {
+        if (allowDoubleJump && jumpsLeft > 0 && (inAir || isJumping)) return true;
+
+        return false;
+    }
+
+    private bool IsGrounded()
+    {
+        return Physics.CheckBox(groundCheck.position, groundDetectionSize / 2, Quaternion.identity, groundLayer);
+    }
+    
     //check if teddy has landed after jumping so player can jump again
     private void CheckIfLanded()
     {
@@ -162,6 +183,18 @@ public class TeddyMovement : MonoBehaviour
         {
             inAir = false;
             isJumping = false;
+            jumpsLeft = 2; //reset double jump
+        }
+    }
+
+    //to ensure only one jump is allowed in the air
+    //checks if teddy walks off a ledge without jumping
+    private void CheckIfWalkedOffEdge()
+    {
+        if (jumpsLeft >= 2 && isJumping == false && IsGrounded() == false)
+        {
+            inAir = true;
+            jumpsLeft--;
         }
     }
     #endregion
