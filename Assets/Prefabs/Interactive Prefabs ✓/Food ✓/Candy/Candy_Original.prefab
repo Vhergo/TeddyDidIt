@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3743776007840918720}
   - component: {fileID: 5102286121285183749}
   - component: {fileID: 6187773957644426187}
-  - component: {fileID: 8105417597969578948}
+  - component: {fileID: -1840983876168494831}
   m_Layer: 8
   m_Name: Candy_Original
   m_TagString: Food
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6250634392276040675}
-  m_Mesh: {fileID: -5076798556035486163, guid: 59c0c8466abfa8b4fbb7fca55afeb465, type: 3}
+  m_Mesh: {fileID: -8076092053346408422, guid: 0eb0a5c372f2cc44ba22b3e65208b04f, type: 3}
 --- !u!23 &3743776007840918720
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -126,8 +126,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 1
---- !u!65 &8105417597969578948
-BoxCollider:
+--- !u!136 &-1840983876168494831
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -136,7 +136,7 @@ BoxCollider:
   m_Material: {fileID: 13400000, guid: b9c6033a772973e4a8c99a0dd55b0905, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -144,6 +144,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.9580593, y: 2.3024085, z: 1.0000006}
-  m_Center: {x: 0.00455004, y: 0.002145767, z: -0.00000008940695}
+  serializedVersion: 2
+  m_Radius: 0.23
+  m_Height: 1.83
+  m_Direction: 0
+  m_Center: {x: -0.0061540008, y: 0.003658689, z: 0.20074922}

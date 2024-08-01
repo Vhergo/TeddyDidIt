@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4183049355658425720}
   - component: {fileID: 3743776007840918720}
   - component: {fileID: 8526527833799096383}
-  - component: {fileID: 6067495854861324625}
+  - component: {fileID: 2401671664348014510}
   - component: {fileID: 267256892258625346}
   m_Layer: 8
   m_Name: Candy_Blue
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6250634392276040675}
-  m_Mesh: {fileID: -5076798556035486163, guid: 59c0c8466abfa8b4fbb7fca55afeb465, type: 3}
+  m_Mesh: {fileID: -8076092053346408422, guid: 0eb0a5c372f2cc44ba22b3e65208b04f, type: 3}
 --- !u!23 &3743776007840918720
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGrabbed: 0
---- !u!65 &6067495854861324625
-BoxCollider:
+--- !u!136 &2401671664348014510
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -109,7 +109,7 @@ BoxCollider:
   m_Material: {fileID: 13400000, guid: b9c6033a772973e4a8c99a0dd55b0905, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -117,9 +117,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.9580593, y: 2.2358754, z: 1.0000006}
-  m_Center: {x: 0.00455004, y: 0.03541231, z: -0.00000005960465}
+  serializedVersion: 2
+  m_Radius: 0.23
+  m_Height: 1.83
+  m_Direction: 0
+  m_Center: {x: -0.0061540008, y: 0.003658689, z: 0.20074922}
 --- !u!54 &267256892258625346
 Rigidbody:
   m_ObjectHideFlags: 0

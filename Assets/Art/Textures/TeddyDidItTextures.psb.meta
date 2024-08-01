@@ -94,7 +94,7 @@ ScriptedImporter:
     spritePosition: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
-  - name: Layer 3
+  - name: Layer 4
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -103,6 +103,48 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
+      width: 2048
+      height: 2048
+    spriteID: 1d1cb4eb23bef1b448ab6115c87986f8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 0, y: 0}
+  - name: Book_Base_color
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 2060
+      width: 2048
+      height: 2048
+    spriteID: 1a8e20fe07f8a9e45a6c68ca72153017
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 2060}
+    spritePosition: {x: 0, y: 0}
+  - name: Layer 3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4116
       width: 2048
       height: 2048
     spriteID: ec28641399b059c4680f1d1f44e8ea51
@@ -113,51 +155,9 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 4}
-    spritePosition: {x: 0, y: 0}
-  - name: Bed_Base_color
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 2060
-      width: 2048
-      height: 2048
-    spriteID: 6f73e64799c62be4ea2c25bd3f6de6b2
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 2060}
-    spritePosition: {x: 0, y: 0}
-  - name: Layer 2
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 4116
-      width: 2048
-      height: 2048
-    spriteID: b7da537eed43b8445aed7aa18a1f59f8
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
     uvTransform: {x: 4, y: 4116}
     spritePosition: {x: 0, y: 0}
-  - name: Teddy_Base_color
+  - name: Bed_Base_color
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -168,7 +168,7 @@ ScriptedImporter:
       y: 4
       width: 2048
       height: 2048
-    spriteID: ca550ed7f8744ec47a07ae38b1b4a40e
+    spriteID: 6f73e64799c62be4ea2c25bd3f6de6b2
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -178,28 +178,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 2060, y: 4}
     spritePosition: {x: 0, y: 0}
-  - name: Wheels
-    originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 6172
-      width: 341
-      height: 535
-    spriteID: 4a23b5791aa937c44a685587a364429c
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 6172}
-    spritePosition: {x: 1461, y: 32}
-  - name: ToyCar_BaseColor
+  - name: Layer 2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -210,7 +189,7 @@ ScriptedImporter:
       y: 2060
       width: 2048
       height: 2048
-    spriteID: de1c8fd07e883d6478c798bd9f5a8641
+    spriteID: b7da537eed43b8445aed7aa18a1f59f8
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -220,7 +199,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 2060, y: 2060}
     spritePosition: {x: 0, y: 0}
-  - name: Layer 0
+  - name: Teddy_Base_color
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -231,7 +210,7 @@ ScriptedImporter:
       y: 4116
       width: 2048
       height: 2048
-    spriteID: 09f1f3bd36325ab4bab89dea9da989e3
+    spriteID: ca550ed7f8744ec47a07ae38b1b4a40e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -240,6 +219,69 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 2060, y: 4116}
+    spritePosition: {x: 0, y: 0}
+  - name: Wheels
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 6172
+      y: 4
+      width: 341
+      height: 535
+    spriteID: 4a23b5791aa937c44a685587a364429c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 6172, y: 4}
+    spritePosition: {x: 1461, y: 32}
+  - name: ToyCar_BaseColor
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4116
+      y: 4
+      width: 2048
+      height: 2048
+    spriteID: de1c8fd07e883d6478c798bd9f5a8641
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4116, y: 4}
+    spritePosition: {x: 0, y: 0}
+  - name: Layer 0
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4116
+      y: 2060
+      width: 2048
+      height: 2048
+    spriteID: 09f1f3bd36325ab4bab89dea9da989e3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4116, y: 2060}
     spritePosition: {x: 0, y: 0}
   characterData:
     bones: []
@@ -277,6 +319,36 @@ ScriptedImporter:
   resliceFromLayer: 0
   mosaicPSDLayers: []
   rigPSDLayers:
+  - name: Books
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 77c71c51f741ca94cab301e0a90bb397
+    layerID: 53
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Layer 4
+    spriteName: Layer 4
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 1d1cb4eb23bef1b448ab6115c87986f8
+    layerID: 55
+    mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Book_Base_color
+    spriteName: Book_Base_color
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 1a8e20fe07f8a9e45a6c68ca72153017
+    layerID: 52
+    mosaicPosition: {x: 4, y: 2060}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
   - name: Bed
     spriteName: 
     isGroup: 1
@@ -290,20 +362,20 @@ ScriptedImporter:
   - name: Layer 3
     spriteName: Layer 3
     isGroup: 0
-    parentIndex: 0
+    parentIndex: 3
     spriteID: ec28641399b059c4680f1d1f44e8ea51
     layerID: 47
-    mosaicPosition: {x: 4, y: 4}
+    mosaicPosition: {x: 4, y: 4116}
     flatten: 0
     isImported: 1
     isVisible: 1
   - name: Bed_Base_color
     spriteName: Bed_Base_color
     isGroup: 0
-    parentIndex: 0
+    parentIndex: 3
     spriteID: 6f73e64799c62be4ea2c25bd3f6de6b2
     layerID: 44
-    mosaicPosition: {x: 4, y: 2060}
+    mosaicPosition: {x: 2060, y: 4}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -320,20 +392,20 @@ ScriptedImporter:
   - name: Layer 2
     spriteName: Layer 2
     isGroup: 0
-    parentIndex: 3
+    parentIndex: 6
     spriteID: b7da537eed43b8445aed7aa18a1f59f8
     layerID: 43
-    mosaicPosition: {x: 4, y: 4116}
+    mosaicPosition: {x: 2060, y: 2060}
     flatten: 0
     isImported: 1
     isVisible: 1
   - name: Teddy_Base_color
     spriteName: Teddy_Base_color
     isGroup: 0
-    parentIndex: 3
+    parentIndex: 6
     spriteID: ca550ed7f8744ec47a07ae38b1b4a40e
     layerID: 40
-    mosaicPosition: {x: 2060, y: 4}
+    mosaicPosition: {x: 2060, y: 4116}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -350,20 +422,20 @@ ScriptedImporter:
   - name: Wheels
     spriteName: Wheels
     isGroup: 0
-    parentIndex: 6
+    parentIndex: 9
     spriteID: 4a23b5791aa937c44a685587a364429c
     layerID: 37
-    mosaicPosition: {x: 4, y: 6172}
+    mosaicPosition: {x: 6172, y: 4}
     flatten: 0
     isImported: 1
     isVisible: 1
   - name: ToyCar_BaseColor
     spriteName: ToyCar_BaseColor
     isGroup: 0
-    parentIndex: 6
+    parentIndex: 9
     spriteID: de1c8fd07e883d6478c798bd9f5a8641
     layerID: 36
-    mosaicPosition: {x: 2060, y: 2060}
+    mosaicPosition: {x: 4116, y: 4}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -380,7 +452,7 @@ ScriptedImporter:
   - name: Blue
     spriteName: Blue
     isGroup: 0
-    parentIndex: 9
+    parentIndex: 12
     spriteID: 6de016ca11ce2204d9f4ab2e02d7c0fa
     layerID: 33
     mosaicPosition: {x: 4, y: 4}
@@ -390,7 +462,7 @@ ScriptedImporter:
   - name: Blue
     spriteName: Blue
     isGroup: 0
-    parentIndex: 9
+    parentIndex: 12
     spriteID: 3b5eadb0be7090b4cb904d9d77dbd782
     layerID: 32
     mosaicPosition: {x: 4, y: 2060}
@@ -400,7 +472,7 @@ ScriptedImporter:
   - name: Blue
     spriteName: Blue
     isGroup: 0
-    parentIndex: 9
+    parentIndex: 12
     spriteID: c781d7d53f6f53147bd0d68dfccd241c
     layerID: 31
     mosaicPosition: {x: 4, y: 4116}
@@ -410,7 +482,7 @@ ScriptedImporter:
   - name: Blue
     spriteName: Blue
     isGroup: 0
-    parentIndex: 9
+    parentIndex: 12
     spriteID: ae4090b51f7cbe844b64e127c6859ac0
     layerID: 30
     mosaicPosition: {x: 2060, y: 4}
@@ -420,7 +492,7 @@ ScriptedImporter:
   - name: YUM YUM!
     spriteName: YUM YUM!
     isGroup: 0
-    parentIndex: 9
+    parentIndex: 12
     spriteID: 07a2889ab666efe47b566aaab63e732b
     layerID: 24
     mosaicPosition: {x: 4, y: 7358}
@@ -430,7 +502,7 @@ ScriptedImporter:
   - name: Label
     spriteName: Label
     isGroup: 0
-    parentIndex: 9
+    parentIndex: 12
     spriteID: 20dbc2dd27a7b964a82c4f65482c922a
     layerID: 19
     mosaicPosition: {x: 4, y: 6172}
@@ -440,7 +512,7 @@ ScriptedImporter:
   - name: Base
     spriteName: Base
     isGroup: 0
-    parentIndex: 9
+    parentIndex: 12
     spriteID: 0965a4ed4b19ef541b3454bd235b297d
     layerID: 28
     mosaicPosition: {x: 2060, y: 2060}
@@ -450,7 +522,7 @@ ScriptedImporter:
   - name: Original
     spriteName: Original
     isGroup: 0
-    parentIndex: 9
+    parentIndex: 12
     spriteID: 8c4e95ddcd94af14f8c7172dbf0782dc
     layerID: 27
     mosaicPosition: {x: 2060, y: 4116}
@@ -470,7 +542,7 @@ ScriptedImporter:
   - name: StrawColor
     spriteName: StrawColor
     isGroup: 0
-    parentIndex: 18
+    parentIndex: 21
     spriteID: 443e5a11dc9ff624590735fdf0f69725
     layerID: 15
     mosaicPosition: {x: 4, y: 4}
@@ -480,7 +552,7 @@ ScriptedImporter:
   - name: Straw
     spriteName: Straw
     isGroup: 0
-    parentIndex: 18
+    parentIndex: 21
     spriteID: f81ab2fdd081b5f4da360493f7d74bde
     layerID: 13
     mosaicPosition: {x: 2060, y: 4116}
@@ -490,7 +562,7 @@ ScriptedImporter:
   - name: Layer 1
     spriteName: Layer 1
     isGroup: 0
-    parentIndex: 18
+    parentIndex: 21
     spriteID: a71d8ff7b4181094e938946adf7d832e
     layerID: 5
     mosaicPosition: {x: 2060, y: 6172}
@@ -500,7 +572,7 @@ ScriptedImporter:
   - name: Blue
     spriteName: Blue
     isGroup: 0
-    parentIndex: 18
+    parentIndex: 21
     spriteID: c84add951c32159499421063c1a8f264
     layerID: 10
     mosaicPosition: {x: 4, y: 2060}
@@ -510,7 +582,7 @@ ScriptedImporter:
   - name: Blue
     spriteName: Blue
     isGroup: 0
-    parentIndex: 18
+    parentIndex: 21
     spriteID: 69a6ce1a780bb5049a56914017f54e26
     layerID: 9
     mosaicPosition: {x: 4, y: 4116}
@@ -520,7 +592,7 @@ ScriptedImporter:
   - name: Blue
     spriteName: Blue
     isGroup: 0
-    parentIndex: 18
+    parentIndex: 21
     spriteID: 82edf7b26b284ce45a5c28215708d156
     layerID: 8
     mosaicPosition: {x: 2060, y: 4}
@@ -530,7 +602,7 @@ ScriptedImporter:
   - name: Blue
     spriteName: Blue
     isGroup: 0
-    parentIndex: 18
+    parentIndex: 21
     spriteID: d236dca14f252c549b846e0811de47e5
     layerID: 7
     mosaicPosition: {x: 4, y: 2060}
@@ -540,7 +612,7 @@ ScriptedImporter:
   - name: Base
     spriteName: Base
     isGroup: 0
-    parentIndex: 18
+    parentIndex: 21
     spriteID: 20b139cbc1e3d7d4280a9ee83c8d9450
     layerID: 4
     mosaicPosition: {x: 4, y: 4116}
@@ -550,7 +622,7 @@ ScriptedImporter:
   - name: Original
     spriteName: Original
     isGroup: 0
-    parentIndex: 18
+    parentIndex: 21
     spriteID: 732b3477834582f4b8598e4acab94e13
     layerID: 14
     mosaicPosition: {x: 2060, y: 4}
@@ -563,7 +635,7 @@ ScriptedImporter:
     parentIndex: -1
     spriteID: 09f1f3bd36325ab4bab89dea9da989e3
     layerID: 2
-    mosaicPosition: {x: 2060, y: 4116}
+    mosaicPosition: {x: 4116, y: 2060}
     flatten: 0
     isImported: 1
     isVisible: 1

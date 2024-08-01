@@ -11,10 +11,12 @@ public class ProgressionSystem : MonoBehaviour
     [Tooltip("Add to list in order of progression")]
     [SerializeField] private List<GameObject> progressionIndicators = new List<GameObject>();
     [SerializeField] private AudioSource progressionSound;
+    [SerializeField] private RectTransform progressionBar;
 
     private ProgressStage currentState;
 
     public static Action OnProgressionChanged;
+    public static Action OnPunchEnabled;
     public static Action OnGrabAndThrowEnabled;
     public static Action OnDoubleJumpEnabled;
     public static Action OnChargeThrowEnabled;
@@ -67,28 +69,29 @@ public class ProgressionSystem : MonoBehaviour
                 break;
             case ProgressStage.Punch:
                 currentState = ProgressStage.Punch;
+                OnPunchEnabled?.Invoke();
                 ActivateUIIndicator(1);
                 break;
             case ProgressStage.GrabAndThrow:
                 currentState = ProgressStage.GrabAndThrow;
                 OnGrabAndThrowEnabled?.Invoke();
                 ActivateUIIndicator(2);
-                AudioManager.instance.PlayNext(AudioManager.instance.audioSource01, AudioManager.instance.audioSource02);
-                progressionSound.Play();
+                //AudioManager.instance.PlayNext(AudioManager.instance.audioSource01, AudioManager.instance.audioSource02);
+                //progressionSound.Play();
                 break;
             case ProgressStage.DoubleJump:
                 currentState = ProgressStage.DoubleJump;
                 OnDoubleJumpEnabled?.Invoke();
                 ActivateUIIndicator(3);
-                AudioManager.instance.PlayNext(AudioManager.instance.audioSource02, AudioManager.instance.audioSource03);
-                progressionSound.Play();
+                //AudioManager.instance.PlayNext(AudioManager.instance.audioSource02, AudioManager.instance.audioSource03);
+                //progressionSound.Play();
                 break;
             case ProgressStage.ChargeThrow:
                 currentState = ProgressStage.ChargeThrow;
                 OnChargeThrowEnabled?.Invoke();
                 ActivateUIIndicator(4);
-                AudioManager.instance.PlayNext(AudioManager.instance.audioSource03, AudioManager.instance.audioSource04);
-                progressionSound.Play();
+                //AudioManager.instance.PlayNext(AudioManager.instance.audioSource03, AudioManager.instance.audioSource04);
+                //progressionSound.Play();
                 break;
         }
     }
@@ -102,6 +105,24 @@ public class ProgressionSystem : MonoBehaviour
     {
         OnProgressionChanged?.Invoke();
         progressionIndicators[index].transform.GetChild(0).GetComponent<Image>().enabled = true;
+    }
+
+    public void SetProgressIndicatorPositions(int punch, int grab, int jump, int charge)
+    {
+        float barWidth = progressionBar.rect.width;
+
+        float punchPercent = (float)punch / charge;
+        float grabPercent = (float)grab / charge;
+        float jumpPercent = (float)jump / charge;
+        float chargePercent = (float)charge / charge;
+        List<float> percentages = new List<float> { 0, punchPercent, grabPercent, jumpPercent, chargePercent };
+
+        float startX = progressionIndicators[0].GetComponent<RectTransform>().anchoredPosition.x;
+
+        for (int i = 0; i < progressionIndicators.Count; i++) {
+            Debug.Log(percentages[i]);
+            progressionIndicators[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(startX + (barWidth * percentages[i]), 0, 0);
+        }
     }
 }
 
