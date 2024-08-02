@@ -30,6 +30,7 @@ public class TeddyMovement : MonoBehaviour
     public bool allowDoubleJump = false;
     [SerializeField] private float doubleJumpForce = 50f;
     [SerializeField] private int jumpsLeft = 2;
+    [SerializeField] private float walkedOffEdgeBufferTime = 0.25f;
 
     [Header("Gravity")]
     [SerializeField] private float gravityScale = 1.0f;
@@ -194,6 +195,13 @@ public class TeddyMovement : MonoBehaviour
         if (jumpsLeft >= 2 && isJumping == false && IsGrounded() == false)
         {
             inAir = true;
+            Invoke("WalkedOffEdgeBuffer", walkedOffEdgeBufferTime);
+        }
+    }
+
+    private void WalkedOffEdgeBuffer()
+    {
+        if (jumpsLeft >= 2 && isJumping == false && IsGrounded() == false) {
             jumpsLeft--;
         }
     }

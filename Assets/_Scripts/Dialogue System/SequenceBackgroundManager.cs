@@ -41,6 +41,17 @@ public class SequenceBackgroundManager : MonoBehaviour
         backgroundChangeCoroutine = StartCoroutine(BackgroundTransition());
     }
 
+    public void ChangeBackground(Sprite sprite)
+    {
+        if (primaryBackground.sprite == sprite) return;
+
+        secondaryBackground.sprite = sprite;
+        if (backgroundChangeCoroutine != null) {
+            StopCoroutine(backgroundChangeCoroutine);
+        }
+        backgroundChangeCoroutine = StartCoroutine(BackgroundTransition());
+    }
+
     private IEnumerator BackgroundTransition()
     {
         secondaryBackground.color = new Color(1, 1, 1, 0);
