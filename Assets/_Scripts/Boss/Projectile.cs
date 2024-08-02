@@ -21,7 +21,8 @@ public class Projectile : MonoBehaviour
     public void Fire(Transform target)
     {
         //move towards player
-        rb.velocity = (target.position - transform.position).normalized * strength;
+        Vector3 direction = (target.position - transform.position).normalized;
+        rb.velocity = direction * strength;
     }
 
     private void DestroyProjectile()

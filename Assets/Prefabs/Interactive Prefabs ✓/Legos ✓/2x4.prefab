@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6508862675359254103}
   - component: {fileID: 6565526926615886524}
   - component: {fileID: 2653765993195973623}
+  - component: {fileID: -2775480935826830153}
   m_Layer: 8
   m_Name: 2x4
   m_TagString: Legos
@@ -147,3 +148,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGrabbed: 0
+--- !u!114 &-2775480935826830153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6414279711447277427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4092cb47c23ea6242af9779542e745a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

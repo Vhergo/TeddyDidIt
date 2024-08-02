@@ -123,7 +123,8 @@ public class Boss : MonoBehaviour
         //register hit if impact higher than threshold
         if (collision.impulse.magnitude > bossHitThreshold)
         {
-           BossManager.Instance.OnBossHit();
+            if (!collision.gameObject.CompareTag("Projectile"))
+                BossManager.Instance.OnBossHit();
         }
     }
 

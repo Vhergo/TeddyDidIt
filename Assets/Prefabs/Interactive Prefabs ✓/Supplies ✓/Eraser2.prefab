@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2945888724960667421}
   - component: {fileID: -7711260258282072652}
   - component: {fileID: 1205399282816475575}
-  - component: {fileID: 5601786400716839755}
+  - component: {fileID: 189701752402677961}
   m_Layer: 8
   m_Name: Eraser2
   m_TagString: OfficeSupplies
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3805179033408353856}
-  m_Mesh: {fileID: 5296974966238605176, guid: f8ae417378d845446b178b9a8b084978, type: 3}
+  m_Mesh: {fileID: 5296974966238605176, guid: 0eb0a5c372f2cc44ba22b3e65208b04f, type: 3}
 --- !u!23 &2945888724960667421
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -126,7 +126,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 1
---- !u!65 &5601786400716839755
+--- !u!65 &189701752402677961
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,7 +136,7 @@ BoxCollider:
   m_Material: {fileID: 13400000, guid: b9c6033a772973e4a8c99a0dd55b0905, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -145,5 +145,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 0.7055221, z: 5.0535593}
-  m_Center: {x: 0, y: -0.14723891, z: -0.66082895}
+  m_Size: {x: 2, y: 5.0535593, z: 0.7055223}
+  m_Center: {x: 0.0004962683, y: -0.000053167336, z: 0.3499866}
