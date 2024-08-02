@@ -34,7 +34,15 @@ public class ScoreSystem : MonoBehaviour
         score_book.Add("Clothing", 10);
         score_book.Add("OfficeSupplies", 5);
         score_book.Add("Toys", 15);
-        score_book.Add("SportsEquipment", 15);
+        score_book.Add("SportsEquipment", 10);
+    }
+
+    public void addScore(String tag1)
+    {
+        int scoreToAdd = score_book[tag1];
+        score = score + scoreToAdd;
+        scoreText.text = score.ToString("#,#");
+        checkThreshhold();
     }
 
     public void addScore(float scalar, String tag1, String tag2)

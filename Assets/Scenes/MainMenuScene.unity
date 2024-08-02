@@ -1259,7 +1259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 566940276}
   effectsSource: {fileID: 829949439}
-  mainMenuMusic: {fileID: 8300000, guid: 68e4bc2623b6ddd46af10caa0b384433, type: 3}
+  mainMenuMusic: {fileID: 8300000, guid: 7f0a82121a864284b9cafb7c122dadd3, type: 3}
   inGameMusic: {fileID: 8300000, guid: bed7a10f43423f94e865e6f0e75a1cfa, type: 3}
   pitchRange: {x: 0.8, y: 1.2}
 --- !u!4 &1353709093
@@ -2254,8 +2254,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3008e76b8286dc44386733b476b837fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectSound: {fileID: 8300000, guid: 2fd275f99b545c64aa455abc845f8744, type: 3}
-  hoverSound: {fileID: 8300000, guid: 82d792800e714044f9e938bf2343de2d, type: 3}
+  selectSound: {fileID: 8300000, guid: 7a32bce29ad2c0c4d8915d7197e126d3, type: 3}
+  hoverSound: {fileID: 8300000, guid: f79c5a08845fedc42bdf71bdd0fda274, type: 3}
   releaseSound: {fileID: 0}
   exitSound: {fileID: 0}
 --- !u!114 &1838337459

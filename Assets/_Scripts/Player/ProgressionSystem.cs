@@ -10,7 +10,9 @@ public class ProgressionSystem : MonoBehaviour
 
     [Tooltip("Add to list in order of progression")]
     [SerializeField] private List<GameObject> progressionIndicators = new List<GameObject>();
-    [SerializeField] private AudioSource progressionSound;
+    [SerializeField] private AudioSource grabPowerUpSound;
+    [SerializeField] private AudioSource doubleJumpPowerUpSound;
+    [SerializeField] private AudioSource chargeThrowPowerUpSound;
 
     private ProgressStage currentState;
 
@@ -33,6 +35,7 @@ public class ProgressionSystem : MonoBehaviour
     {
         InitializeUI();
         SetProgressionStage(ProgressStage.Base);
+        SetProgressionStage(ProgressStage.Punch);
     }
 
     private void Update()
@@ -74,21 +77,21 @@ public class ProgressionSystem : MonoBehaviour
                 OnGrabAndThrowEnabled?.Invoke();
                 ActivateUIIndicator(2);
                 AudioManager.instance.PlayNext(AudioManager.instance.audioSource01, AudioManager.instance.audioSource02);
-                progressionSound.Play();
+                grabPowerUpSound.Play();
                 break;
             case ProgressStage.DoubleJump:
                 currentState = ProgressStage.DoubleJump;
                 OnDoubleJumpEnabled?.Invoke();
                 ActivateUIIndicator(3);
                 AudioManager.instance.PlayNext(AudioManager.instance.audioSource02, AudioManager.instance.audioSource03);
-                progressionSound.Play();
+                doubleJumpPowerUpSound.Play();
                 break;
             case ProgressStage.ChargeThrow:
                 currentState = ProgressStage.ChargeThrow;
                 OnChargeThrowEnabled?.Invoke();
                 ActivateUIIndicator(4);
                 AudioManager.instance.PlayNext(AudioManager.instance.audioSource03, AudioManager.instance.audioSource04);
-                progressionSound.Play();
+                chargeThrowPowerUpSound.Play();
                 break;
         }
     }

@@ -109,6 +109,7 @@ public class CombatSystem : MonoBehaviour
             Rigidbody rb = punchableObjects.GetComponent<Rigidbody>();
             if (rb != null) {
                 rb.AddForce(punchDirection * punchForce, ForceMode.Impulse);
+                ScoreSystem.Instance.addScore(punchableObjects.gameObject.tag);
             }
         }
 

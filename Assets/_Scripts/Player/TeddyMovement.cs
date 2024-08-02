@@ -23,6 +23,8 @@ public class TeddyMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Vector3 groundDetectionSize = new(1f, 0.2f, 1f);
+    [SerializeField] private AudioSource jumpSound;
+    [SerializeField] private AudioSource landSound;
     private bool isJumping = false;
     private bool inAir = false;
     private bool inJumpAnim = false;
@@ -148,6 +150,7 @@ public class TeddyMovement : MonoBehaviour
         StartCoroutine(JumpTrigger()); //start cooldown for jump input
         anim.Play("TeddyJump", 0); //play jump animation
         rb.velocity = new(rb.velocity.x, jumpForce); //add jump force    
+        jumpSound.Play();
     }
 
     //wait to give time for player to jump so ground check doens't think player has landed immediately
@@ -184,6 +187,7 @@ public class TeddyMovement : MonoBehaviour
             inAir = false;
             isJumping = false;
             jumpsLeft = 2; //reset double jump
+            landSound.Play();
         }
     }
 
