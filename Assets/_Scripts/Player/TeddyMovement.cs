@@ -19,18 +19,22 @@ public class TeddyMovement : MonoBehaviour
     private bool facingLeft = false;
 
     [Header("Jump")]
-    [SerializeField] private float jumpForce = 60f; 
+    [SerializeField] private float jumpForce = 40f; 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Vector3 groundDetectionSize = new(1f, 0.2f, 1f);
     [SerializeField] private bool isJumping = false;
     [SerializeField] private bool inAir = false;
-    private bool inJumpAnim = false;
+    // private bool inJumpAnim = false;
 
     public bool allowDoubleJump = false;
-    [SerializeField] private float doubleJumpForce = 50f;
-    [SerializeField] private int jumpsLeft = 2;
-    [SerializeField] private float walkedOffEdgeBufferTime = 0.25f;
+    [SerializeField] private float doubleJumpForce = 45f;
+    [SerializeField] private int jumpLimit = 2;
+    [SerializeField] private float coyoteTime = 0.22f;
+    [SerializeField] private float jumpBuffer = 0.2f;
+    private int jumpsLeft;
+    private float jumpBufferTimer = 0;
+
 
     [Header("Gravity")]
     [SerializeField] private float gravityScale = 1.0f;
@@ -64,15 +68,22 @@ public class TeddyMovement : MonoBehaviour
         jump.performed -= JumpInput; //read jump input
     }
 
-    void Update()
+    private void Start()
+    {
+        jumpsLeft = jumpLimit;
+        jumpBufferTimer = jumpBuffer;
+    }
+
+    private void Update()
     {
         MoveInput(); //read movement input
         AnimateMovement(); //animate teddy
         CheckIfLanded();
         CheckIfWalkedOffEdge();
+        Timers();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         //apply gravity with custom scale
         Vector3 gravity = globalGravity * gravityScale * Vector3.up;
@@ -161,15 +172,16 @@ public class TeddyMovement : MonoBehaviour
     private bool CanJump()
     {
         if (IsGrounded() || isJumping == false) return true;
-
+        else if (isJumping == true) {
+            jumpBufferTimer = jumpBuffer;
+        }
         return false;
     }
 
     private bool CanDoubleJump()
     {
         if (allowDoubleJump && jumpsLeft > 0 && (inAir || isJumping)) return true;
-
-        return false;
+        else return false;
     }
 
     private bool IsGrounded()
@@ -177,14 +189,15 @@ public class TeddyMovement : MonoBehaviour
         return Physics.CheckBox(groundCheck.position, groundDetectionSize / 2, Quaternion.identity, groundLayer);
     }
     
-    //check if teddy has landed after jumping so player can jump again
+    // Check if teddy has landed after jumping so player can jump again
     private void CheckIfLanded()
     {
         if (inAir && IsGrounded())
         {
+            JumpBuffer();
             inAir = false;
             isJumping = false;
-            jumpsLeft = 2; //reset double jump
+            jumpsLeft = jumpLimit; //reset double jump
         }
     }
 
@@ -192,18 +205,29 @@ public class TeddyMovement : MonoBehaviour
     //checks if teddy walks off a ledge without jumping
     private void CheckIfWalkedOffEdge()
     {
-        if (jumpsLeft >= 2 && isJumping == false && IsGrounded() == false)
+        if (jumpsLeft >= jumpLimit && isJumping == false && IsGrounded() == false)
         {
             inAir = true;
-            Invoke("WalkedOffEdgeBuffer", walkedOffEdgeBufferTime);
+            Invoke("CoyoteTime", coyoteTime);
         }
     }
 
-    private void WalkedOffEdgeBuffer()
+    private void CoyoteTime()
     {
-        if (jumpsLeft >= 2 && isJumping == false && IsGrounded() == false) {
+        if (jumpsLeft >= jumpLimit && isJumping == false && IsGrounded() == false) {
             jumpsLeft--;
         }
+    }
+
+    private void JumpBuffer()
+    {
+        if (jumpBufferTimer > 0) Jump(jumpForce);
+    }
+
+    private void Timers()
+    {
+        jumpBufferTimer -= Time.deltaTime;
+        
     }
     #endregion
 }
