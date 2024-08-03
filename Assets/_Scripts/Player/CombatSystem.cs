@@ -99,7 +99,6 @@ public class CombatSystem : MonoBehaviour
     {
         Debug.Log("PUNCH");
         punchOnCooldown = true;
-        punchSound.Play();
 
         Vector3 punchDirection = (throwTarget.position - grabPos.position).normalized;
         Vector3 punchPoint = grabPos.position + punchDirection * punchRadius;
@@ -109,6 +108,11 @@ public class CombatSystem : MonoBehaviour
             Rigidbody rb = punchableObjects.GetComponent<Rigidbody>();
             if (rb != null) {
                 rb.AddForce(punchDirection * punchForce, ForceMode.Impulse);
+<<<<<<< Updated upstream
+=======
+                ScoreSystem.Instance.AddScore(punchableObjects.gameObject.tag);
+                SoundManager.Instance.PlaySound(punchSound.clip);
+>>>>>>> Stashed changes
             }
         }
 
@@ -217,7 +221,7 @@ public class CombatSystem : MonoBehaviour
             Vector3 throwDirection = throwTarget.position - grabPos.position;
             rb.AddForce(throwDirection.normalized * throwForce, ForceMode.Impulse);
             grabbedObject = null;
-            throwSound.Play();
+            SoundManager.Instance.PlaySound(throwSound.clip);
         }
 
         Invoke("ResetThrowCooldown", cooldownTime);

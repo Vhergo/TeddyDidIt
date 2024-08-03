@@ -1259,8 +1259,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 566940276}
   effectsSource: {fileID: 829949439}
+<<<<<<< Updated upstream
   mainMenuMusic: {fileID: 8300000, guid: 68e4bc2623b6ddd46af10caa0b384433, type: 3}
   inGameMusic: {fileID: 8300000, guid: bed7a10f43423f94e865e6f0e75a1cfa, type: 3}
+=======
+  mainMenuMusic: {fileID: 8300000, guid: 7f0a82121a864284b9cafb7c122dadd3, type: 3}
+  track01: {fileID: 8300000, guid: de2f4588c465f734f83b1004831236e3, type: 3}
+  track02: {fileID: 8300000, guid: ceec73d7b75a6304480639590ec2eac4, type: 3}
+  track03: {fileID: 8300000, guid: cbee5f15a511a8d4eaa2cd07f2298d4f, type: 3}
+  track04: {fileID: 8300000, guid: b078040a03d440640bd485099cc1128c, type: 3}
+  track05: {fileID: 8300000, guid: bc8d377301058ec41a582e119a3f6c54, type: 3}
+>>>>>>> Stashed changes
   pitchRange: {x: 0.8, y: 1.2}
 --- !u!4 &1353709093
 Transform:
