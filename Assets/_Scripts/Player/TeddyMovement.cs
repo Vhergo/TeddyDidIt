@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class TeddyMovement : MonoBehaviour
 {
+    public static TeddyMovement Instance { get; private set; }
+
     [SerializeField] private PlayerControls playerControls;
     private InputAction move;
     private InputAction jump;
@@ -44,6 +46,9 @@ public class TeddyMovement : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+
         playerControls = new PlayerControls();
     }
 

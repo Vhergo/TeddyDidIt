@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,10 +34,13 @@ public class CombatSystem : MonoBehaviour
     private bool hasGrabbed;
 
     private ObjectScoring objectScoringScript;
-
     private GameObject grabbedObject;
 
     private ProgressStage progressStage;
+
+    public static Action OnPunch;
+    public static Action OnGrab;
+    public static Action OnThrow;
 
     private void Awake()
     {
@@ -76,9 +80,12 @@ public class CombatSystem : MonoBehaviour
                 PunchInput();
                 break;
             case ProgressStage.GrabAndThrow:
+                PunchInput();
                 GrabAndThrowInput();
                 break;
             case ProgressStage.DoubleJump:
+                TeddyMovement.Instance.allowDoubleJump = true;
+                PunchInput();
                 GrabAndThrowInput();
                 break;
             case ProgressStage.ChargeThrow:
@@ -99,7 +106,7 @@ public class CombatSystem : MonoBehaviour
     {
         Debug.Log("PUNCH");
         punchOnCooldown = true;
-        punchSound.Play();
+        // punchSound.Play();
 
         Vector3 punchDirection = (throwTarget.position - grabPos.position).normalized;
         Vector3 punchPoint = grabPos.position + punchDirection * punchRadius;
@@ -112,10 +119,12 @@ public class CombatSystem : MonoBehaviour
             }
         }
 
-        // Punch Effects (punchSimulator should be a particle system)
-        if (punchSimulator != null) {
-            Instantiate(punchSimulator, punchPoint, Quaternion.identity);
-        }
+        OnPunch?.Invoke();
+
+        //// Punch Effects (punchSimulator should be a particle system)
+        //if (punchSimulator != null) {
+        //    Instantiate(punchSimulator, punchPoint, Quaternion.identity);
+        //}
 
         Invoke("ResetPunchCooldown", punchCooldown);
     }
@@ -125,14 +134,14 @@ public class CombatSystem : MonoBehaviour
     private void GrabAndThrowInput()
     {
         if (hasGrabbed) {
-            if (Input.GetMouseButtonDown(0)) {
+            if (Input.GetMouseButtonDown(1)) {
                 ThrowObject();
             }
         }
 
         if (onCooldown) return;
 
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(1)) {
             Debug.Log("Grab Input");
             TryGetObjectToThrow(out GameObject objectToThrow);
             grabbedObject = objectToThrow;
@@ -165,11 +174,6 @@ public class CombatSystem : MonoBehaviour
         return false;
     }
 
-    private bool ClickIsInRange(Transform targetObject)
-    {
-        return Vector3.Distance(targetObject.position, transform.position) <= grabRadius;
-    }
-
     private void GrabObject()
     {
         hasGrabbed = true;
@@ -181,24 +185,30 @@ public class CombatSystem : MonoBehaviour
             grabbedObject.transform.position = grabPos.position;
             grabbedObject.transform.parent = grabPos;
             objectScoringScript.isGrabbed = true;
+
+            OnGrab?.Invoke();
         }
-        StartCoroutine(HandGrabAnimation());
     }
 
-    private IEnumerator HandGrabAnimation()
+    private bool ClickIsInRange(Transform targetObject)
     {
-        float objectWidth = grabbedObject.GetComponent<Renderer>().bounds.size.x;
-        Vector3 rightHandPos = new Vector3(objectWidth / 2, 0, 0);
-        Vector3 leftHandPos = new Vector3(-objectWidth / 2, 0, 0);
-
-        while (Vector3.Distance(rightHand.position, rightHandPos) > 0.01f) {
-            rightHand.position = Vector3.Lerp(rightHand.position, rightHandPos, 0.1f);
-            leftHand.position = Vector3.Lerp(leftHand.position, leftHandPos, 0.1f);
-            yield return null;
-        }
-        rightHand.position = rightHandPos;
-        leftHand.position = leftHandPos;
+        return Vector3.Distance(targetObject.position, transform.position) <= grabRadius;
     }
+
+    //private IEnumerator HandGrabAnimation()
+    //{
+    //    float objectWidth = grabbedObject.GetComponent<Renderer>().bounds.size.x;
+    //    Vector3 rightHandPos = new Vector3(objectWidth / 2, 0, 0);
+    //    Vector3 leftHandPos = new Vector3(-objectWidth / 2, 0, 0);
+
+    //    while (Vector3.Distance(rightHand.position, rightHandPos) > 0.01f) {
+    //        rightHand.position = Vector3.Lerp(rightHand.position, rightHandPos, 0.1f);
+    //        leftHand.position = Vector3.Lerp(leftHand.position, leftHandPos, 0.1f);
+    //        yield return null;
+    //    }
+    //    rightHand.position = rightHandPos;
+    //    leftHand.position = leftHandPos;
+    //}
     #endregion
 
     #region THROW
@@ -217,7 +227,9 @@ public class CombatSystem : MonoBehaviour
             Vector3 throwDirection = throwTarget.position - grabPos.position;
             rb.AddForce(throwDirection.normalized * throwForce, ForceMode.Impulse);
             grabbedObject = null;
-            throwSound.Play();
+            //throwSound.Play();
+
+            OnThrow?.Invoke();
         }
 
         Invoke("ResetThrowCooldown", cooldownTime);
