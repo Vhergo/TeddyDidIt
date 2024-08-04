@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4745237656904741010}
   - component: {fileID: 6902916061164202345}
   - component: {fileID: 1048094169455209723}
-  m_Layer: 0
+  - component: {fileID: -4750904065820898357}
+  m_Layer: 6
   m_Name: Book Open Cyan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,3 +107,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10878924369477238, guid: 0eb0a5c372f2cc44ba22b3e65208b04f, type: 3}
+--- !u!114 &-4750904065820898357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3684251238285726876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081648cbfe8e9a9408cb27dec828497a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGrabbed: 0

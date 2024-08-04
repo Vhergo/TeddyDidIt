@@ -11,10 +11,11 @@ public class CombatAnimations : MonoBehaviour
     [SerializeField] private Rig rig;
 
     [Header("Animation Clips")]
-    [SerializeField] private AnimationClip rigIdle;
     [SerializeField] private AnimationClip punchClip;
     [SerializeField] private AnimationClip grabClip;
     [SerializeField] private AnimationClip throwClip;
+    [SerializeField] private AnimationClip chargeClip;
+    [SerializeField] private AnimationClip chargedThrowClip;
     private bool punchLeft = false;
 
     private void Awake()
@@ -28,6 +29,8 @@ public class CombatAnimations : MonoBehaviour
         CombatSystem.OnPunch += PunchAnimation;
         CombatSystem.OnGrab += GrabAnimation;
         CombatSystem.OnThrow += ThrowAnimation;
+        CombatSystem.OnCharge += ChargeAnimation;
+        CombatSystem.OnChargedThrow += ChargedThrowAnimation;
     }
 
     private void OnDisable()
@@ -35,6 +38,8 @@ public class CombatAnimations : MonoBehaviour
         CombatSystem.OnPunch -= PunchAnimation;
         CombatSystem.OnGrab -= GrabAnimation;
         CombatSystem.OnThrow -= ThrowAnimation;
+        CombatSystem.OnCharge -= ChargeAnimation;
+        CombatSystem.OnChargedThrow -= ChargedThrowAnimation;
     }
 
     public void PunchAnimation()
@@ -55,5 +60,17 @@ public class CombatAnimations : MonoBehaviour
     {
         Debug.Log("THROW");
         anim.Play(throwClip.name);
+    }
+
+    public void ChargeAnimation()
+    {
+        Debug.Log("CHARGED THROW");
+        anim.Play(chargeClip.name);
+    }
+
+    public void ChargedThrowAnimation()
+    {
+        Debug.Log("CHARGED THROW");
+        anim.Play(chargedThrowClip.name);
     }
 }

@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4522216157869059188}
   - component: {fileID: 4846602676705741903}
   - component: {fileID: -1029074128259663435}
-  m_Layer: 0
+  - component: {fileID: -1899533513200026902}
+  m_Layer: 6
   m_Name: Skateboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,3 +107,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5058536060674849927, guid: 0eb0a5c372f2cc44ba22b3e65208b04f, type: 3}
+--- !u!114 &-1899533513200026902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4136440736834454124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081648cbfe8e9a9408cb27dec828497a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGrabbed: 0

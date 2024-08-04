@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9221321589407650339}
   - component: {fileID: 6436945200611666886}
   - component: {fileID: 699133956825454187}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Car
   m_TagString: Toys
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 1338688234384731428}
   - component: {fileID: 8057532416704260481}
   - component: {fileID: 6524114422987116536}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Car Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}

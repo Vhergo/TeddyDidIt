@@ -16,7 +16,6 @@ public class Player3DPlatformerMovement : MonoBehaviour
     [SerializeField] private PlayerControls playerControls;
     private InputAction move;
     private InputAction jump;
-    private InputAction dash;
     #endregion
 
     #region VARIABLES
@@ -149,14 +148,11 @@ public class Player3DPlatformerMovement : MonoBehaviour
 
         move = playerControls.Player.Movement;
         jump = playerControls.Player.Jump;
-        dash = playerControls.Player.Dash;
 
         move.Enable();
         jump.Enable();
-        dash.Enable();
 
         jump.performed += JumpInput;
-        dash.performed += DashInput;
     }
 
     private void OnDisable()
@@ -166,7 +162,6 @@ public class Player3DPlatformerMovement : MonoBehaviour
 
         move.Disable();
         jump.Disable();
-        dash.Disable();
     }
 
     // TEMPORARY ENABLE/DISABLE FOR CUTSCENE TESTING
@@ -174,14 +169,12 @@ public class Player3DPlatformerMovement : MonoBehaviour
     {
         move.Enable();
         jump.Enable();
-        dash.Enable();
     }
 
     public void DisableControls()
     {
         move.Disable();
         jump.Disable();
-        dash.Disable();
     }
 
     void Start()

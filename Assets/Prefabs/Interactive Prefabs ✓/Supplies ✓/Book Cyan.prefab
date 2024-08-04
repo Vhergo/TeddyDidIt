@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -8574101492469581631}
   - component: {fileID: 5984652809382959484}
   - component: {fileID: -263460384875463123}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Book Cyan
   m_TagString: OfficeSupplies
   m_Icon: {fileID: 0}

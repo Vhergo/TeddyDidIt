@@ -10,9 +10,7 @@ public class CursorManager : MonoBehaviour
     public static CursorManager Instance { get; private set; }
 
     public Texture2D cursorDefault;
-    public Texture2D cursorEnemy;
     private Vector2 cursorHotspot;
-    private bool isOverEnemy;
 
     private void Awake()
     {
@@ -25,19 +23,13 @@ public class CursorManager : MonoBehaviour
         }
     }
 
-    public void OnPointerExitUI()
-    {
-        SetCursor(cursorDefault);
-    }
-
-    public void OnPointerOverEnemy(bool onEnemy)
-    {
-        isOverEnemy = onEnemy ? true : false;
-        SetCursor(onEnemy ? cursorEnemy : cursorDefault);
-    }
-
-    private void SetCursor(Texture2D cursorTexture)
+    public void SetCursor(Texture2D cursorTexture)
     {
         Cursor.SetCursor(cursorTexture, cursorHotspot, CursorMode.Auto);
+    }
+
+    public void ResetCursor()
+    {
+        Cursor.SetCursor(cursorDefault, cursorHotspot, CursorMode.Auto);
     }
 }

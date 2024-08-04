@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1279879449555828834}
   - component: {fileID: 8372229911970462953}
   - component: {fileID: 4434089510522978959}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BaseballFigurine
   m_TagString: Toys
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 1243687128001796830}
   - component: {fileID: 4163874352104855409}
   - component: {fileID: 3162851525247301291}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 2849590543276680799}
   - component: {fileID: 1666594749302985311}
   - component: {fileID: 5328360956299509808}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Figurine Bat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
