@@ -224,6 +224,8 @@ MonoBehaviour:
   maxSprintSpeed: 16
   turnWithMovement: 0
   mousePos: {fileID: 0}
+  cape: {fileID: 1719070966655408706}
+  capeWind: 15
   jumpForce: 40
   groundCheck: {fileID: 3750239101430303307}
   groundLayer:
@@ -266,7 +268,6 @@ MonoBehaviour:
   chargedThrowForce: 300
   chargedThrowCooldown: 3
   chargeTime: 2
-  grabbedObject: {fileID: 0}
 --- !u!114 &4064004104968612761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,7 +285,8 @@ MonoBehaviour:
   punchClip: {fileID: 7400000, guid: 174779db7c76a8448be8bd0d039a8137, type: 2}
   grabClip: {fileID: 7400000, guid: 2e2b08761a9a4f946a3d92ad66649ff4, type: 2}
   throwClip: {fileID: 7400000, guid: 44e410fe528bf7148bc2fade07609297, type: 2}
-  chargedThrowClip: {fileID: 0}
+  chargeClip: {fileID: 7400000, guid: 3f7745824c1cfb6499e4259a336aedc0, type: 2}
+  chargedThrowClip: {fileID: 7400000, guid: c1bd75fc5d9f9084fb533a09775be3f5, type: 2}
 --- !u!95 &3514948487103154002
 Animator:
   serializedVersion: 5
@@ -1451,7 +1453,7 @@ Transform:
   m_GameObject: {fileID: 7674093241453053192}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.055582285, z: 0.15034688}
+  m_LocalPosition: {x: 0, y: 0.055582285, z: 0.15034688}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1944,11 +1946,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7957762721733895016, guid: 7420ef8bc704b414690dc40efc72b4c7, type: 3}
+      propertyPath: m_Damping
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7420ef8bc704b414690dc40efc72b4c7, type: 3}
+--- !u!183 &1719070966655408706 stripped
+Cloth:
+  m_CorrespondingSourceObject: {fileID: 7957762721733895016, guid: 7420ef8bc704b414690dc40efc72b4c7, type: 3}
+  m_PrefabInstance: {fileID: 8769910245194840362}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5932807135219694354 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3161925240180277816, guid: 7420ef8bc704b414690dc40efc72b4c7, type: 3}

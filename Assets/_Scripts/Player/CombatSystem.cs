@@ -15,7 +15,7 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private float punchForce = 10f;
     [SerializeField] private float punchRadius = 2f;
     [SerializeField] private AudioSource punchSound;
-    public bool punchOnCooldown;
+    private bool punchOnCooldown;
 
     [Header("Grab and Throw"), Space(10)]
     [SerializeField] private Transform grabPos;
@@ -26,21 +26,21 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private float throwForce = 10f;
     [SerializeField] private float throwCooldown = 1f;
     [SerializeField] private AudioSource throwSound;
-    public bool grabOnCooldown;
-    public bool hasGrabbed;
+    private GameObject grabbedObject;
+    private bool grabOnCooldown;
+    private bool hasGrabbed;
 
     [Header("Charged Throw")]
     [SerializeField] private float chargedThrowForce = 20f;
     [SerializeField] private float chargedThrowCooldown = 3f;
     [SerializeField] private float chargeTime = 2f;
-    public float chargeTimer;
-    public bool chargeOnCooldown;
-    public bool isCharging;
+    private float chargeTimer;
+    private bool chargeOnCooldown;
+    private bool isCharging;
 
     public bool HasGrabbed => hasGrabbed;
 
     private ObjectScoring objectScoringScript;
-    [SerializeField] private GameObject grabbedObject;
 
     private ProgressStage progressStage;
     private CameraShake cameraShake;
@@ -73,12 +73,14 @@ public class CombatSystem : MonoBehaviour
     private void Start()
     {
         progressStage = ProgressionSystem.Instance.GetCurrentStage();
+        cameraShake = CameraShake.Instance;
         chargeTimer = chargeTime;
     }
 
     private void Update()
     {
         HandleCombatInput();
+        Timers();
     }
 
     private void HandleCombatInput()
@@ -289,11 +291,25 @@ public class CombatSystem : MonoBehaviour
     private void ResetPunchCooldown() => punchOnCooldown = false;
     private void ResetThrowCooldown() => grabOnCooldown = false;
     private void ResetChargedThrowCooldown() => chargeOnCooldown = false;
-
+    private void ChargeHoldTimer()
+    {
+        if (isCharging) chargeTimer -= Time.deltaTime;
+        if (chargeTimer <= 0) {
+            isCharging = false;
+            chargeTimer = chargeTime;
+            OnChargedThrow?.Invoke();
+        }
+    }
+    
     private void EnableDoubleJump()
     {
         if (!TeddyMovement.Instance.allowDoubleJump)
             TeddyMovement.Instance.allowDoubleJump = true;
+    }
+    
+    private void Timers()
+    {
+        ChargeHoldTimer();
     }
 
     private void UpdateProgressionStage()

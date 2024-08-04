@@ -22,6 +22,8 @@ public class TeddyMovement : MonoBehaviour
     [SerializeField] private float maxSprintSpeed = 16f;
     [SerializeField] private bool turnWithMovement;
     [SerializeField] private Transform mousePos;
+    [SerializeField] private Cloth cape;
+    [SerializeField] private float capeWind = 15f;
     private float moveSpeed;
     private Vector3 moveDirection;
     private bool facingLeft = false;
@@ -112,10 +114,10 @@ public class TeddyMovement : MonoBehaviour
     }
 
     #region MOVEMENT
-    void MoveInput() => moveDirection = move.ReadValue<Vector2>().normalized;
-    void SprintInput() => moveSpeed = sprint.ReadValue<float>() == 1 ? maxSprintSpeed : maxWalkSpeed;
+    private void MoveInput() => moveDirection = move.ReadValue<Vector2>().normalized;
+    private void SprintInput() => moveSpeed = sprint.ReadValue<float>() == 1 ? maxSprintSpeed : maxWalkSpeed;
 
-    void Move()
+    private void Move()
     {
         if (disableMovement) return;
 
@@ -123,7 +125,7 @@ public class TeddyMovement : MonoBehaviour
         rb.velocity = new(targetSpeed, rb.velocity.y, 0); //move player
     }
 
-    void AnimateMovement()
+    private void AnimateMovement()
     {
         if (turnWithMovement) TurnWithMovement();
         else TurnWithMouse();
@@ -131,6 +133,7 @@ public class TeddyMovement : MonoBehaviour
         if (isJumping) return; // Prevent walk and idle anims overriding jump anim
 
         WalkAnimation();
+        CapeAnimation();
     }
 
     private void WalkAnimation()
@@ -154,16 +157,13 @@ public class TeddyMovement : MonoBehaviour
 
     private void TurnWithMovement()
     {
-        //player is not jumping
-        float speed = moveDirection.x;
-
         //check if player direction is changing to play turn around anim
-        if (speed < 0 && !facingLeft) {
+        if (moveDirection.x < 0 && !facingLeft) {
             anim.Play("TeddyTurnLeft", 1);
             facingLeft = true;
         }
         //changing direction to right
-        else if (speed > 0 && facingLeft) {
+        else if (moveDirection.x > 0 && facingLeft) {
             anim.Play("TeddyTurnRight", 1);
             facingLeft = false;
         }
@@ -178,6 +178,12 @@ public class TeddyMovement : MonoBehaviour
             anim.Play("TeddyTurnRight", 1);
             facingLeft = false;
         }
+    }
+
+    private void CapeAnimation()
+    {
+        if (facingLeft) cape.externalAcceleration = new Vector3(capeWind, 0, 0);
+        else cape.externalAcceleration = new Vector3(-capeWind, 0, 0);
     }
     #endregion
 
