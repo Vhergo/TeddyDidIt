@@ -56,6 +56,14 @@ public class ScoreSystem : MonoBehaviour
         ProgressionSystem.Instance.SetProgressIndicatorPositions(punchScore, grabAndThrowScore, doubleJumpScore, chargeThrowScore);
     }
 
+    public void AddScore(String tag1)
+    {
+        int scoreToAdd = score_book[tag1];
+        score = score + scoreToAdd;
+        scoreText.text = score.ToString("#,#");
+        CheckThreshhold();
+    }
+
     public void AddScore(float scalar, String tag1, String tag2)
     {
         float scoreToAdd = (float) score_book[tag1] + score_book[tag2];
@@ -63,6 +71,7 @@ public class ScoreSystem : MonoBehaviour
         score = score + (int) scoreToAdd;
         scoreText.text = score.ToString("#,#");
         destroySound.Play(); // Switch to use the Sound Manager
+        SoundManager.Instance.PlaySound(destroySound.clip);
         CheckThreshhold();
     }
 

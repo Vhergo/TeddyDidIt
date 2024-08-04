@@ -10,7 +10,9 @@ public class ProgressionSystem : MonoBehaviour
 
     [Tooltip("Add to list in order of progression")]
     [SerializeField] private List<GameObject> progressionIndicators = new List<GameObject>();
-    [SerializeField] private AudioSource progressionSound;
+    [SerializeField] private AudioSource progressionSound01;
+    [SerializeField] private AudioSource progressionSound02;
+    [SerializeField] private AudioSource progressionSound03;
     [SerializeField] private RectTransform progressionBar;
 
     private ProgressStage currentState;
@@ -76,22 +78,22 @@ public class ProgressionSystem : MonoBehaviour
                 currentState = ProgressStage.GrabAndThrow;
                 OnGrabAndThrowEnabled?.Invoke();
                 ActivateUIIndicator(2);
-                //AudioManager.instance.PlayNext(AudioManager.instance.audioSource01, AudioManager.instance.audioSource02);
-                //progressionSound.Play();
+                SoundManager.Instance.PlayNext(SoundManager.Instance.track02);
+                SoundManager.Instance.PlaySound(progressionSound01.clip);
                 break;
             case ProgressStage.DoubleJump:
                 currentState = ProgressStage.DoubleJump;
                 OnDoubleJumpEnabled?.Invoke();
                 ActivateUIIndicator(3);
-                //AudioManager.instance.PlayNext(AudioManager.instance.audioSource02, AudioManager.instance.audioSource03);
-                //progressionSound.Play();
+                SoundManager.Instance.PlayNext(SoundManager.Instance.track03);
+                SoundManager.Instance.PlaySound(progressionSound02.clip);
                 break;
             case ProgressStage.ChargeThrow:
                 currentState = ProgressStage.ChargeThrow;
                 OnChargeThrowEnabled?.Invoke();
                 ActivateUIIndicator(4);
-                //AudioManager.instance.PlayNext(AudioManager.instance.audioSource03, AudioManager.instance.audioSource04);
-                //progressionSound.Play();
+                SoundManager.Instance.PlayNext(SoundManager.Instance.track04);
+                SoundManager.Instance.PlaySound(progressionSound03.clip);
                 break;
         }
     }
