@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 2375694201602603180}
   - component: {fileID: 3835880863594346561}
   - component: {fileID: 8040695255324058273}
-  m_Layer: 6
+  - component: {fileID: 2873552775843009220}
+  m_Layer: 8
   m_Name: Cap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,3 +135,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3365645382605875686, guid: 0eb0a5c372f2cc44ba22b3e65208b04f, type: 3}
+--- !u!114 &2873552775843009220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8319785798654064700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081648cbfe8e9a9408cb27dec828497a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGrabbed: 0

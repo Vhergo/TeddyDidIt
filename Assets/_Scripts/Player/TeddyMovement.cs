@@ -1,45 +1,63 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class TeddyMovement : MonoBehaviour
 {
+    public static TeddyMovement Instance { get; private set; }
+
     [SerializeField] private PlayerControls playerControls;
     private InputAction move;
     private InputAction jump;
+    private InputAction sprint;
 
     [Header("Components")]
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Animator anim;
 
     [Header("Movement")]
-    [SerializeField] private float maxSpeed = 10f;
+    [SerializeField] private float maxWalkSpeed = 12f;
+    [SerializeField] private float maxSprintSpeed = 16f;
+    [SerializeField] private bool turnWithMovement;
+    [SerializeField] private Transform mousePos;
+    [SerializeField] private Cloth cape;
+    [SerializeField] private float capeWind = 15f;
+    private float moveSpeed;
     private Vector3 moveDirection;
     private bool facingLeft = false;
 
     [Header("Jump")]
-    [SerializeField] private float jumpForce = 60f;
+    [SerializeField] private float jumpForce = 40f;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Vector3 groundDetectionSize = new(1f, 0.2f, 1f);
     [SerializeField] private bool isJumping = false;
     [SerializeField] private bool inAir = false;
-    private bool inJumpAnim = false;
+    private bool disableMovement;
 
     public bool allowDoubleJump = false;
-    [SerializeField] private float doubleJumpForce = 50f;
-    [SerializeField] private int jumpsLeft = 2;
-    [SerializeField] private float walkedOffEdgeBufferTime = 0.25f;
+    [SerializeField] private float doubleJumpForce = 45f;
+    [SerializeField] private int jumpLimit = 2;
+    [SerializeField] private float coyoteTime = 0.22f;
+    [SerializeField] private float jumpBuffer = 0.2f;
+    private int jumpsLeft;
+    private float jumpBufferTimer = 0;
+
 
     [Header("Gravity")]
     [SerializeField] private float gravityScale = 1.0f;
     [SerializeField] private ForceMode forceMode = ForceMode.Force;
+    private bool disableGravity;
 
     private static float globalGravity = -9.81f;
 
     private void Awake()
     {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+
         playerControls = new PlayerControls();
     }
 
@@ -49,81 +67,123 @@ public class TeddyMovement : MonoBehaviour
 
         move = playerControls.Player.Movement;
         jump = playerControls.Player.Jump;
+        sprint = playerControls.Player.Sprint;
 
         move.Enable();
         jump.Enable();
+        sprint.Enable();
 
         jump.performed += JumpInput;
+
+        CombatSystem.OnCharge += Freeze;
+        CombatSystem.OnChargedThrow += Unfreeze;
     }
 
     private void OnDisable()
     {
         move.Disable();
         jump.Disable();
+        sprint.Disable();
 
         jump.performed -= JumpInput; //read jump input
+
+        CombatSystem.OnCharge -= Freeze;
+        CombatSystem.OnChargedThrow -= Unfreeze;
     }
 
-    void Update()
+    private void Start()
+    {
+        jumpsLeft = jumpLimit;
+        jumpBufferTimer = jumpBuffer;
+    }
+
+    private void Update()
     {
         MoveInput(); //read movement input
+        SprintInput();
         AnimateMovement(); //animate teddy
         CheckIfLanded();
         CheckIfWalkedOffEdge();
+        Timers();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        //apply gravity with custom scale
-        Vector3 gravity = globalGravity * gravityScale * Vector3.up;
-        rb.AddForce(gravity, forceMode);
-
+        ApplyGravity();
         Move();
     }
 
     #region MOVEMENT
-    void MoveInput()
-    {
-        moveDirection = move.ReadValue<Vector2>().normalized;
-    }
+    private void MoveInput() => moveDirection = move.ReadValue<Vector2>().normalized;
+    private void SprintInput() => moveSpeed = sprint.ReadValue<float>() == 1 ? maxSprintSpeed : maxWalkSpeed;
 
-
-    void Move()
+    private void Move()
     {
-        float targetSpeed = moveDirection.x * maxSpeed; //calculate speed
+        if (disableMovement) return;
+
+        float targetSpeed = moveDirection.x * moveSpeed; //calculate speed
         rb.velocity = new(targetSpeed, rb.velocity.y, 0); //move player
     }
 
-    void AnimateMovement()
+    private void AnimateMovement()
     {
-        //player is not jumping
-        float speed = moveDirection.x;
+        if (turnWithMovement) TurnWithMovement();
+        else TurnWithMouse();
 
+        if (isJumping) return; // Prevent walk and idle anims overriding jump anim
+
+        WalkAnimation();
+        CapeAnimation();
+    }
+
+    private void WalkAnimation()
+    {
+        // Play idle anim if player is not moving
+        if (moveDirection.x == 0) {
+            anim.Play("TeddyIdle", 0); // Play idle animation
+            rb.velocity = new(0, rb.velocity.y); // Freeze x to prevent sliding
+            return;
+        }
+
+        // Check if player is walking forwards or backwards
+        if ((facingLeft && moveDirection.x > 0) || (!facingLeft && moveDirection.x < 0)) {
+            // Choose between walking backwards or sprinting backwards
+            anim.Play(moveSpeed == maxWalkSpeed ? "TeddyWalkBackwards" : "TeddySprintBackwards", 0);
+        } else {
+
+            anim.Play(moveSpeed == maxWalkSpeed ? "TeddyWalk" : "TeddySprint", 0);
+        }
+    }
+
+    private void TurnWithMovement()
+    {
         //check if player direction is changing to play turn around anim
-        if (speed < 0 && !facingLeft)
-        {
+        if (moveDirection.x < 0 && !facingLeft) {
             anim.Play("TeddyTurnLeft", 1);
             facingLeft = true;
         }
         //changing direction to right
-        else if (speed > 0 && facingLeft)
-        {
+        else if (moveDirection.x > 0 && facingLeft) {
             anim.Play("TeddyTurnRight", 1);
             facingLeft = false;
         }
+    }
 
-        if (isJumping) return; //to prevent walk and idle anims overriding jump anim
-
-        //play idle anim if player is not moving
-        if (speed == 0)
-        {
-            anim.Play("TeddyIdle", 0); //play idle animation
-            rb.velocity = new(0, rb.velocity.y); // freeze x to prevent sliding
-            return;
+    private void TurnWithMouse()
+    {
+        if (mousePos.position.x < transform.position.x && !facingLeft) {
+            anim.Play("TeddyTurnLeft", 1);
+            facingLeft = true;
+        } else if (mousePos.position.x > transform.position.x && facingLeft) {
+            anim.Play("TeddyTurnRight", 1);
+            facingLeft = false;
         }
+    }
 
-        //player is moving
-        anim.Play("TeddyWalk", 0); //play walk animation
+    private void CapeAnimation()
+    {
+        if (facingLeft) cape.externalAcceleration = new Vector3(capeWind, 0, 0);
+        else cape.externalAcceleration = new Vector3(-capeWind, 0, 0);
     }
     #endregion
 
@@ -162,15 +222,16 @@ public class TeddyMovement : MonoBehaviour
     private bool CanJump()
     {
         if (IsGrounded() || isJumping == false) return true;
-
+        else if (isJumping == true) {
+            jumpBufferTimer = jumpBuffer;
+        }
         return false;
     }
 
     private bool CanDoubleJump()
     {
-        if (allowDoubleJump && jumpsLeft > 0 && (inAir || isJumping)) return true;
-
-        return false;
+        if (allowDoubleJump && jumpsLeft > 0 && (inAir || isJumping) && !CombatSystem.Instance.HasGrabbed) return true;
+        else return false;
     }
 
     private bool IsGrounded()
@@ -178,15 +239,15 @@ public class TeddyMovement : MonoBehaviour
         return Physics.CheckBox(groundCheck.position, groundDetectionSize / 2, Quaternion.identity, groundLayer);
     }
 
-    //check if teddy has landed after jumping so player can jump again
+    // Check if teddy has landed after jumping so player can jump again
     private void CheckIfLanded()
     {
         if (inAir && IsGrounded())
         {
+            JumpBuffer();
             inAir = false;
             isJumping = false;
-            jumpsLeft = 2; //reset double jump
-            landSound.Play();
+            jumpsLeft = jumpLimit; //reset double jump
         }
     }
 
@@ -194,18 +255,46 @@ public class TeddyMovement : MonoBehaviour
     //checks if teddy walks off a ledge without jumping
     private void CheckIfWalkedOffEdge()
     {
-        if (jumpsLeft >= 2 && isJumping == false && IsGrounded() == false)
+        if (jumpsLeft >= jumpLimit && isJumping == false && IsGrounded() == false)
         {
             inAir = true;
-            Invoke("WalkedOffEdgeBuffer", walkedOffEdgeBufferTime);
+            Invoke("CoyoteTime", coyoteTime);
         }
     }
 
-    private void WalkedOffEdgeBuffer()
+    private void CoyoteTime()
     {
-        if (jumpsLeft >= 2 && isJumping == false && IsGrounded() == false) {
+        if (jumpsLeft >= jumpLimit && isJumping == false && IsGrounded() == false) {
             jumpsLeft--;
         }
     }
+
+    private void JumpBuffer()
+    {
+        if (jumpBufferTimer > 0) Jump(jumpForce);
+    }
+
+    private void Timers() => jumpBufferTimer -= Time.deltaTime;
+
     #endregion
+    private void ApplyGravity()
+    {
+        if (disableGravity) return;
+
+        Vector3 gravity = globalGravity * gravityScale * Vector3.up;
+        rb.AddForce(gravity, forceMode);
+    }
+
+    private void Unfreeze()
+    {
+        disableGravity = false;
+        disableMovement = false;
+    }
+
+    private void Freeze()
+    {
+        disableGravity = true;
+        disableMovement = true;
+        rb.velocity = Vector3.zero;
+    }
 }

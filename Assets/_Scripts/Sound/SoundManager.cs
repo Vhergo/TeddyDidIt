@@ -15,7 +15,12 @@ public class SoundManager : MonoBehaviour
     [Header("SOUNDS")]
     [Header("Background Music")]
     [SerializeField] private AudioClip mainMenuMusic;
-    [SerializeField] private AudioClip inGameMusic;
+    [SerializeField] public AudioClip track01;
+    [SerializeField] public AudioClip track02;
+    [SerializeField] public AudioClip track03;
+    [SerializeField] public AudioClip track04;
+    //Boss Music
+    [SerializeField] public AudioClip track05;
     [SerializeField] private Vector2 pitchRange = new Vector2(0.8f, 1.2f);
 
     private Slider masterSlider;
@@ -110,6 +115,7 @@ public class SoundManager : MonoBehaviour
         musicSource.Play();
     }
 
+
     // Method to change the music based off of the current scene
     // Simple switch statement can be expanded to handle more scenes
     private void OnSceneLoadMusicUpdate(Scene scene, LoadSceneMode mode)
@@ -119,7 +125,7 @@ public class SoundManager : MonoBehaviour
                 StartCoroutine(SetMusic(mainMenuMusic));
                 break;
             case nameof(SceneEnum.GameScene):
-                StartCoroutine(SetMusic(inGameMusic));
+                StartCoroutine(SetMusic(track01));
                 break;
         }
     }
@@ -217,4 +223,11 @@ public class SoundManager : MonoBehaviour
         Debug.LogError(message);
     }
     #endregion
+
+    public void PlayNext(AudioClip audioSourceNext)
+    {
+        musicSource.clip = audioSourceNext;
+        musicSource.Play();
+        
+    }
 }

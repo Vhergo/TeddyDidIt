@@ -1,15 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CombatSystem : MonoBehaviour
 {
     public static CombatSystem Instance { get; private set; }
-
-    [Space(10)]
-    [SerializeField] private Transform rightHand;
-    [SerializeField] private Transform leftHand;
 
     [Header("Punch")]
     [SerializeField] private GameObject punchSimulator;
@@ -20,23 +18,38 @@ public class CombatSystem : MonoBehaviour
     private bool punchOnCooldown;
 
     [Header("Grab and Throw"), Space(10)]
-    [SerializeField] private Transform throwTarget;
     [SerializeField] private Transform grabPos;
-    [SerializeField] private Transform throwPrepPos;
-    [SerializeField] private Transform throwPos;
+    [SerializeField] private Transform throwTarget;
+    [SerializeField] private Transform playerCore;
     [Space(10)]
     [SerializeField] private float grabRadius = 2f;
     [SerializeField] private float throwForce = 10f;
-    [SerializeField] private float cooldownTime = 1f;
+    [SerializeField] private float throwCooldown = 1f;
     [SerializeField] private AudioSource throwSound;
-    private bool onCooldown;
+    private GameObject grabbedObject;
+    private bool grabOnCooldown;
     private bool hasGrabbed;
+
+    [Header("Charged Throw")]
+    [SerializeField] private float chargedThrowForce = 20f;
+    [SerializeField] private float chargedThrowCooldown = 3f;
+    [SerializeField] private float chargeTime = 2f;
+    private float chargeTimer;
+    private bool chargeOnCooldown;
+    private bool isCharging;
+
+    public bool HasGrabbed => hasGrabbed;
 
     private ObjectScoring objectScoringScript;
 
-    private GameObject grabbedObject;
-
     private ProgressStage progressStage;
+    private CameraShake cameraShake;
+
+    public static Action OnPunch;
+    public static Action OnGrab;
+    public static Action OnThrow;
+    public static Action OnCharge;
+    public static Action OnChargedThrow;
 
     private void Awake()
     {
@@ -60,11 +73,14 @@ public class CombatSystem : MonoBehaviour
     private void Start()
     {
         progressStage = ProgressionSystem.Instance.GetCurrentStage();
+        cameraShake = CameraShake.Instance;
+        chargeTimer = chargeTime;
     }
 
     private void Update()
     {
         HandleCombatInput();
+        Timers();
     }
 
     private void HandleCombatInput()
@@ -76,13 +92,18 @@ public class CombatSystem : MonoBehaviour
                 PunchInput();
                 break;
             case ProgressStage.GrabAndThrow:
+                PunchInput();
                 GrabAndThrowInput();
                 break;
             case ProgressStage.DoubleJump:
+                EnableDoubleJump();
+                PunchInput();
                 GrabAndThrowInput();
                 break;
             case ProgressStage.ChargeThrow:
-                // Implement charged throw input handling if different from normal throw
+                PunchInput();
+                GrabAndThrowInput();
+                ChargedThrowInput();
                 break;
         }
     }
@@ -90,57 +111,63 @@ public class CombatSystem : MonoBehaviour
     #region PUNCH
     private void PunchInput()
     {
-        if (Input.GetMouseButtonDown(0) && !punchOnCooldown) {
-            Punch();
+        if (Input.GetMouseButtonDown(0) && !punchOnCooldown && !hasGrabbed) {
+            OnPunch?.Invoke();
         }
     }
 
-    private void Punch()
+    public void Punch()
     {
         Debug.Log("PUNCH");
         punchOnCooldown = true;
-        punchSound.Play();
 
-        Vector3 punchDirection = (throwTarget.position - grabPos.position).normalized;
-        Vector3 punchPoint = grabPos.position + punchDirection * punchRadius;
+        Vector3 punchDirection = (throwTarget.position - playerCore.position).normalized;
+        Vector3 punchPoint = playerCore.position + punchDirection * punchRadius;
 
         Collider[] colliders = Physics.OverlapSphere(punchPoint, punchRadius);
         foreach (Collider punchableObjects in colliders) {
             Rigidbody rb = punchableObjects.GetComponent<Rigidbody>();
             if (rb != null) {
                 rb.AddForce(punchDirection * punchForce, ForceMode.Impulse);
-                ScoreSystem.Instance.addScore(punchableObjects.gameObject.tag);
+                ScoreSystem.Instance.AddScore(punchableObjects.gameObject.tag);
+                SoundManager.Instance.PlaySound(punchSound.clip);
             }
         }
 
-        // Punch Effects (punchSimulator should be a particle system)
-        if (punchSimulator != null) {
-            Instantiate(punchSimulator, punchPoint, Quaternion.identity);
-        }
+        PunchEffect();
 
         Invoke("ResetPunchCooldown", punchCooldown);
+    }
+
+    private void PunchEffect()
+    {
+        //// Punch Effects (punchSimulator should be a particle system)
+        //if (punchSimulator != null) {
+        //    Instantiate(punchSimulator, punchPoint, Quaternion.identity);
+        //}
     }
     #endregion
 
     #region GRAB AND THROW
     private void GrabAndThrowInput()
     {
+        if (isCharging) return;
+
         if (hasGrabbed) {
-            if (Input.GetMouseButtonDown(0)) {
-                ThrowObject();
+            if (Input.GetMouseButtonDown(1)) {
+                OnThrow?.Invoke();
             }
-        }
+        }else {
+            if (grabOnCooldown) return;
 
-        if (onCooldown) return;
-
-        if (Input.GetMouseButtonDown(0)) {
-            Debug.Log("Grab Input");
-            TryGetObjectToThrow(out GameObject objectToThrow);
-            grabbedObject = objectToThrow;
-            if (grabbedObject != null)
-            {
-                objectScoringScript = grabbedObject.GetComponent<ObjectScoring>();
-                GrabObject();
+            if (Input.GetMouseButtonDown(1)) {
+                Debug.Log("Grab Input");
+                TryGetObjectToThrow(out GameObject objectToThrow);
+                grabbedObject = objectToThrow;
+                if (grabbedObject != null) {
+                    objectScoringScript = grabbedObject.GetComponent<ObjectScoring>();
+                    GrabObject();
+                }
             }
         }
     }
@@ -166,11 +193,6 @@ public class CombatSystem : MonoBehaviour
         return false;
     }
 
-    private bool ClickIsInRange(Transform targetObject)
-    {
-        return Vector3.Distance(targetObject.position, transform.position) <= grabRadius;
-    }
-
     private void GrabObject()
     {
         hasGrabbed = true;
@@ -181,33 +203,25 @@ public class CombatSystem : MonoBehaviour
             col.enabled = false;
             grabbedObject.transform.position = grabPos.position;
             grabbedObject.transform.parent = grabPos;
-            objectScoringScript.isGrabbed = true;
+            // objectScoringScript.isGrabbed = true;
+
+            OnGrab?.Invoke();
         }
-        StartCoroutine(HandGrabAnimation());
     }
 
-    private IEnumerator HandGrabAnimation()
+    private bool ClickIsInRange(Transform targetObject)
     {
-        float objectWidth = grabbedObject.GetComponent<Renderer>().bounds.size.x;
-        Vector3 rightHandPos = new Vector3(objectWidth / 2, 0, 0);
-        Vector3 leftHandPos = new Vector3(-objectWidth / 2, 0, 0);
-
-        while (Vector3.Distance(rightHand.position, rightHandPos) > 0.01f) {
-            rightHand.position = Vector3.Lerp(rightHand.position, rightHandPos, 0.1f);
-            leftHand.position = Vector3.Lerp(leftHand.position, leftHandPos, 0.1f);
-            yield return null;
-        }
-        rightHand.position = rightHandPos;
-        leftHand.position = leftHandPos;
+        return Vector3.Distance(targetObject.position, transform.position) <= grabRadius;
     }
     #endregion
 
     #region THROW
-    private void ThrowObject()
+    public void ThrowObject()
     {
         hasGrabbed = false;
-        onCooldown = true;
+        grabOnCooldown = true;
 
+        Debug.Log("GRABBED OBJECT: " + grabbedObject.name);
         Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
         Collider col = grabbedObject.GetComponent<Collider>();
         if (rb != null) {
@@ -218,42 +232,86 @@ public class CombatSystem : MonoBehaviour
             Vector3 throwDirection = throwTarget.position - grabPos.position;
             rb.AddForce(throwDirection.normalized * throwForce, ForceMode.Impulse);
             grabbedObject = null;
-            throwSound.Play();
+            SoundManager.Instance.PlaySound(throwSound.clip);
         }
 
-        Invoke("ResetThrowCooldown", cooldownTime);
+        ThrowEffect();
+
+        Invoke("ResetThrowCooldown", throwCooldown);
     }
 
-    private void ResetThrowCooldown() => onCooldown = false;
+    private void ThrowEffect()
+    {
+
+    }
+
+    #endregion
+
+    #endregion
+
+    #region CHARGED THROW
+
+    private void ChargedThrowInput()
+    {
+        if (Input.GetKeyDown(KeyCode.X) && !chargeOnCooldown && hasGrabbed) {
+            if (!isCharging) {
+                isCharging = true;
+                chargeTimer = chargeTime;
+                OnCharge?.Invoke();
+            }else {
+                isCharging = false;
+                OnChargedThrow?.Invoke();
+            }
+        }
+    }
+
+    public void ChargedThrow()
+    {
+        hasGrabbed = false;
+        chargeOnCooldown = true;
+
+        Debug.Log("GRABBED OBJECT: " + grabbedObject.name);
+        Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
+        Collider col = grabbedObject.GetComponent<Collider>();
+        if (rb != null) {
+            grabbedObject.transform.parent = null;
+            rb.isKinematic = false;
+            col.enabled = true;
+
+            Vector3 throwDirection = throwTarget.position - grabPos.position;
+            rb.AddForce(throwDirection.normalized * chargedThrowForce, ForceMode.Impulse);
+            grabbedObject = null;
+        }
+
+        Invoke("ResetChargedThrowCooldown", chargedThrowCooldown);
+    }
+
+    #endregion
+
+
     private void ResetPunchCooldown() => punchOnCooldown = false;
+    private void ResetThrowCooldown() => grabOnCooldown = false;
+    private void ResetChargedThrowCooldown() => chargeOnCooldown = false;
+    private void ChargeHoldTimer()
+    {
+        if (isCharging) chargeTimer -= Time.deltaTime;
+        if (chargeTimer <= 0) {
+            isCharging = false;
+            chargeTimer = chargeTime;
+            OnChargedThrow?.Invoke();
+        }
+    }
 
-    //private IEnumerator HandThrowPrepAnimation()
-    //{
-    //    while (Vector3.Distance(grabPos.position, throwPrepPos.position) > 0.01f) {
-    //        rightHand.position = Vector3.Lerp(rightHand.position, rightHandThrowPrepPosition.position, 0.1f);
-    //        leftHand.position = Vector3.Lerp(leftHand.position, rightHandThrowPrepPosition.position, 0.1f);
-    //        yield return null;
-    //    }
-    //    rightHand.position = rightHandThrowPrepPosition.position;
-    //    leftHand.position = rightHandThrowPrepPosition.position;
+    private void EnableDoubleJump()
+    {
+        if (!TeddyMovement.Instance.allowDoubleJump)
+            TeddyMovement.Instance.allowDoubleJump = true;
+    }
 
-    //    StartCoroutine(HandThrowAnimation());
-    //}
-
-    //private IEnumerator HandThrowAnimation()
-    //{
-    //    while (Vector3.Distance(rightHand.position, rightHandThrowPosition.position) > 0.01f) {
-    //        rightHand.position = Vector3.Lerp(rightHand.position, rightHandThrowPosition.position, 0.1f);
-    //        leftHand.position = Vector3.Lerp(leftHand.position, rightHandThrowPosition.position, 0.1f);
-    //        yield return null;
-    //    }
-    //    rightHand.position = rightHandThrowPosition.position;
-    //    leftHand.position = rightHandThrowPosition.position;
-    //}
-
-    #endregion
-
-    #endregion
+    private void Timers()
+    {
+        ChargeHoldTimer();
+    }
 
     private void UpdateProgressionStage()
     {

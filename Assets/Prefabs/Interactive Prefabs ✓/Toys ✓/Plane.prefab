@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6240827415428241418}
   - component: {fileID: 801545244503004740}
   - component: {fileID: 8980869867231872796}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Toys
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 5547750916386545683}
   - component: {fileID: 805360815535645343}
   - component: {fileID: 3370975509333893231}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane Engine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
