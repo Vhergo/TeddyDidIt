@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ProgressionSystem : MonoBehaviour
 {
@@ -10,10 +12,19 @@ public class ProgressionSystem : MonoBehaviour
 
     [Tooltip("Add to list in order of progression")]
     [SerializeField] private List<GameObject> progressionIndicators = new List<GameObject>();
-    [SerializeField] private AudioSource progressionSound01;
-    [SerializeField] private AudioSource progressionSound02;
-    [SerializeField] private AudioSource progressionSound03;
     [SerializeField] private RectTransform progressionBar;
+
+    [Header("Achivement")]
+    [SerializeField] private Image achievementIcon;
+    [SerializeField] private TMP_Text achievementTitle;
+    [SerializeField] private Sprite powerPunch;
+    [SerializeField] private Sprite grabAndThrow;
+    [SerializeField] private Sprite doubleJump;
+    [SerializeField] private Sprite chargeThrow;
+
+    [SerializeField] private AudioClip achievementSound;
+    [SerializeField] private Animator achievementAnim;
+    [SerializeField] private AnimationClip achievementClip;
 
     private ProgressStage currentState;
 
@@ -73,27 +84,29 @@ public class ProgressionSystem : MonoBehaviour
                 currentState = ProgressStage.Punch;
                 OnPunchEnabled?.Invoke();
                 ActivateUIIndicator(1);
+
+                AchievementNotification(powerPunch, "Power Punch");
                 break;
             case ProgressStage.GrabAndThrow:
                 currentState = ProgressStage.GrabAndThrow;
                 OnGrabAndThrowEnabled?.Invoke();
                 ActivateUIIndicator(2);
-                SoundManager.Instance.PlayNext(SoundManager.Instance.track02);
-                SoundManager.Instance.PlaySound(progressionSound01.clip);
+
+                AchievementNotification(grabAndThrow, "Grab And Throw");
                 break;
             case ProgressStage.DoubleJump:
                 currentState = ProgressStage.DoubleJump;
                 OnDoubleJumpEnabled?.Invoke();
                 ActivateUIIndicator(3);
-                SoundManager.Instance.PlayNext(SoundManager.Instance.track03);
-                SoundManager.Instance.PlaySound(progressionSound02.clip);
+
+                AchievementNotification(doubleJump, "Double Jump");
                 break;
             case ProgressStage.ChargeThrow:
                 currentState = ProgressStage.ChargeThrow;
                 OnChargeThrowEnabled?.Invoke();
                 ActivateUIIndicator(4);
-                SoundManager.Instance.PlayNext(SoundManager.Instance.track04);
-                SoundManager.Instance.PlaySound(progressionSound03.clip);
+
+                AchievementNotification(chargeThrow, "Charged Throw");
                 break;
         }
     }
@@ -125,6 +138,17 @@ public class ProgressionSystem : MonoBehaviour
             Debug.Log(percentages[i]);
             progressionIndicators[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(startX + (barWidth * percentages[i]), 0, 0);
         }
+    }
+
+    private void AchievementNotification(Sprite icon, string title)
+    {
+        achievementIcon.sprite = icon;
+        achievementTitle.text = title;
+
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlaySound(achievementSound);
+
+        achievementAnim.Play(achievementClip.name);
     }
 }
 

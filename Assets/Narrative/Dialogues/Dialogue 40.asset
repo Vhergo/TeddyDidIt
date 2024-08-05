@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 40
   m_EditorClassIdentifier: 
   orderNumber: 40
-  speaker: 5
-  dialogueText: "(They finish talking and finally come to a conclusion, what Timmy\u2019s
-    punishment will be.)"
+  speaker: 2
+  dialogueText: He's not only challenging himself, but also our patience...
   autoplayDuration: 1

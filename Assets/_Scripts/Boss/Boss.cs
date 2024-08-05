@@ -5,13 +5,22 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     private const string PROJECTILE_TAG = "Projectile";
+    private List<string> throwableTags = new List<string> {
+        "Legos",
+        "Food",
+        "Clothing",
+        "OfficeSupplies",
+        "SportsEquipment",
+        "Toys"
+    };
 
-    [Header ("References")]
+    [Header("References")]
     [SerializeField] private Transform target;
     [SerializeField] private Transform firePoint;
     [SerializeField] private SkinnedMeshRenderer faceMesh;
     [SerializeField] private Animator ani;
     [SerializeField] private BossAniEvent aniEvent;
+    [SerializeField] private AnimationClip takenDamage;
 
     [Header("Projectile Variants")]
     [SerializeField] private GameObject slowPea;
@@ -39,11 +48,9 @@ public class Boss : MonoBehaviour
     private bool canFire = false;
     private int slowPeasFired = 0;
 
-
     private void Start()
     {
         StartCoroutine(FiringProcess());
-        StartFiring();
     }
 
     #region PROJECTILE FIRING
@@ -118,16 +125,6 @@ public class Boss : MonoBehaviour
     }
     #endregion
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        //register hit if impact higher than threshold
-        if (collision.impulse.magnitude > bossHitThreshold)
-        {
-            if (!collision.gameObject.CompareTag("Projectile"))
-                BossManager.Instance.OnBossHit();
-        }
-    }
-
     #region EMOTE
     public void SetEmote(BossManager.Emotes emote)
     {
@@ -156,6 +153,31 @@ public class Boss : MonoBehaviour
         }
 
         BossManager.Instance.currentEmote = emote;
+    }
+    #endregion
+
+    #region TAKE DAMAGE
+
+    [ContextMenu("Take Damage")]
+    public void TakeDamage()
+    {
+        BossManager.Instance.BossHit();
+        ani.Play(takenDamage.name);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //register hit if impact higher than threshold
+        if (collision.impulse.magnitude > bossHitThreshold) {
+            if (CheckCollisionTag(collision.gameObject.tag)) {
+                TakeDamage();
+            }
+        }
+    }
+
+    private bool CheckCollisionTag(string tag)
+    {
+        return throwableTags.Contains(tag);
     }
     #endregion
 }

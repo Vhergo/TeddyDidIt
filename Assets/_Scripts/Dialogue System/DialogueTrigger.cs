@@ -8,7 +8,7 @@ public class DialogueTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) {
-            DialogueSystem.Instance.NextDialogue();
+            DialogueManager.Instance.NextDialogue(true);
             Destroy(gameObject);
         }
     }

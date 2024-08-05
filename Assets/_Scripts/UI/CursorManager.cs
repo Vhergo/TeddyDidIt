@@ -17,7 +17,7 @@ public class CursorManager : MonoBehaviour
         if (Instance == null) {
             Instance = this;
             cursorHotspot = new Vector2(cursorDefault.width / 2, cursorDefault.height / 2);
-            Cursor.SetCursor(cursorDefault, cursorHotspot, CursorMode.Auto);
+            Cursor.SetCursor(cursorDefault, cursorHotspot, CursorMode.ForceSoftware);
         } else {
             Destroy(gameObject);
         }
@@ -25,11 +25,11 @@ public class CursorManager : MonoBehaviour
 
     public void SetCursor(Texture2D cursorTexture)
     {
-        Cursor.SetCursor(cursorTexture, cursorHotspot, CursorMode.Auto);
+        Cursor.SetCursor(cursorTexture, cursorHotspot, CursorMode.ForceSoftware);
     }
 
     public void ResetCursor()
     {
-        Cursor.SetCursor(cursorDefault, cursorHotspot, CursorMode.Auto);
+        Cursor.SetCursor(cursorDefault, cursorHotspot, CursorMode.ForceSoftware);
     }
 }

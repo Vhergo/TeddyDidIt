@@ -20,12 +20,12 @@ public class SequenceBackgroundManager : MonoBehaviour
 
     private void OnEnable()
     {
-        DialogueSystem.OnSequenceChange += ChangeBackground;
+        DialogueManager.OnSequenceChange += ChangeBackground;
     }
 
     private void OnDisable()
     {
-        DialogueSystem.OnSequenceChange -= ChangeBackground;
+        DialogueManager.OnSequenceChange -= ChangeBackground;
     }
 
     public void ChangeBackground(DialogueSequence sequence)

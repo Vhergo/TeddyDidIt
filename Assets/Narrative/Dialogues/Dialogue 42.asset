@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue 42
   m_EditorClassIdentifier: 
   orderNumber: 42
-  speaker: 1
-  dialogueText: "Father is right, pumpkin\u2026"
+  speaker: 2
+  dialogueText: Well, I think that settles it. Timmy, you're grounded from playing
+    on the DX, until you clean up this mess 'Teddy' made.
   autoplayDuration: 1

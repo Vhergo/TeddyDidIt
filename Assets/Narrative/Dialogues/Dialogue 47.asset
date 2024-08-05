@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orderNumber: 47
   speaker: 1
-  dialogueText: "Remember, pumpkin, we\u2019re doing it to teach you a lesson. We
-    want you to take responsibility for what \u2018Teddy\u2019 has done, he is your
-    friend after all."
+  dialogueText: '(Father & Mother leaves Timmy''s room, heading back to the kitchen)
+
+'
   autoplayDuration: 1

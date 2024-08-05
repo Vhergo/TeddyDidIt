@@ -61,7 +61,8 @@ public class ObjectPoolManager : MonoBehaviour
 
     public void ReturnPoolObject(GameObject objectToPool)
     {
-        ObjectPoolInfo objectPool = objectPools.Find(x => x.objectName == RemoveCloneString(objectToPool.name));
+        // ObjectPoolInfo objectPool = objectPools.Find(x => x.objectName == RemoveCloneString(objectToPool.name));
+        ObjectPoolInfo objectPool = objectPools.Find(x => x.objectName == objectToPool.name);
 
         if (objectPool != null) {
             objectToPool.SetActive(false);
@@ -80,12 +81,13 @@ public class ObjectPoolManager : MonoBehaviour
 
     private Transform CreatePoolContainer(GameObject objectToSpawn)
     {
-        GameObject newObjectPoolContainer = new GameObject(RemoveCloneString(objectToSpawn.name) + " Pool");
+        // GameObject newObjectPoolContainer = new GameObject(RemoveCloneString(objectToSpawn.name) + " Pool");
+        GameObject newObjectPoolContainer = new GameObject(objectToSpawn.name + " Pool");
         newObjectPoolContainer.transform.SetParent(objectPoolContainer.transform);
         return newObjectPoolContainer.transform;
     }
 
-    private string RemoveCloneString(string objectName) => objectName.Substring(0, objectName.Length - 7);
+    // private string RemoveCloneString(string objectName) => objectName.Substring(0, objectName.Length - 7);
     #endregion
 }
 

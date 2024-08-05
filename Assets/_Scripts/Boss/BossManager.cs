@@ -9,7 +9,15 @@ public class BossManager : MonoBehaviour
     [SerializeField] private Boss boss;
 
     public delegate void BossEvent();
-    public BossEvent onBossHit;
+    public BossEvent OnBossHit;
+
+    [Header("Boss")]
+    [SerializeField] private int maxHealth = 10;
+    [SerializeField] private int currentHealth;
+
+    [Header("Dialogue")]
+    [SerializeField] private List<Dialogue> bossHit;
+    [SerializeField] private Dialogue bossDefeated;
 
     [HideInInspector] public Emotes currentEmote;
     [SerializeField] private Emotes startingEmote = Emotes.blinkClosedMouth;
@@ -23,18 +31,58 @@ public class BossManager : MonoBehaviour
         Instance = this;
     }
 
+    private void OnEnable()
+    {
+        Player.OnPlayerDeath += StopFiring;
+    }
+
+    private void OnDisable()
+    {
+        Player.OnPlayerDeath -= StopFiring;
+    }
+
     private void Start()
     {
-        //set stating emote
+        boss = GetComponent<Boss>();
+        currentHealth = maxHealth;
+
         SetEmote(startingEmote);
+
     }
 
     //called by boss when hit by player projectile
-    public void OnBossHit()
+    public void BossHit()
     {
-        onBossHit?.Invoke();
+        OnBossHit?.Invoke();
+        currentHealth--;
+
+        if (currentHealth <= 0) {
+            BossDeath();
+        }else {
+            SetDialogue(BossHitDialogue());
+        }
     }
+
+    private void BossDeath()
+    {
+        SetDialogue(bossDefeated);
+    }
+
+    private void SetDialogue(Dialogue dialogue)
+    {
+        DialogueManager.Instance.SetDialogue(dialogue);
+    }
+
+    private Dialogue BossHitDialogue()
+    {
+        int randomeIndex = Random.Range(0, bossHit.Count);
+        return bossHit[randomeIndex];
+    }
+
 
     //set face emote of boss
     public void SetEmote(Emotes emote) => boss.SetEmote(emote);
+
+    public void StartFiring() => boss.StartFiring();
+    public void StopFiring() => boss.StopFiring();
 }

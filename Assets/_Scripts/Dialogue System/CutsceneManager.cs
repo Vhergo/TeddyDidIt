@@ -6,7 +6,7 @@ using UnityEngine.Playables;
 public class CutsceneManager : MonoBehaviour
 {
     private PlayableDirector playableDirector;
-    private DialogueSystem dialogueSystem;
+    private DialogueManager dialogueSystem;
     private bool cutscenePlaying = true;
     public bool CutscenePlaying {
         get => cutscenePlaying;
@@ -16,7 +16,7 @@ public class CutsceneManager : MonoBehaviour
     private void Start()
     {
         playableDirector = FindObjectOfType<PlayableDirector>();
-        dialogueSystem = DialogueSystem.Instance;
+        dialogueSystem = DialogueManager.Instance;
     }
 
     private void Update()

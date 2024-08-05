@@ -43,14 +43,14 @@ public class DialogueAnimator : MonoBehaviour
 
     private void OnEnable()
     {
-        DialogueSystem.OnSpeakerChanged += TriggerSpeakerChange;
-        DialogueSystem.OnAutoSequenceEnded += StopCurrentSpeaker;
+        DialogueManager.OnSpeakerChanged += TriggerSpeakerChange;
+        DialogueManager.OnAutoSequenceEnded += StopCurrentSpeaker;
     }
 
     private void OnDisable()
     {
-        DialogueSystem.OnSpeakerChanged -= TriggerSpeakerChange;
-        DialogueSystem.OnAutoSequenceEnded -= StopCurrentSpeaker;
+        DialogueManager.OnSpeakerChanged -= TriggerSpeakerChange;
+        DialogueManager.OnAutoSequenceEnded -= StopCurrentSpeaker;
     }
 
     private void TriggerSpeakerChange(Speaker speaker)

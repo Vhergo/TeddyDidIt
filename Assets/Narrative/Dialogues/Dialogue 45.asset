@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue 45
   m_EditorClassIdentifier: 
   orderNumber: 45
-  speaker: 0
-  dialogueText: "Yes, Father\u2026?"
+  speaker: 2
+  dialogueText: 'Now then, this mess isn''t going to clean up after itself. Get to
+    tidying it up, pronto. '
   autoplayDuration: 1

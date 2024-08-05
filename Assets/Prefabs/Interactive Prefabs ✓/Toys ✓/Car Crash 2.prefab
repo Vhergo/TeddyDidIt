@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -407794653102833851}
   m_Layer: 6
   m_Name: Car Crash 2
-  m_TagString: Untagged
+  m_TagString: Toys
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,4 +96,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081648cbfe8e9a9408cb27dec828497a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedThreshold: 0.1
   isGrabbed: 0

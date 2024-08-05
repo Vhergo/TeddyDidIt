@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 44
   m_EditorClassIdentifier: 
   orderNumber: 44
-  speaker: 2
-  dialogueText: Timmy.
+  speaker: 0
+  dialogueText: I understand... Thank you for trying to teach me a lesson.
   autoplayDuration: 1

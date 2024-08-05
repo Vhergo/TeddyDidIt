@@ -15,13 +15,10 @@ public class SoundManager : MonoBehaviour
     [Header("SOUNDS")]
     [Header("Background Music")]
     [SerializeField] private AudioClip mainMenuMusic;
-    [SerializeField] public AudioClip track01;
-    [SerializeField] public AudioClip track02;
-    [SerializeField] public AudioClip track03;
-    [SerializeField] public AudioClip track04;
-    //Boss Music
-    [SerializeField] public AudioClip track05;
+    [SerializeField] public AudioClip gameMusic;
+
     [SerializeField] private Vector2 pitchRange = new Vector2(0.8f, 1.2f);
+    [SerializeField] private float musicTransitionTime = 2f;
 
     private Slider masterSlider;
     private Slider musicSlider;
@@ -111,8 +108,34 @@ public class SoundManager : MonoBehaviour
     {
         musicSource.clip = music;
 
-        yield return new WaitUntil(MySceneManager.Instance.LoadingScreenIsNotActive);
+        if (MySceneManager.Instance != null)
+            yield return new WaitUntil(MySceneManager.Instance.LoadingScreenIsNotActive);
         musicSource.Play();
+    }
+
+    public void TriggerSwitchMusic(AudioClip newMusic)
+    {
+        StartCoroutine(SwitchMusic(newMusic));
+    }
+
+    public IEnumerator SwitchMusic(AudioClip newMusic)
+    {
+        float startVolume = musicSource.volume;
+
+        while (musicSource.volume > 0) {
+            musicSource.volume -= startVolume * Time.deltaTime / (musicTransitionTime / 2);
+            yield return null;
+        }
+
+        musicSource.clip = newMusic;
+        musicSource.Play();
+
+        while (musicSource.volume < startVolume) {
+            musicSource.volume += startVolume * Time.deltaTime / (musicTransitionTime / 2);
+            yield return null;
+        }
+
+        musicSource.volume = startVolume;
     }
 
 
@@ -125,7 +148,7 @@ public class SoundManager : MonoBehaviour
                 StartCoroutine(SetMusic(mainMenuMusic));
                 break;
             case nameof(SceneEnum.GameScene):
-                StartCoroutine(SetMusic(track01));
+                StartCoroutine(SetMusic(gameMusic));
                 break;
         }
     }

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orderNumber: 38
   speaker: 2
-  dialogueText: "(sigh) Give me and Mother a moment to converse real quick\u2026"
+  dialogueText: That doesn't explain why the rest of the room looks like a literal
+    junkyard, Timmy...
   autoplayDuration: 1

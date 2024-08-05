@@ -98,9 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b117fc300f3b64abd40220f7e70e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 3693062578227363797, guid: 31e0f5b98de911b428ff49ecca9db1a9, type: 3}
   selfDestroy: 1
   timeToSelfDestroy: 10
-  strength: 30
+  strength: 50
 --- !u!135 &3613342179966307641
 SphereCollider:
   m_ObjectHideFlags: 0

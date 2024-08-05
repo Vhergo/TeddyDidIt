@@ -14,8 +14,13 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private float punchCooldown = 0.5f;
     [SerializeField] private float punchForce = 10f;
     [SerializeField] private float punchRadius = 2f;
-    [SerializeField] private AudioSource punchSound;
+    [SerializeField] private AudioClip punchSound;
     private bool punchOnCooldown;
+
+    [SerializeField] private bool poweredUp;
+    [SerializeField] private float powerAmp = 1f;
+
+    public bool PoweredUp => poweredUp;
 
     [Header("Grab and Throw"), Space(10)]
     [SerializeField] private Transform grabPos;
@@ -25,7 +30,7 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private float grabRadius = 2f;
     [SerializeField] private float throwForce = 10f;
     [SerializeField] private float throwCooldown = 1f;
-    [SerializeField] private AudioSource throwSound;
+    [SerializeField] private AudioClip throwSound;
     private GameObject grabbedObject;
     private bool grabOnCooldown;
     private bool hasGrabbed;
@@ -128,9 +133,11 @@ public class CombatSystem : MonoBehaviour
         foreach (Collider punchableObjects in colliders) {
             Rigidbody rb = punchableObjects.GetComponent<Rigidbody>();
             if (rb != null) {
-                rb.AddForce(punchDirection * punchForce, ForceMode.Impulse);
+                rb.AddForce(punchDirection * punchForce * ForceAmplification() * CheckPowerAmplification(), ForceMode.Impulse);
+
                 ScoreSystem.Instance.AddScore(punchableObjects.gameObject.tag);
-                SoundManager.Instance.PlaySound(punchSound.clip);
+
+                SoundManager.Instance.PlaySound(punchSound);
             }
         }
 
@@ -157,7 +164,7 @@ public class CombatSystem : MonoBehaviour
             if (Input.GetMouseButtonDown(1)) {
                 OnThrow?.Invoke();
             }
-        }else {
+        } else {
             if (grabOnCooldown) return;
 
             if (Input.GetMouseButtonDown(1)) {
@@ -165,7 +172,6 @@ public class CombatSystem : MonoBehaviour
                 TryGetObjectToThrow(out GameObject objectToThrow);
                 grabbedObject = objectToThrow;
                 if (grabbedObject != null) {
-                    objectScoringScript = grabbedObject.GetComponent<ObjectScoring>();
                     GrabObject();
                 }
             }
@@ -175,7 +181,6 @@ public class CombatSystem : MonoBehaviour
     #region GRAB
     private bool TryGetObjectToThrow(out GameObject objectToThrow)
     {
-        Debug.Log("Trying to get object to throw");
         objectToThrow = null;
 
         Vector3 mousePos = Mouse.current.position.ReadValue();
@@ -203,7 +208,9 @@ public class CombatSystem : MonoBehaviour
             col.enabled = false;
             grabbedObject.transform.position = grabPos.position;
             grabbedObject.transform.parent = grabPos;
-            // objectScoringScript.isGrabbed = true;
+
+            objectScoringScript = grabbedObject.GetComponent<ObjectScoring>();
+            objectScoringScript.isGrabbed = true;
 
             OnGrab?.Invoke();
         }
@@ -221,7 +228,6 @@ public class CombatSystem : MonoBehaviour
         hasGrabbed = false;
         grabOnCooldown = true;
 
-        Debug.Log("GRABBED OBJECT: " + grabbedObject.name);
         Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
         Collider col = grabbedObject.GetComponent<Collider>();
         if (rb != null) {
@@ -230,9 +236,10 @@ public class CombatSystem : MonoBehaviour
             col.enabled = true;
 
             Vector3 throwDirection = throwTarget.position - grabPos.position;
-            rb.AddForce(throwDirection.normalized * throwForce, ForceMode.Impulse);
+            rb.AddForce(throwDirection.normalized * throwForce * ForceAmplification() * CheckPowerAmplification(), ForceMode.Impulse);
             grabbedObject = null;
-            SoundManager.Instance.PlaySound(throwSound.clip);
+
+            SoundManager.Instance.PlaySound(throwSound);
         }
 
         ThrowEffect();
@@ -258,7 +265,7 @@ public class CombatSystem : MonoBehaviour
                 isCharging = true;
                 chargeTimer = chargeTime;
                 OnCharge?.Invoke();
-            }else {
+            } else {
                 isCharging = false;
                 OnChargedThrow?.Invoke();
             }
@@ -279,7 +286,7 @@ public class CombatSystem : MonoBehaviour
             col.enabled = true;
 
             Vector3 throwDirection = throwTarget.position - grabPos.position;
-            rb.AddForce(throwDirection.normalized * chargedThrowForce, ForceMode.Impulse);
+            rb.AddForce(throwDirection.normalized * chargedThrowForce * ForceAmplification() * CheckPowerAmplification(), ForceMode.Impulse);
             grabbedObject = null;
         }
 
@@ -292,6 +299,26 @@ public class CombatSystem : MonoBehaviour
     private void ResetPunchCooldown() => punchOnCooldown = false;
     private void ResetThrowCooldown() => grabOnCooldown = false;
     private void ResetChargedThrowCooldown() => chargeOnCooldown = false;
+
+    private float ForceAmplification() => TeddyMovement.Instance.GetMovementAmplification();
+
+    private float CheckPowerAmplification()
+    {
+        if (poweredUp) {
+            float power = powerAmp;
+            powerAmp = 1;
+            poweredUp = false;
+            return power;
+        }else {
+            return powerAmp;
+        }
+    }
+
+    public void PowerUp(float amplification) {
+        poweredUp = true;
+        powerAmp = amplification;
+    }
+
     private void ChargeHoldTimer()
     {
         if (isCharging) chargeTimer -= Time.deltaTime;
@@ -301,7 +328,7 @@ public class CombatSystem : MonoBehaviour
             OnChargedThrow?.Invoke();
         }
     }
-    
+
     private void EnableDoubleJump()
     {
         if (!TeddyMovement.Instance.allowDoubleJump)

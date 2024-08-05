@@ -143,8 +143,8 @@ public class Player3DPlatformerMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        DialogueSystem.OnAutoSequenceStarted += DisableControls;
-        DialogueSystem.OnAutoSequenceEnded += EnableControls;
+        DialogueManager.OnAutoSequenceStarted += DisableControls;
+        DialogueManager.OnAutoSequenceEnded += EnableControls;
 
         move = playerControls.Player.Movement;
         jump = playerControls.Player.Jump;
@@ -157,8 +157,8 @@ public class Player3DPlatformerMovement : MonoBehaviour
 
     private void OnDisable()
     {
-        DialogueSystem.OnAutoSequenceStarted -= DisableControls;
-        DialogueSystem.OnAutoSequenceEnded -= EnableControls;
+        DialogueManager.OnAutoSequenceStarted -= DisableControls;
+        DialogueManager.OnAutoSequenceEnded -= EnableControls;
 
         move.Disable();
         jump.Disable();

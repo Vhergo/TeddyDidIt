@@ -9,4 +9,5 @@ public class DialogueSequence : ScriptableObject
     public List<Dialogue> dialogueSequence = new List<Dialogue>();
     public DialogueSequence nextSequence;
     public Sprite background;
+    public AudioClip backgroundMusic;
 }

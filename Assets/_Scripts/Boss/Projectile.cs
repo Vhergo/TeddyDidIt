@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [SerializeField] private GameObject explosion;
+
     [Header("Settings")]
     [SerializeField] private bool selfDestroy = true;
     [SerializeField] private float timeToSelfDestroy = 10;
@@ -33,6 +35,7 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        rb.useGravity = true; //let projectile fall once it hits something
+        ObjectPoolManager.Instance.GetPoolObject(explosion, transform.position, Quaternion.identity);
+        ObjectPoolManager.Instance.ReturnPoolObject(gameObject);
     }
 }

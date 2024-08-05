@@ -14,14 +14,14 @@ public class HandlePostProcessing : MonoBehaviour
 
     private void OnEnable()
     {
-        DialogueSystem.OnAutoSequenceStarted += EnablePostProcessing;
-        DialogueSystem.OnAutoSequenceEnded += DisablePostProcessing;
+        DialogueManager.OnAutoSequenceStarted += EnablePostProcessing;
+        DialogueManager.OnAutoSequenceEnded += DisablePostProcessing;
     }
 
     private void OnDisable()
     {
-        DialogueSystem.OnAutoSequenceStarted -= EnablePostProcessing;
-        DialogueSystem.OnAutoSequenceEnded -= DisablePostProcessing;
+        DialogueManager.OnAutoSequenceStarted -= EnablePostProcessing;
+        DialogueManager.OnAutoSequenceEnded -= DisablePostProcessing;
     }
 
     private void EnablePostProcessing()

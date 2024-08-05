@@ -44,4 +44,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3b33429046fbfcf43a6e829c3b8e6e13, type: 2}
   - {fileID: 11400000, guid: af4f620dad02d7a4dbdb714d1c924f15, type: 2}
   nextSequence: {fileID: 11400000, guid: 76147f805a37b034bb5159ee4aec782f, type: 2}
-  background: {fileID: 21300000, guid: 59740185bd573014ba7fd090a984fe27, type: 3}
+  background: {fileID: 21300000, guid: 2fdcbd0fc483bda4ba2024199cc5f6fd, type: 3}
+  backgroundMusic: {fileID: 0}

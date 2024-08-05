@@ -12,9 +12,10 @@ public class ScoreSystem : MonoBehaviour
     [SerializeField] private int grabAndThrowScore;
     [SerializeField] private int doubleJumpScore;
     [SerializeField] private int chargeThrowScore;
-    [SerializeField] private AudioSource destroySound;
     [SerializeField] private int maxScore;
     [SerializeField] private int score = 0;
+
+    //[SerializeField] private AudioSource destroySound;
 
     [Header("Score Book")]
     [SerializeField] private int legoScore = 5;
@@ -23,6 +24,10 @@ public class ScoreSystem : MonoBehaviour
     [SerializeField] private int officeSuppliesScore = 5;
     [SerializeField] private int toysScore = 15;
     [SerializeField] private int sportsEquipmentScore = 15;
+    [Space(10)]
+    [SerializeField] private int BossDefeatedScore = 7777;
+    [SerializeField] private int specialScore = 100;
+    [SerializeField] private int prePunchScore = 25;
 
     [Header("UI")]
     [SerializeField] private Image progressionFill;
@@ -41,6 +46,9 @@ public class ScoreSystem : MonoBehaviour
         Instance = this;
     }
 
+    private void OnEnable() => BossManager.Instance.OnBossHit += BossDefeated;
+    private void OnDisable() => BossManager.Instance.OnBossHit -= BossDefeated;
+
     private void Start()
     {
         score_book.Add("Legos", legoScore);
@@ -50,6 +58,7 @@ public class ScoreSystem : MonoBehaviour
         score_book.Add("Toys", toysScore);
         score_book.Add("SportsEquipment", sportsEquipmentScore);
         score_book.Add("Explosion", 100);
+        score_book.Add("Projectile", 5);
 
         maxScore = chargeThrowScore;
         progressionFill.fillAmount = 0;
@@ -70,8 +79,7 @@ public class ScoreSystem : MonoBehaviour
         scoreToAdd = Mathf.Floor(scalar * scoreToAdd);
         score = score + (int) scoreToAdd;
         scoreText.text = score.ToString("#,#");
-        destroySound.Play(); // Switch to use the Sound Manager
-        SoundManager.Instance.PlaySound(destroySound.clip);
+        // SoundManager.Instance.PlaySound(destroySound);
         CheckThreshhold();
     }
 
@@ -79,6 +87,27 @@ public class ScoreSystem : MonoBehaviour
     public void AddScore()
     {
         score += 100;
+        scoreText.text = score.ToString("#,#");
+        CheckThreshhold();
+    }
+
+    public void AddScorePrePunch()
+    {
+        score += prePunchScore;
+        scoreText.text = score.ToString("#,#");
+        CheckThreshhold();
+    }
+
+    public void BossDefeated()
+    {
+        score += BossDefeatedScore;
+        scoreText.text = score.ToString("#,#");
+        CheckThreshhold();
+    }
+
+    public void SpecialPickup()
+    {
+        score += specialScore;
         scoreText.text = score.ToString("#,#");
         CheckThreshhold();
     }

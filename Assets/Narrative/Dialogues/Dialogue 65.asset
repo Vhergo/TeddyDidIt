@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orderNumber: 65
   speaker: 3
-  dialogueText: Missing socks??? Are you serious right now, Timmy?
+  dialogueText: Are you serious right now, Timmy?
   autoplayDuration: 1

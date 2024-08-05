@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue 39
   m_EditorClassIdentifier: 
   orderNumber: 39
-  speaker: 5
-  dialogueText: (Father & Mother whisper to each other, while Timmy sits on the floor
-    waiting in anticipation)
+  speaker: 0
+  dialogueText: Teddy likes stacking the planes and cars on top of one another, he
+    likes to challenge his jumping skills!
   autoplayDuration: 1

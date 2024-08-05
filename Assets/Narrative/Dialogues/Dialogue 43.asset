@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dialogue 43
   m_EditorClassIdentifier: 
   orderNumber: 43
-  speaker: 0
-  dialogueText: "\u2026"
+  speaker: 1
+  dialogueText: Remember, pumpkin, we not only learn from our mistakes, but also
+    the mistakes of others. In this case, your friend, Teddy.
   autoplayDuration: 1

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Dialogue 41
   m_EditorClassIdentifier: 
   orderNumber: 41
-  speaker: 2
-  dialogueText: Well, Timmy, what happened to your room is inexcusable. I hope you
-    know that.
+  speaker: 1
+  dialogueText: ...
   autoplayDuration: 1

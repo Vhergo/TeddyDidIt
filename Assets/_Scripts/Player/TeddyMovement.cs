@@ -26,7 +26,7 @@ public class TeddyMovement : MonoBehaviour
     [SerializeField] private float capeWind = 15f;
     private float moveSpeed;
     private Vector3 moveDirection;
-    private bool facingLeft = false;
+    private bool facingLeft;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 40f; 
@@ -95,13 +95,15 @@ public class TeddyMovement : MonoBehaviour
     {
         jumpsLeft = jumpLimit;
         jumpBufferTimer = jumpBuffer;
+
+        disableMovement = true;
     }
 
     private void Update()
     {
         MoveInput(); //read movement input
         SprintInput();
-        AnimateMovement(); //animate teddy
+        
         CheckIfLanded();
         CheckIfWalkedOffEdge();
         Timers();
@@ -111,6 +113,7 @@ public class TeddyMovement : MonoBehaviour
     {
         ApplyGravity();
         Move();
+        AnimateMovement(); //animate teddy
     }
 
     #region MOVEMENT
@@ -127,6 +130,8 @@ public class TeddyMovement : MonoBehaviour
 
     private void AnimateMovement()
     {
+        if (disableMovement) return;
+
         if (turnWithMovement) TurnWithMovement();
         else TurnWithMouse();
 
@@ -192,6 +197,8 @@ public class TeddyMovement : MonoBehaviour
 
     void TryJump()
     {
+        if (disableMovement) return;
+
         if (CanJump())
         {
             Jump(jumpForce);
@@ -284,16 +291,25 @@ public class TeddyMovement : MonoBehaviour
         rb.AddForce(gravity, forceMode);
     }
 
-    private void Unfreeze()
+    public void Unfreeze()
     {
         disableGravity = false;
         disableMovement = false;
     }
 
-    private void Freeze()
+    public void Freeze()
     {
         disableGravity = true;
         disableMovement = true;
         rb.velocity = Vector3.zero;
+    }
+
+    public float GetMovementAmplification()
+    {
+        if (moveDirection.x == 0) return 1f; // No amplification if player is not moving
+        else {
+            if (moveSpeed == maxSprintSpeed) return 2f;
+            else return 1.5f;
+        }
     }
 }
