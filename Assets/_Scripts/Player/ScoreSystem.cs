@@ -32,6 +32,9 @@ public class ScoreSystem : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Image progressionFill;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioSource destroySound;
+
     private Dictionary<string,int> score_book = new Dictionary<string,int>();
 
     public static ScoreSystem Instance;
@@ -79,7 +82,7 @@ public class ScoreSystem : MonoBehaviour
         scoreToAdd = Mathf.Floor(scalar * scoreToAdd);
         score = score + (int) scoreToAdd;
         scoreText.text = score.ToString("#,#");
-        // SoundManager.Instance.PlaySound(destroySound);
+        SoundManager.Instance.PlaySound(destroySound.clip);
         CheckThreshhold();
     }
 

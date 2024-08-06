@@ -1947,8 +1947,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3008e76b8286dc44386733b476b837fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectSound: {fileID: 8300000, guid: 2fd275f99b545c64aa455abc845f8744, type: 3}
-  hoverSound: {fileID: 8300000, guid: 82d792800e714044f9e938bf2343de2d, type: 3}
+  selectSound: {fileID: 8300000, guid: 7c374b7b7f74d3242a7a78f591e03711, type: 3}
+  hoverSound: {fileID: 8300000, guid: e8dc1ce6cbc31b14088b2f817fe9298a, type: 3}
   releaseSound: {fileID: 0}
   exitSound: {fileID: 0}
 --- !u!114 &1838337459

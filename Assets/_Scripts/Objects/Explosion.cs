@@ -62,7 +62,7 @@ public class Explosion : MonoBehaviour
                 rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
             }
         }
-
+        ExplosionSFX.instance.playSFX();
         AddScore();
         if (destroyOnTrigger) Destroy(gameObject, 1f);
     }

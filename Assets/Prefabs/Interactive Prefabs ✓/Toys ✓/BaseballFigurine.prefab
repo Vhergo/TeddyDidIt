@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7893597483264675022}
   - component: {fileID: 1279879449555828834}
   - component: {fileID: 8372229911970462953}
-  - component: {fileID: 4434089510522978959}
+  - component: {fileID: 2241137449876667323}
   m_Layer: 8
   m_Name: BaseballFigurine
   m_TagString: Toys
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081648cbfe8e9a9408cb27dec828497a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedThreshold: 0.1
   isGrabbed: 0
 --- !u!54 &8372229911970462953
 Rigidbody:
@@ -128,8 +129,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 1
---- !u!136 &4434089510522978959
-CapsuleCollider:
+--- !u!65 &2241137449876667323
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -146,11 +147,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.22
-  m_Height: 5.05
-  m_Direction: 2
-  m_Center: {x: -0.030740276, y: -0.1669552, z: 3.2872858}
+  serializedVersion: 3
+  m_Size: {x: 2.8453856, y: 1.7608427, z: 6.1999316}
+  m_Center: {x: -0.030740261, y: -0.16695517, z: 3.035347}
 --- !u!1 &8149886699719277584
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,7 +161,6 @@ GameObject:
   - component: {fileID: 3513298131025320483}
   - component: {fileID: 1243687128001796830}
   - component: {fileID: 4163874352104855409}
-  - component: {fileID: 3162851525247301291}
   m_Layer: 8
   m_Name: Base
   m_TagString: Untagged
@@ -235,27 +233,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3162851525247301291
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8149886699719277584}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.4022598, y: 3.402261, z: 0.50930405}
-  m_Center: {x: 0.0000005364418, y: 0.00000017881352, z: 0.25400192}
 --- !u!1 &8964286277283101863
 GameObject:
   m_ObjectHideFlags: 0

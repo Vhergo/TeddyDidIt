@@ -19,7 +19,6 @@ public class ObjectScoring : MonoBehaviour
             {
                 ScoreSystem.Instance.AddScore(speed + 1.0f, gameObject.tag, collision.gameObject.tag);
             }
-
             isGrabbed = false;
             Debug.Log(speed.ToString());
         }
