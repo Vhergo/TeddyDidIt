@@ -52,17 +52,17 @@ public class ProgressionSystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            SetProgressionStage(ProgressStage.Base);
-        } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            SetProgressionStage(ProgressStage.Punch);
-        } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
-            SetProgressionStage(ProgressStage.GrabAndThrow);
-        } else if (Input.GetKeyDown(KeyCode.Alpha4)) {
-            SetProgressionStage(ProgressStage.DoubleJump);
-        } else if (Input.GetKeyDown(KeyCode.Alpha5)) {
-            SetProgressionStage(ProgressStage.ChargeThrow);
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha1)) {
+        //    SetProgressionStage(ProgressStage.Base);
+        //} else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+        //    SetProgressionStage(ProgressStage.Punch);
+        //} else if (Input.GetKeyDown(KeyCode.Alpha3)) {
+        //    SetProgressionStage(ProgressStage.GrabAndThrow);
+        //} else if (Input.GetKeyDown(KeyCode.Alpha4)) {
+        //    SetProgressionStage(ProgressStage.DoubleJump);
+        //} else if (Input.GetKeyDown(KeyCode.Alpha5)) {
+        //    SetProgressionStage(ProgressStage.ChargeThrow);
+        //}
     }
 
     private void InitializeUI()

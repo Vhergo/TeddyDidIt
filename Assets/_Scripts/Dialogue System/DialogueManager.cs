@@ -58,6 +58,7 @@ public class DialogueManager : MonoBehaviour
 
     [Space(10)]
     [SerializeField] private PlayableDirector playableDirector;
+    [SerializeField] private AudioSource typingSource;
     [SerializeField] private AudioClip typingSound;
 
     public static Action<Speaker> OnSpeakerChanged;
@@ -75,6 +76,9 @@ public class DialogueManager : MonoBehaviour
     {
         originalTextSpeed = textSpeed;
         InitializeSpeakers();
+
+        typingSource = GetComponent<AudioSource>();
+        typingSource.clip = typingSound;
     }
 
     private void Update()
@@ -262,11 +266,17 @@ public class DialogueManager : MonoBehaviour
         while (counter <= totalVisibleCharacters) {
             dialogueText.maxVisibleCharacters = counter;
             counter++;
-            SoundManager.Instance.PlaySound(typingSound, true);
+            PlayTypingSound();
             yield return new WaitForSeconds(textSpeed);
         }
 
         allTextIsDisplayed = true;
+    }
+
+    private void PlayTypingSound()
+    {
+        typingSource.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+        typingSource.Play();
     }
 
     private IEnumerator SkipTyping()
