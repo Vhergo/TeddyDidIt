@@ -138,6 +138,7 @@ public class CombatSystem : MonoBehaviour
 
                 ScoreSystem.Instance.AddScore(punchableObjects.gameObject.tag);
                 SoundManager.Instance.PlaySound(punchSound);
+                CameraShake.Instance.TriggerCameraShake();
             }
         }
 

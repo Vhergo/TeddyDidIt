@@ -15,5 +15,6 @@ public class ExplosionSFX : MonoBehaviour
     public void playSFX()
     {
         SoundManager.Instance.PlaySound(explosionSFX.clip);
+        GetComponent<BoxCollider>().enabled = false;
     }
 }

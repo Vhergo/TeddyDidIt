@@ -26,6 +26,7 @@ public class CameraShake : MonoBehaviour
     private void Start() {
         vCam = GetComponent<CinemachineVirtualCamera>();
         noise = vCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        StopShake();
     }
 
     /// <summary>
@@ -34,7 +35,7 @@ public class CameraShake : MonoBehaviour
     /// <param name="shakeIntensity">The intensity of the shake. If null, uses the default intensity.</param>
     /// <param name="shakeFrequency">The frequency of the shake. If null, uses the default frequency.</param>
     /// <param name="shakeDuration">The duration of the shake. If null, uses the default duration.</param>
-    public void TriggerCameraShake(float shakeIntensity, float shakeFrequency, float shakeDuration) {
+    public void TriggerCameraShake(float shakeIntensity = 1f, float shakeFrequency = 2f, float shakeDuration = 0.25f) {
         ShakeCamera(shakeIntensity, shakeFrequency);
         Invoke("StopShake", shakeDuration);
     }
@@ -44,6 +45,7 @@ public class CameraShake : MonoBehaviour
     /// Call TriggerCameraShake() without parameters to trigger it with default values
     /// </summary>
     public void TriggerCameraShake() {
+        Debug.Log("TRIGGERED CAMERA SHAKE");
         TriggerCameraShake(defaultShakeIntensity, defaultShakeFrequency, defaultShakeDuration);
     }
 

@@ -28,11 +28,13 @@ public class BossFightManager : MonoBehaviour
     private void OnEnable()
     {
         Player.OnPlayerDeath += EndBossFight;
+        GameManager.OnGameOver += () => bossFightInProgress = false;
     }
 
     private void OnDisable()
     {
         Player.OnPlayerDeath -= EndBossFight;
+        GameManager.OnGameOver -= () => bossFightInProgress = false;
     }
 
     public void RestartBossFight()

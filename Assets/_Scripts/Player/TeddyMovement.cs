@@ -157,7 +157,6 @@ public class TeddyMovement : MonoBehaviour
             // Choose between walking backwards or sprinting backwards
             anim.Play(moveSpeed == maxWalkSpeed ? "TeddyWalkBackwards" : "TeddySprintBackwards", 0);
         } else {
-
             anim.Play(moveSpeed == maxWalkSpeed ? "TeddyWalk" : "TeddySprint", 0);
         }
     }
@@ -218,6 +217,7 @@ public class TeddyMovement : MonoBehaviour
         StartCoroutine(JumpTrigger()); //start cooldown for jump input
         anim.Play("TeddyJump", 0); //play jump animation
         rb.velocity = new(rb.velocity.x, jumpForce); //add jump force    
+
         SoundManager.Instance.PlaySound(jumpSound.clip);
     }
 
