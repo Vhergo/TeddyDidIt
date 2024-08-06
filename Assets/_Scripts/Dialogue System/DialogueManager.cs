@@ -58,6 +58,7 @@ public class DialogueManager : MonoBehaviour
 
     [Space(10)]
     [SerializeField] private PlayableDirector playableDirector;
+    [SerializeField] private AudioClip typingSound;
 
     public static Action<Speaker> OnSpeakerChanged;
     public static Action<DialogueSequence> OnSequenceChange;
@@ -107,6 +108,8 @@ public class DialogueManager : MonoBehaviour
 
     public void SkipSequence()
     {
+        if (currentSequence.nextSequence == null) return;
+
         StopAllCoroutines();
         if (!currentSequence.nextSequence.autoplay) {
             OnAutoSequenceEnded?.Invoke();
@@ -161,11 +164,15 @@ public class DialogueManager : MonoBehaviour
         }
         Debug.Log("Sequence is over");
 
-        if (!currentSequence.nextSequence.autoplay) {
-            OnAutoSequenceEnded?.Invoke();
-            UseFullVisual(false);
+        if (currentSequence.nextSequence != null) {
+            if (!currentSequence.nextSequence.autoplay) {
+                OnAutoSequenceEnded?.Invoke();
+                UseFullVisual(false);
+            }
+            UpdateSequence(currentSequence.nextSequence);
+        }else {
+            GameManager.Instance.GameOver();
         }
-        UpdateSequence(currentSequence.nextSequence);
     }
 
     private void UseFullVisual(bool fullVisual)
@@ -193,11 +200,8 @@ public class DialogueManager : MonoBehaviour
 
     public IEnumerator SetDelayedDialogue(Dialogue dialogue, float bonusDelay = 0.5f)
     {
-        Debug.Log("YES");
         yield return new WaitUntil(() => allTextIsDisplayed);
-        Debug.Log("TWO");
         yield return new WaitForSeconds(bonusDelay);
-        Debug.Log("THREE");
         SetDialogue(dialogue);
     }
 
@@ -258,6 +262,7 @@ public class DialogueManager : MonoBehaviour
         while (counter <= totalVisibleCharacters) {
             dialogueText.maxVisibleCharacters = counter;
             counter++;
+            SoundManager.Instance.PlaySound(typingSound, true);
             yield return new WaitForSeconds(textSpeed);
         }
 

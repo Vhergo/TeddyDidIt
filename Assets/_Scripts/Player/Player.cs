@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
         else Destroy(gameObject);
     }
 
+    private void OnEnable() => BossFightManager.OnBossFightReset += ResetHealth;
+    private void OnDisable() => BossFightManager.OnBossFightReset -= ResetHealth;
     private void Start()
     {
         currentHealth = maxHealth;
@@ -43,6 +45,11 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Timer();
+    }
+
+    private void ResetHealth()
+    {
+        currentHealth = maxHealth;
     }
 
     #region HEALTH

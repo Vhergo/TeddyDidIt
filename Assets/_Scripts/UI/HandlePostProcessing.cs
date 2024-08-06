@@ -6,11 +6,7 @@ using UnityEngine.Rendering;
 public class HandlePostProcessing : MonoBehaviour
 {
     [SerializeField] private Volume ppVolume;
-
-    private void Awake()
-    {
-        ppVolume = GetComponent<Volume>();
-    }
+    [SerializeField] private Volume ppVolume2;
 
     private void OnEnable()
     {
@@ -22,6 +18,11 @@ public class HandlePostProcessing : MonoBehaviour
     {
         DialogueManager.OnAutoSequenceStarted -= EnablePostProcessing;
         DialogueManager.OnAutoSequenceEnded -= DisablePostProcessing;
+    }
+
+    private void Start()
+    {
+        ppVolume.enabled = ppVolume2.enabled = true;
     }
 
     private void EnablePostProcessing()

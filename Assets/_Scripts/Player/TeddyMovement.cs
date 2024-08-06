@@ -243,7 +243,7 @@ public class TeddyMovement : MonoBehaviour
         else return false;
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics.CheckBox(groundCheck.position, groundDetectionSize / 2, Quaternion.identity, groundLayer);
     }

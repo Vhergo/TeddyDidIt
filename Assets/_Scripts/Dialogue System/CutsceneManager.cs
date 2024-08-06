@@ -5,13 +5,35 @@ using UnityEngine.Playables;
 
 public class CutsceneManager : MonoBehaviour
 {
+    public static CutsceneManager Instance { get; private set; }
+
+    [SerializeField] private PlayableAsset introCutscene;
+    [SerializeField] private PlayableAsset endingCutscene;
+
     private PlayableDirector playableDirector;
     private DialogueManager dialogueSystem;
     private bool cutscenePlaying = true;
+
     public bool CutscenePlaying {
         get => cutscenePlaying;
         set => cutscenePlaying = value;
     }
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
+    private void OnEnable()
+    {
+        BossManager.OnBossDeath += PlayEndingCutscene;
+    }
+
+    private void OnDisable()
+    {
+        BossManager.OnBossDeath -= PlayEndingCutscene;
+    }   
 
     private void Start()
     {
@@ -31,6 +53,12 @@ public class CutsceneManager : MonoBehaviour
         }
     }
 
+    public void UpdateCutscene(PlayableAsset cutscene)
+    {
+        playableDirector.playableAsset = cutscene;
+        playableDirector.Play();
+    }
+
     public void SkipCutscene()
     {
         playableDirector.time = playableDirector.duration;
@@ -43,5 +71,11 @@ public class CutsceneManager : MonoBehaviour
         if (dialogueSystem.IsAutoSequence) {
             dialogueSystem.SkipSequence();
         }
+    }
+
+    public void PlayEndingCutscene()
+    {
+        if (endingCutscene != null)
+            UpdateCutscene(endingCutscene);
     }
 }

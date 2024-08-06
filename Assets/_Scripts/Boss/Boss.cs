@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,11 +17,30 @@ public class Boss : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Transform target;
-    [SerializeField] private Transform firePoint;
+    [SerializeField] private Transform firePointLeft;
+    [SerializeField] private Transform firePointRight;
+    private Transform firePoint;
+
+    [Space(10)]
     [SerializeField] private SkinnedMeshRenderer faceMesh;
-    [SerializeField] private Animator ani;
-    [SerializeField] private BossAniEvent aniEvent;
-    [SerializeField] private AnimationClip takenDamage;
+    [SerializeField] private Animator anim;
+    [SerializeField] private BossAnimEvent animEvent;
+    [SerializeField] private AnimationClip takenDamageAnimation;
+    [SerializeField] private AnimationClip turnLeft;
+    [SerializeField] private AnimationClip turnRight;
+    private bool isFacingLeft = true;
+
+    [Header("Stomping")]
+    [SerializeField] private AnimationClip stompAnimation;
+    [SerializeField] private AudioClip stompSound;
+    [SerializeField] private Transform stompPoint;
+    [SerializeField] private float stompMoveSpeed;
+    [SerializeField] private float stompDelay = 4f;
+    [SerializeField] private float stompDuration = 1f;
+    [SerializeField] private float stompRadius = 5f;
+    [SerializeField] private float stompForce = 25f;
+    private bool isStomping;
+    private bool stompStarted;
 
     [Header("Projectile Variants")]
     [SerializeField] private GameObject slowPea;
@@ -43,54 +63,71 @@ public class Boss : MonoBehaviour
     [SerializeField] private Material neutralClosed;
     [SerializeField] private Material neutralOpen;
 
+    [SerializeField] private List<AudioClip> shootSounds;
+
     private ObjectPoolManager PoolManager => ObjectPoolManager.Instance;
 
     private bool canFire = false;
     private int slowPeasFired = 0;
 
+    private CombatState currentCombatState = CombatState.Idle;
+    private Coroutine currentCombatCoroutine;
+
     private void Start()
     {
-        StartCoroutine(FiringProcess());
+        // SetCombatState(CombatState.Default);
+        firePoint = firePointLeft;
     }
 
-    #region PROJECTILE FIRING
-    //allow firing process
-    public void StartFiring()
+    private void Update()
     {
-        canFire = true;
+        BossTurn();
     }
 
-    //pause firing process
-    public void StopFiring()
+    public void SetCombatState(CombatState state)
     {
-        canFire = false;
+        if (currentCombatState == state) return;
+        currentCombatState = state;
+
+        switch (state) {
+            case CombatState.Idle:
+                // Do nothing
+                break;
+            case CombatState.Firing:
+                StartFiring();
+                if (currentCombatCoroutine != null) StopCoroutine(currentCombatCoroutine);
+                currentCombatCoroutine = StartCoroutine(FiringProcess());
+                break;
+            case CombatState.Stomping:
+                StopFiring();
+                isStomping = stompStarted = false;
+                if (currentCombatCoroutine != null) StopCoroutine(currentCombatCoroutine);
+                currentCombatCoroutine = StartCoroutine(StompingProcess());
+                break;
+        }
     }
 
-    //fire projectiles at a set interval
+    public CombatState GetCombatState() => currentCombatState;
+
+    #region FIRING PROCESS
+    // Fire projectiles at a set interval
     private IEnumerator FiringProcess()
     {
-        //keep firing unless stopped
-        while (true)
-        {   
-            if (canFire)
-            {
-                //fire fast pea every 3 slow peas fired
-                if (slowPeasFired < 3)
-                {
-                    yield return new WaitForSeconds(Random.Range(minIntervalForSlow, maxIntervalForSlow));
+        while (currentCombatState == CombatState.Firing) {   
+            if (canFire) {
+                // Fire fast pea every 3 slow peas fired
+                if (slowPeasFired < 3) {
+                    yield return new WaitForSeconds(UnityEngine.Random.Range(minIntervalForSlow, maxIntervalForSlow));
                     slowPeasFired++; //increment counter
                     StartCoroutine("FireProcess", slowPea); //fire slow pea
-                }
-                else
-                {
-                    yield return new WaitForSeconds(Random.Range(minIntervalForFast, maxIntervalForFast));
+                }else {
+                    yield return new WaitForSeconds(UnityEngine.Random.Range(minIntervalForFast, maxIntervalForFast));
                     slowPeasFired = 0; //reset counter
                     StartCoroutine("FireProcess", fastPea); //fire fast pea
-                }
-                
-            }
-            else
-            {
+                }   
+                int randomIndex = UnityEngine.Random.Range(0, shootSounds.Count);
+                SoundManager.Instance.PlaySound(shootSounds[randomIndex], true);
+            } else {
                 yield return null;
             }
         }     
@@ -100,29 +137,111 @@ public class Boss : MonoBehaviour
     private IEnumerator FireProcess(GameObject peaVariant)
     {
         //play attack animation
-        ani.SetTrigger("fire");
+        anim.SetTrigger("fire");
 
         //wait for animation event before firing projectile at right timing
-        while (aniEvent.onAttack == false)
+        while (animEvent.onAttack == false)
             yield return null;
 
         //reset event trigger
-        aniEvent.ResetAttack();
+        animEvent.ResetAttack();
 
-        //fire projectile
         Fire(peaVariant);
     }
 
-    //fire projectile
     private void Fire(GameObject peaVariant)
     {
-        //get chosen projectile from pool
         GameObject projectile = PoolManager.GetPoolObject(peaVariant, firePoint.position, transform.rotation);
 
-        //initialize projectile
         Projectile projectileScript = projectile.GetComponent<Projectile>();
         projectileScript.Fire(target);
+
+        int randomIndex = UnityEngine.Random.Range(0, shootSounds.Count);
+        SoundManager.Instance.PlaySound(shootSounds[randomIndex]);
     }
+    public void StartFiring() => canFire = true;
+    public void StopFiring() => canFire = false;
+    #endregion
+
+    #region STOMPING PROCESS
+
+    private IEnumerator StompingProcess()
+    {
+        Debug.Log("STOOOOOOOMPING");
+        while (currentCombatState == CombatState.Stomping) {
+            // isStomping = true;
+            StartCoroutine(StartStomp());
+            Debug.Log("JUMP");
+            yield return new WaitUntil(() => !isStomping && stompStarted);
+            
+            EndStomp();
+            Debug.Log("LAND");
+            yield return new WaitForSeconds(stompDelay);
+        }
+    }
+
+    public IEnumerator StartStomp()
+    {
+        Vector3 stompDirection = isFacingLeft ? Vector3.left : Vector3.right;
+        Vector3 targetPosition = transform.position + stompDirection * 100f;
+
+        anim.Play(stompAnimation.name);
+        yield return new WaitUntil(() => isStomping);
+        stompStarted = true;
+
+        float stompTimer = 0;
+        while (stompTimer < stompDuration) {
+            stompTimer += Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, stompMoveSpeed * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    public void EndStomp()
+    {
+        Collider[] colliders = Physics.OverlapSphere(stompPoint.position, stompRadius);
+        foreach (Collider col in colliders) {
+            Debug.Log("COLLIDED WITH " + col.gameObject.name);
+            Rigidbody rb;
+            if (col.CompareTag("Player")) {
+                rb = Player.Instance.GetComponent<Rigidbody>();
+                if (TeddyMovement.Instance.IsGrounded()) Player.Instance.TakeDamage();
+                Debug.Log("PLAYER STOMPED");
+            } else {
+                rb = col.GetComponent<Rigidbody>();
+                Debug.Log("OBJECT STOMPED" + col.gameObject.name);
+            }
+            
+            if (rb != null)
+                rb.AddForce(Vector3.up * stompForce, ForceMode.Impulse);
+
+            SoundManager.Instance.PlaySound(stompSound, true);
+        }
+
+        stompStarted = false;
+    }
+
+    public void StartedStomping() => isStomping = true;
+    public void FinishedStopming() => isStomping = false;
+
+    #endregion
+
+    #region OTHER ANIMATIONS
+    private void BossTurn()
+    {
+        if (target.position.x < transform.position.x && !isFacingLeft) {
+            Debug.Log("TURN LEFT");
+            anim.Play(turnLeft.name, 1);
+            isFacingLeft = true;
+            firePoint = firePointLeft;
+        } else if (target.position.x > transform.position.x && isFacingLeft) {
+            Debug.Log("TURN RIGHT");
+            anim.Play(turnRight.name, 1);
+            isFacingLeft = false;
+            firePoint = firePointRight;
+        }
+    }
+
     #endregion
 
     #region EMOTE
@@ -162,7 +281,7 @@ public class Boss : MonoBehaviour
     public void TakeDamage()
     {
         BossManager.Instance.BossHit();
-        ani.Play(takenDamage.name);
+        anim.Play(takenDamageAnimation.name);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -170,7 +289,8 @@ public class Boss : MonoBehaviour
         //register hit if impact higher than threshold
         if (collision.impulse.magnitude > bossHitThreshold) {
             if (CheckCollisionTag(collision.gameObject.tag)) {
-                TakeDamage();
+                PunchedOrThrown punchedOrThrownRef = collision.gameObject.GetComponent<PunchedOrThrown>();
+                if (punchedOrThrownRef != null && punchedOrThrownRef.punchedOrThrown) TakeDamage();
             }
         }
     }
@@ -180,4 +300,12 @@ public class Boss : MonoBehaviour
         return throwableTags.Contains(tag);
     }
     #endregion
+}
+
+[Serializable]
+public enum CombatState
+{
+    Idle,
+    Firing,
+    Stomping
 }

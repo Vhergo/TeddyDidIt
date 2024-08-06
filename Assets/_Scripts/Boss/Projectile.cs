@@ -35,6 +35,7 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("COLLIDEDEDEDEDEDED");
         ObjectPoolManager.Instance.GetPoolObject(explosion, transform.position, Quaternion.identity);
         ObjectPoolManager.Instance.ReturnPoolObject(gameObject);
     }

@@ -134,9 +134,9 @@ public class CombatSystem : MonoBehaviour
             Rigidbody rb = punchableObjects.GetComponent<Rigidbody>();
             if (rb != null) {
                 rb.AddForce(punchDirection * punchForce * ForceAmplification() * CheckPowerAmplification(), ForceMode.Impulse);
+                UpdateObjectPunchedOrThrown(rb.gameObject);
 
                 ScoreSystem.Instance.AddScore(punchableObjects.gameObject.tag);
-
                 SoundManager.Instance.PlaySound(punchSound);
             }
         }
@@ -210,7 +210,8 @@ public class CombatSystem : MonoBehaviour
             grabbedObject.transform.parent = grabPos;
 
             objectScoringScript = grabbedObject.GetComponent<ObjectScoring>();
-            objectScoringScript.isGrabbed = true;
+            if (objectScoringScript != null)
+                objectScoringScript.isGrabbed = true;
 
             OnGrab?.Invoke();
         }
@@ -228,6 +229,9 @@ public class CombatSystem : MonoBehaviour
         hasGrabbed = false;
         grabOnCooldown = true;
 
+        // In case the object is destoryed before it is thrown
+        if (grabbedObject == null) return;
+
         Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
         Collider col = grabbedObject.GetComponent<Collider>();
         if (rb != null) {
@@ -237,6 +241,7 @@ public class CombatSystem : MonoBehaviour
 
             Vector3 throwDirection = throwTarget.position - grabPos.position;
             rb.AddForce(throwDirection.normalized * throwForce * ForceAmplification() * CheckPowerAmplification(), ForceMode.Impulse);
+            UpdateObjectPunchedOrThrown(rb.gameObject);
             grabbedObject = null;
 
             SoundManager.Instance.PlaySound(throwSound);
@@ -287,6 +292,7 @@ public class CombatSystem : MonoBehaviour
 
             Vector3 throwDirection = throwTarget.position - grabPos.position;
             rb.AddForce(throwDirection.normalized * chargedThrowForce * ForceAmplification() * CheckPowerAmplification(), ForceMode.Impulse);
+            UpdateObjectPunchedOrThrown(rb.gameObject);
             grabbedObject = null;
         }
 
@@ -295,6 +301,11 @@ public class CombatSystem : MonoBehaviour
 
     #endregion
 
+    private void UpdateObjectPunchedOrThrown(GameObject obj)
+    {
+        PunchedOrThrown punchedOrThrown = obj.GetComponent<PunchedOrThrown>();
+        if (punchedOrThrown != null) punchedOrThrown.punchedOrThrown = true;
+    }
 
     private void ResetPunchCooldown() => punchOnCooldown = false;
     private void ResetThrowCooldown() => grabOnCooldown = false;

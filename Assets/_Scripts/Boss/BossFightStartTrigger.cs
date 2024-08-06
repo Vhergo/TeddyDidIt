@@ -15,6 +15,7 @@ public class BossFightStartTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player")) {
             // Trigger Boss Cutscene
+            BossManager.Instance.StartBossCombatCycle();
             BossFightManager.Instance.BeginBossFight();
             restartBossFightButton.SetActive(true);
         }
