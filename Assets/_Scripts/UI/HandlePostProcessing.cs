@@ -12,12 +12,18 @@ public class HandlePostProcessing : MonoBehaviour
     {
         DialogueManager.OnAutoSequenceStarted += EnablePostProcessing;
         DialogueManager.OnAutoSequenceEnded += DisablePostProcessing;
+
+        GameUIManager.OnMenuOpen += EnablePostProcessing;
+        GameUIManager.OnMenuClose += DisablePostProcessing;
     }
 
     private void OnDisable()
     {
         DialogueManager.OnAutoSequenceStarted -= EnablePostProcessing;
         DialogueManager.OnAutoSequenceEnded -= DisablePostProcessing;
+
+        GameUIManager.OnMenuOpen -= EnablePostProcessing;
+        GameUIManager.OnMenuClose -= DisablePostProcessing;
     }
 
     private void Start()

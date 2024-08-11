@@ -68,8 +68,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionRadius: 50
   explosionForce: 2000
-  zAxisAmplifier: 3
-  destroyOnTrigger: 0
+  explosionForcePlayer: 0
+  destroyOnTrigger: 1
+  triggerByAnything: 0
+  triggerOnSpawn: 0
+  hasExplosionSound: 1
+  givesScore: 0
   awardedScore: 0
   affectedObjects:
   - {fileID: 0}

@@ -12,6 +12,8 @@ public class Explosion : MonoBehaviour
     [SerializeField] private bool destroyOnTrigger;
     [SerializeField] private bool triggerByAnything;
     [SerializeField] private bool triggerOnSpawn;
+    [SerializeField] private bool hasExplosionSound;
+    [SerializeField] private bool givesScore;
 
     [Space(10)]
     [SerializeField] private int awardedScore;
@@ -62,8 +64,8 @@ public class Explosion : MonoBehaviour
                 rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
             }
         }
-        ExplosionSFX.instance.playSFX();
-        AddScore();
+        if (hasExplosionSound) ExplosionSFX.instance.playSFX();
+        if (givesScore) AddScore();
         if (destroyOnTrigger) Destroy(gameObject, 1f);
     }
 

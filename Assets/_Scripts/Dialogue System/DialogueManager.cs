@@ -112,7 +112,10 @@ public class DialogueManager : MonoBehaviour
 
     public void SkipSequence()
     {
-        if (currentSequence.nextSequence == null) return;
+        if (currentSequence.nextSequence == null) {
+            SoundManager.Instance.PlayEndingMusic();
+            return;
+        }
 
         StopAllCoroutines();
         if (!currentSequence.nextSequence.autoplay) {

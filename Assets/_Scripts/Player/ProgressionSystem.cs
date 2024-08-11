@@ -13,6 +13,7 @@ public class ProgressionSystem : MonoBehaviour
     [Tooltip("Add to list in order of progression")]
     [SerializeField] private List<GameObject> progressionIndicators = new List<GameObject>();
     [SerializeField] private RectTransform progressionBar;
+    [SerializeField] private bool allowProgressionShortcut;
 
     [Header("Achivement")]
     [SerializeField] private Image achievementIcon;
@@ -52,17 +53,19 @@ public class ProgressionSystem : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Alpha1)) {
-        //    SetProgressionStage(ProgressStage.Base);
-        //} else if (Input.GetKeyDown(KeyCode.Alpha2)) {
-        //    SetProgressionStage(ProgressStage.Punch);
-        //} else if (Input.GetKeyDown(KeyCode.Alpha3)) {
-        //    SetProgressionStage(ProgressStage.GrabAndThrow);
-        //} else if (Input.GetKeyDown(KeyCode.Alpha4)) {
-        //    SetProgressionStage(ProgressStage.DoubleJump);
-        //} else if (Input.GetKeyDown(KeyCode.Alpha5)) {
-        //    SetProgressionStage(ProgressStage.ChargeThrow);
-        //}
+        if (!allowProgressionShortcut) return;
+
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            SetProgressionStage(ProgressStage.Base);
+        } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            SetProgressionStage(ProgressStage.Punch);
+        } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
+            SetProgressionStage(ProgressStage.GrabAndThrow);
+        } else if (Input.GetKeyDown(KeyCode.Alpha4)) {
+            SetProgressionStage(ProgressStage.DoubleJump);
+        } else if (Input.GetKeyDown(KeyCode.Alpha5)) {
+            SetProgressionStage(ProgressStage.ChargeThrow);
+        }
     }
 
     private void InitializeUI()

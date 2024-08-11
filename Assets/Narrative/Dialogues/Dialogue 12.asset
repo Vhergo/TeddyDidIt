@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orderNumber: 12
   speaker: 0
-  dialogueText: (Points at Teddy) Teddy Did It!
+  dialogueText: (Points at Teddy) TEDDY DID IT!
   autoplayDuration: 1

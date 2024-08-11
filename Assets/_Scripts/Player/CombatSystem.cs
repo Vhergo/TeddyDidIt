@@ -26,6 +26,7 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private Transform grabPos;
     [SerializeField] private Transform throwTarget;
     [SerializeField] private Transform playerCore;
+    [SerializeField] private Transform thrownObjectParent;
     [Space(10)]
     [SerializeField] private float grabRadius = 2f;
     [SerializeField] private float throwForce = 10f;
@@ -236,7 +237,7 @@ public class CombatSystem : MonoBehaviour
         Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
         Collider col = grabbedObject.GetComponent<Collider>();
         if (rb != null) {
-            grabbedObject.transform.parent = null;
+            grabbedObject.transform.parent = thrownObjectParent;
             rb.isKinematic = false;
             col.enabled = true;
 
@@ -306,6 +307,9 @@ public class CombatSystem : MonoBehaviour
     {
         PunchedOrThrown punchedOrThrown = obj.GetComponent<PunchedOrThrown>();
         if (punchedOrThrown != null) punchedOrThrown.punchedOrThrown = true;
+
+        ObjectScoring objScoring = obj.GetComponent<ObjectScoring>();
+        if (objScoring != null) objScoring.isInteracted = true;
     }
 
     private void ResetPunchCooldown() => punchOnCooldown = false;

@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
@@ -12,6 +14,9 @@ public class GameUIManager : MonoBehaviour
     [Header("Menu")]
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private Button exitToMenuButton;
+
+    public static Action OnMenuOpen;
+    public static Action OnMenuClose;
 
     private void Awake() {
         if(Instance == null) Instance = this;
@@ -42,10 +47,12 @@ public class GameUIManager : MonoBehaviour
 
     public void TurnOnSettings() {
         settingsPanel.SetActive(true);
+        OnMenuOpen?.Invoke();
     }
 
     public void TurnOffSettings() {
         settingsPanel.SetActive(false);
+        OnMenuClose?.Invoke();
     }
 
     private void OnExitToMenuButtonClick() {

@@ -167,6 +167,9 @@ public class Player : MonoBehaviour
         if (ProgressionSystem.Instance.GetCurrentStage() == ProgressStage.Base) {
             if (collision.gameObject.layer == 8) {
                 ScoreSystem.Instance.AddScorePrePunch();
+
+                ObjectScoring objScoring = collision.gameObject.GetComponent<ObjectScoring>();
+                if (objScoring != null) objScoring.isInteracted = true;
             }
         }
     }

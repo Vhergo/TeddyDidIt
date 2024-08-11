@@ -15,6 +15,7 @@ TagManager:
   - SportsEquipment
   - Legos
   - Boss
+  - Bed
   layers:
   - Default
   - TransparentFX

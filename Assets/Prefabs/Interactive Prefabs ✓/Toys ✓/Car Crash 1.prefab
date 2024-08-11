@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8806195361346623093}
   - component: {fileID: 6614208113484221465}
   - component: {fileID: -7447614285197605880}
+  - component: {fileID: 4348012782386897872}
   m_Layer: 6
   m_Name: Car Crash 1
   m_TagString: Toys
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: -4.6, y: 0.57, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -98,3 +99,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedThreshold: 0.1
   isGrabbed: 0
+  collisonSounds:
+  - {fileID: 8300000, guid: dd4e3a43c8d2e524db13ef0b3e09b0bb, type: 3}
+  - {fileID: 8300000, guid: 75d7a99922e3de243b861dbc37c055c0, type: 3}
+  - {fileID: 8300000, guid: 424feae49556cbc4ebde6cd6b02bcfb8, type: 3}
+  - {fileID: 8300000, guid: 7e46ca8074a78aa44b7735c8aae03e0a, type: 3}
+--- !u!64 &4348012782386897872
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2833425367785062234}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8389015710832079318, guid: 0eb0a5c372f2cc44ba22b3e65208b04f, type: 3}

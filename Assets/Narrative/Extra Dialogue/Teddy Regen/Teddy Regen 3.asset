@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orderNumber: -1
   speaker: 3
-  dialogueText: You're aim really sucks.
+  dialogueText: Your aim really sucks.
   autoplayDuration: 0

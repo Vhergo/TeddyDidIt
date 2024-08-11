@@ -6,11 +6,13 @@ using UnityEngine;
 public class BackgroundChangeTrigger : MonoBehaviour
 {
     [SerializeField] private Sprite newBackground;
+    [SerializeField] private AudioClip newBackgroundMusic;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) {
             SequenceBackgroundManager.Instance.ChangeBackground(newBackground);
+            SoundManager.Instance.TriggerSwitchMusic(newBackgroundMusic);
             Destroy(gameObject);
         }
     }

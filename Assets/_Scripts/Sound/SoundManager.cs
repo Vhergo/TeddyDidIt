@@ -16,6 +16,7 @@ public class SoundManager : MonoBehaviour
     [Header("Background Music")]
     [SerializeField] private AudioClip mainMenuMusic;
     [SerializeField] public AudioClip gameMusic;
+    [SerializeField] private AudioClip endingMusic;
 
     [SerializeField] private Vector2 pitchRange = new Vector2(0.8f, 1.2f);
     [SerializeField] private float musicTransitionTime = 2f;
@@ -45,6 +46,11 @@ public class SoundManager : MonoBehaviour
         } else {
             Destroy(gameObject);
         }
+    }
+
+    private void OnEnable()
+    {
+        DialogueManager.OnSequenceChange += TriggerSwitchMusic;
     }
 
     private void Start()
@@ -115,7 +121,14 @@ public class SoundManager : MonoBehaviour
 
     public void TriggerSwitchMusic(AudioClip newMusic)
     {
+        if (newMusic == null) return;
         StartCoroutine(SwitchMusic(newMusic));
+    }
+
+    public void TriggerSwitchMusic(DialogueSequence sequence)
+    {
+        if (sequence.backgroundMusic != null)
+            TriggerSwitchMusic(sequence.backgroundMusic);
     }
 
     public IEnumerator SwitchMusic(AudioClip newMusic)
@@ -252,5 +265,10 @@ public class SoundManager : MonoBehaviour
         musicSource.clip = audioSourceNext;
         musicSource.Play();
         
+    }
+
+    public void PlayEndingMusic()
+    {
+        TriggerSwitchMusic(endingMusic);
     }
 }

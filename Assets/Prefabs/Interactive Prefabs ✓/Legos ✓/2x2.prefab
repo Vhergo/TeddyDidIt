@@ -147,7 +147,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081648cbfe8e9a9408cb27dec828497a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedThreshold: 0.1
   isGrabbed: 0
+  collisonSounds:
+  - {fileID: 8300000, guid: ca99c005ac3c48642bdc43f47652f406, type: 3}
+  - {fileID: 8300000, guid: 510c370cd01fa3847af4be548b33b2d8, type: 3}
+  - {fileID: 8300000, guid: c2e1f3bc25e077a41b5508155d133c9b, type: 3}
+  - {fileID: 8300000, guid: 251b6948670a5e943bbf1c12611c4f39, type: 3}
+  - {fileID: 8300000, guid: b33297a18a079554e8073bd41197a839, type: 3}
 --- !u!114 &8543467362469437395
 MonoBehaviour:
   m_ObjectHideFlags: 0

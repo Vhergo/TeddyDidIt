@@ -35,8 +35,14 @@ public class TeddyMovement : MonoBehaviour
     [SerializeField] private Vector3 groundDetectionSize = new(1f, 0.2f, 1f);
     [SerializeField] private bool isJumping = false;
     [SerializeField] private bool inAir = false;
-    [SerializeField] private AudioSource jumpSound;
-    [SerializeField] private AudioSource landSound;
+    [Space(10)]
+    [SerializeField] private AudioClip jumpSoundNormal;
+    [SerializeField] private AudioClip jumpSoundOnBed;
+    private AudioClip jumpSound;
+    [SerializeField] private AudioClip landSoundNormal;
+    [SerializeField] private AudioClip landSoundShoesOn;
+    private AudioClip landSound;
+    [SerializeField] private ParticleSystem dustParticles;
     private bool disableMovement;
 
     public bool allowDoubleJump = false;
@@ -79,6 +85,7 @@ public class TeddyMovement : MonoBehaviour
 
         CombatSystem.OnCharge += Freeze;
         CombatSystem.OnChargedThrow += Unfreeze;
+        PlayerGear.OnShoesEquipped += UpdateLandSound;
     }
 
     private void OnDisable()
@@ -91,12 +98,15 @@ public class TeddyMovement : MonoBehaviour
 
         CombatSystem.OnCharge -= Freeze;
         CombatSystem.OnChargedThrow -= Unfreeze;
+        PlayerGear.OnShoesEquipped -= UpdateLandSound;
     }
 
     private void Start()
     {
         jumpsLeft = jumpLimit;
         jumpBufferTimer = jumpBuffer;
+        jumpSound = jumpSoundNormal;
+        landSound = landSoundNormal;
 
         disableMovement = true;
     }
@@ -105,7 +115,8 @@ public class TeddyMovement : MonoBehaviour
     {
         MoveInput(); //read movement input
         SprintInput();
-        
+        AnimateMovement(); //animate teddy
+
         CheckIfLanded();
         CheckIfWalkedOffEdge();
         Timers();
@@ -115,7 +126,6 @@ public class TeddyMovement : MonoBehaviour
     {
         ApplyGravity();
         Move();
-        AnimateMovement(); //animate teddy
     }
 
     #region MOVEMENT
@@ -216,10 +226,16 @@ public class TeddyMovement : MonoBehaviour
         isJumping = true; //ensure player can't jump until landed
         StartCoroutine(JumpTrigger()); //start cooldown for jump input
         anim.Play("TeddyJump", 0); //play jump animation
-        rb.velocity = new(rb.velocity.x, jumpForce); //add jump force    
+        rb.velocity = new(rb.velocity.x, jumpForce); //add jump force
 
-        SoundManager.Instance.PlaySound(jumpSound.clip);
+        TriggerJumpSound();
     }
+
+    private void TriggerJumpSound()
+    {
+        SoundManager.Instance.PlaySound(jumpSound);
+    }
+
 
     //wait to give time for player to jump so ground check doens't think player has landed immediately
     private IEnumerator JumpTrigger()
@@ -257,8 +273,31 @@ public class TeddyMovement : MonoBehaviour
             inAir = false;
             isJumping = false;
             jumpsLeft = jumpLimit; //reset double jump
-            SoundManager.Instance.PlaySound(landSound.clip);
+
+            JustLanded();
+            CheckIfOnBed();
         }
+    }
+
+    private void CheckIfOnBed()
+    {
+        Collider[] colliders = Physics.OverlapSphere(groundCheck.position, 1f);
+        foreach (Collider col in colliders) {
+            if (col.CompareTag("Bed")) {
+                SoundManager.Instance.PlaySound(jumpSoundOnBed);
+            }
+        }
+    }
+
+    private void JustLanded()
+    {
+        SoundManager.Instance.PlaySound(landSound);
+        dustParticles.Play();
+    }
+
+    private void UpdateLandSound()
+    {
+        landSound = landSoundShoesOn;
     }
 
     //to ensure only one jump is allowed in the air
@@ -287,6 +326,7 @@ public class TeddyMovement : MonoBehaviour
     private void Timers() => jumpBufferTimer -= Time.deltaTime;
 
     #endregion
+    
     private void ApplyGravity()
     {
         if (disableGravity) return;

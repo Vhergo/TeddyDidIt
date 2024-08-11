@@ -63,7 +63,7 @@ public class Boss : MonoBehaviour
     [SerializeField] private Material neutralClosed;
     [SerializeField] private Material neutralOpen;
 
-    [SerializeField] private List<AudioClip> shootSounds;
+    [SerializeField] private AudioClip shootSound;
 
     private ObjectPoolManager PoolManager => ObjectPoolManager.Instance;
 
@@ -124,9 +124,7 @@ public class Boss : MonoBehaviour
                     yield return new WaitForSeconds(UnityEngine.Random.Range(minIntervalForFast, maxIntervalForFast));
                     slowPeasFired = 0; //reset counter
                     StartCoroutine("FireProcess", fastPea); //fire fast pea
-                }   
-                int randomIndex = UnityEngine.Random.Range(0, shootSounds.Count);
-                SoundManager.Instance.PlaySound(shootSounds[randomIndex], true);
+                }
             } else {
                 yield return null;
             }
@@ -156,8 +154,7 @@ public class Boss : MonoBehaviour
         Projectile projectileScript = projectile.GetComponent<Projectile>();
         projectileScript.Fire(target);
 
-        int randomIndex = UnityEngine.Random.Range(0, shootSounds.Count);
-        SoundManager.Instance.PlaySound(shootSounds[randomIndex]);
+        SoundManager.Instance.PlaySound(shootSound, true);
     }
     public void StartFiring() => canFire = true;
     public void StopFiring() => canFire = false;

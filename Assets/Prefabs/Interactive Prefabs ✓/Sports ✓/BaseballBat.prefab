@@ -98,7 +98,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081648cbfe8e9a9408cb27dec828497a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedThreshold: 0.1
   isGrabbed: 0
+  isInteracted: 0
+  collisonSounds:
+  - {fileID: 8300000, guid: 34d7d00710db0ee4bbfd0b3cfba9bf52, type: 3}
+  - {fileID: 8300000, guid: 5f6fbb64b9777c3469d9bf82d0447e0c, type: 3}
+  - {fileID: 8300000, guid: 2d331df498362574ca970725d7958539, type: 3}
+  - {fileID: 8300000, guid: 06f00542a3f8b9348863b6f479f69f18, type: 3}
+  - {fileID: 8300000, guid: a73f52a7bc6f60942860ea68620ccad0, type: 3}
+  - {fileID: 8300000, guid: c70e26df1a73226439ceffebe28080fe, type: 3}
 --- !u!54 &3812851288469071491
 Rigidbody:
   m_ObjectHideFlags: 0

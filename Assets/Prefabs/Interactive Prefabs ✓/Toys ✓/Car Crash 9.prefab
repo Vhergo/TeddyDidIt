@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6244829899745950052}
   - component: {fileID: 4319169717937557325}
   - component: {fileID: 8960870295847759288}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Car Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,8 @@ GameObject:
   - component: {fileID: 379101776013449123}
   - component: {fileID: 32160830966030636}
   - component: {fileID: 3629145308563795143}
-  m_Layer: 0
+  - component: {fileID: -2514414224382079893}
+  m_Layer: 6
   m_Name: Car Crash 9
   m_TagString: Toys
   m_Icon: {fileID: 0}
@@ -113,7 +114,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 10.45, y: 0.57, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6244829899745950052}
@@ -214,7 +215,26 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 1
+--- !u!114 &-2514414224382079893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492186664927624991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081648cbfe8e9a9408cb27dec828497a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedThreshold: 0.1
+  isGrabbed: 0
+  collisonSounds:
+  - {fileID: 8300000, guid: dd4e3a43c8d2e524db13ef0b3e09b0bb, type: 3}
+  - {fileID: 8300000, guid: 75d7a99922e3de243b861dbc37c055c0, type: 3}
+  - {fileID: 8300000, guid: 424feae49556cbc4ebde6cd6b02bcfb8, type: 3}
+  - {fileID: 8300000, guid: 7e46ca8074a78aa44b7735c8aae03e0a, type: 3}
