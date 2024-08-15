@@ -306,7 +306,10 @@ public class CombatSystem : MonoBehaviour
     private void UpdateObjectPunchedOrThrown(GameObject obj)
     {
         PunchedOrThrown punchedOrThrown = obj.GetComponent<PunchedOrThrown>();
-        if (punchedOrThrown != null) punchedOrThrown.punchedOrThrown = true;
+        if (punchedOrThrown != null) {
+            punchedOrThrown.punchedOrThrown = true;
+            punchedOrThrown.ResetDelayed();
+        }
 
         ObjectScoring objScoring = obj.GetComponent<ObjectScoring>();
         if (objScoring != null) objScoring.isInteracted = true;

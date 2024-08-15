@@ -133,10 +133,16 @@ public class SoundManager : MonoBehaviour
 
     public IEnumerator SwitchMusic(AudioClip newMusic)
     {
+        if (musicSource.clip == newMusic) {
+            yield break;
+        }
+
+        Debug.Log("CHECK!!!: " + newMusic.name);
+
         float startVolume = musicSource.volume;
 
         while (musicSource.volume > 0) {
-            musicSource.volume -= startVolume * Time.deltaTime / (musicTransitionTime / 2);
+            musicSource.volume -= startVolume * Time.unscaledDeltaTime / (musicTransitionTime / 2);
             yield return null;
         }
 
@@ -144,7 +150,7 @@ public class SoundManager : MonoBehaviour
         musicSource.Play();
 
         while (musicSource.volume < startVolume) {
-            musicSource.volume += startVolume * Time.deltaTime / (musicTransitionTime / 2);
+            musicSource.volume += startVolume * Time.unscaledDeltaTime / (musicTransitionTime / 2);
             yield return null;
         }
 

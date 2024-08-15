@@ -33,10 +33,12 @@ public class Projectile : MonoBehaviour
         ObjectPoolManager.Instance.ReturnPoolObject(gameObject); //return to pool
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider col)
     {
-        Debug.Log("COLLIDEDEDEDEDEDED");
-        ObjectPoolManager.Instance.GetPoolObject(explosion, transform.position, Quaternion.identity);
-        ObjectPoolManager.Instance.ReturnPoolObject(gameObject);
+        if (col.CompareTag("Player")) {
+            Debug.Log("BOSS PROJECITLE COLLIDED WITH PLAYER");
+            ObjectPoolManager.Instance.GetPoolObject(explosion, transform.position, Quaternion.identity);
+            ObjectPoolManager.Instance.ReturnPoolObject(gameObject);
+        }
     }
 }

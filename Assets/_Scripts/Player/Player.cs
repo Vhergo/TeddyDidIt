@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     [SerializeField] private List<Dialogue> bossTaunts;
     [SerializeField] private float bonusDialogueDelay = 1f;
 
+    private bool bossIsDead;
+
     public static Action OnPlayerDeath;
 
     private void Awake()
@@ -34,8 +36,17 @@ public class Player : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    private void OnEnable() => BossFightManager.OnBossFightReset += ResetHealth;
-    private void OnDisable() => BossFightManager.OnBossFightReset -= ResetHealth;
+    private void OnEnable()
+    {
+        BossFightManager.OnBossFightReset += ResetHealth;
+        BossManager.OnBossDeath += () => bossIsDead = true;
+    }
+    private void OnDisable()
+    {
+        BossFightManager.OnBossFightReset -= ResetHealth;
+        BossManager.OnBossDeath -= () => bossIsDead = true;
+    }
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -82,6 +93,7 @@ public class Player : MonoBehaviour
     {
         Debug.Log("TEDDY HAS DIED");
         OnPlayerDeath?.Invoke();
+        GetComponent<Rigidbody>().isKinematic = true;
 
         if (MySceneManager.Instance != null) {
             MySceneManager.Instance.PauseGame();
@@ -135,11 +147,13 @@ public class Player : MonoBehaviour
     #region DIALOGUE
     private void SetDialogue(Dialogue dialogue)
     {
+        if (bossIsDead) return;
         DialogueManager.Instance.SetDialogue(dialogue);
     }
 
     private void SetDelayedDialogue(Dialogue dialogue)
     {
+        if (bossIsDead) return;
         StartCoroutine(DialogueManager.Instance.SetDelayedDialogue(dialogue, bonusDialogueDelay));
     }
 

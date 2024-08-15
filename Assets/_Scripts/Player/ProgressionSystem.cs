@@ -55,17 +55,17 @@ public class ProgressionSystem : MonoBehaviour
     {
         if (!allowProgressionShortcut) return;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            SetProgressionStage(ProgressStage.Base);
-        } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            SetProgressionStage(ProgressStage.Punch);
-        } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
-            SetProgressionStage(ProgressStage.GrabAndThrow);
-        } else if (Input.GetKeyDown(KeyCode.Alpha4)) {
-            SetProgressionStage(ProgressStage.DoubleJump);
-        } else if (Input.GetKeyDown(KeyCode.Alpha5)) {
-            SetProgressionStage(ProgressStage.ChargeThrow);
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha1)) {
+        //    SetProgressionStage(ProgressStage.Base);
+        //} else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+        //    SetProgressionStage(ProgressStage.Punch);
+        //} else if (Input.GetKeyDown(KeyCode.Alpha3)) {
+        //    SetProgressionStage(ProgressStage.GrabAndThrow);
+        //} else if (Input.GetKeyDown(KeyCode.Alpha4)) {
+        //    SetProgressionStage(ProgressStage.DoubleJump);
+        //} else if (Input.GetKeyDown(KeyCode.Alpha5)) {
+        //    SetProgressionStage(ProgressStage.ChargeThrow);
+        //}
     }
 
     private void InitializeUI()
@@ -138,7 +138,7 @@ public class ProgressionSystem : MonoBehaviour
         float startX = progressionIndicators[0].GetComponent<RectTransform>().anchoredPosition.x;
 
         for (int i = 0; i < progressionIndicators.Count; i++) {
-            Debug.Log(percentages[i]);
+            // Debug.Log(percentages[i]);
             progressionIndicators[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(startX + (barWidth * percentages[i]), 0, 0);
         }
     }

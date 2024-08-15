@@ -278,7 +278,8 @@ public class Boss : MonoBehaviour
     public void TakeDamage()
     {
         BossManager.Instance.BossHit();
-        anim.Play(takenDamageAnimation.name);
+        if (anim.GetCurrentAnimatorClipInfo(0)[0].clip != stompAnimation)
+            anim.Play(takenDamageAnimation.name);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -287,7 +288,10 @@ public class Boss : MonoBehaviour
         if (collision.impulse.magnitude > bossHitThreshold) {
             if (CheckCollisionTag(collision.gameObject.tag)) {
                 PunchedOrThrown punchedOrThrownRef = collision.gameObject.GetComponent<PunchedOrThrown>();
-                if (punchedOrThrownRef != null && punchedOrThrownRef.punchedOrThrown) TakeDamage();
+                if (punchedOrThrownRef != null && punchedOrThrownRef.punchedOrThrown) {
+                    TakeDamage();
+                    punchedOrThrownRef.ResetNow();
+                }
             }
         }
     }

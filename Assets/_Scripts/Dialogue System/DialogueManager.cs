@@ -57,9 +57,9 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject skipAutoSequenceDisplay;
 
     [Space(10)]
-    [SerializeField] private PlayableDirector playableDirector;
     [SerializeField] private AudioSource typingSource;
     [SerializeField] private AudioClip typingSound;
+    [SerializeField] private AudioClip outroMusic;
 
     public static Action<Speaker> OnSpeakerChanged;
     public static Action<DialogueSequence> OnSequenceChange;
@@ -113,7 +113,9 @@ public class DialogueManager : MonoBehaviour
     public void SkipSequence()
     {
         if (currentSequence.nextSequence == null) {
-            SoundManager.Instance.PlayEndingMusic();
+            Debug.Log("ALL SEQUENCES ARE COMPLETE");
+            SoundManager.Instance.TriggerSwitchMusic(outroMusic);
+            GameManager.Instance.GameOver();
             return;
         }
 
@@ -178,6 +180,8 @@ public class DialogueManager : MonoBehaviour
             }
             UpdateSequence(currentSequence.nextSequence);
         }else {
+            Debug.Log("ALL SEQUENCES ARE COMPLETE");
+            SoundManager.Instance.TriggerSwitchMusic(outroMusic);
             GameManager.Instance.GameOver();
         }
     }

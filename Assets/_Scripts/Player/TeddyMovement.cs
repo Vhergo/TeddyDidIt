@@ -346,6 +346,7 @@ public class TeddyMovement : MonoBehaviour
         disableGravity = true;
         disableMovement = true;
         rb.velocity = Vector3.zero;
+        anim.Play("TeddyIdle", 0);
     }
 
     public float GetMovementAmplification()

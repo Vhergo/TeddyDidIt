@@ -28,13 +28,13 @@ public class BossFightManager : MonoBehaviour
     private void OnEnable()
     {
         Player.OnPlayerDeath += EndBossFight;
-        GameManager.OnGameOver += () => bossFightInProgress = false;
+        GameManager.OnGameOver += EndBossFight;
     }
 
     private void OnDisable()
     {
         Player.OnPlayerDeath -= EndBossFight;
-        GameManager.OnGameOver -= () => bossFightInProgress = false;
+        GameManager.OnGameOver -= EndBossFight;
     }
 
     public void RestartBossFight()
@@ -65,11 +65,15 @@ public class BossFightManager : MonoBehaviour
         MySceneManager.Instance.UnpauseGame();
     }
 
-    public void BeginBossFight()
+    public void BeginSpawningBossFightObjects()
     {
         bossFightInProgress = true;
-        BossManager.Instance.StartBossCombatCycle();
         StartCoroutine(SpawnObjects());
+    }
+
+    public void BeginBossFight()
+    {
+        BossManager.Instance.StartBossCombatCycle();
     }
 
     public void EndBossFight()

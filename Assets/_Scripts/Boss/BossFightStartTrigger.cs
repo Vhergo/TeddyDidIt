@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossFightStartTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject restartBossFightButton;
+    [SerializeField] private GameObject backtrackBlock;
 
     private void Start()
     {
@@ -14,10 +15,10 @@ public class BossFightStartTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) {
-            // Trigger Boss Cutscene
-            BossManager.Instance.StartBossCombatCycle();
-            BossFightManager.Instance.BeginBossFight();
+            CutsceneManager.Instance.PlayBossCutscene();
             restartBossFightButton.SetActive(true);
+            backtrackBlock.SetActive(true);
+            gameObject.SetActive(false);
         }
     }
 }

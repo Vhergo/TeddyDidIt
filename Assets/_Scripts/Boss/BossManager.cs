@@ -29,6 +29,7 @@ public class BossManager : MonoBehaviour
 
     [HideInInspector] public Emotes currentEmote;
     [SerializeField] private Emotes startingEmote = Emotes.blinkClosedMouth;
+    [SerializeField] private GameObject bossFightRestartButton;
     public enum Emotes
     {
         blinkClosedMouth, blinkOpenMouth, madClosedMouth, madOpenMouth, neutralClosedMouth, neutralOpenMouth
@@ -95,7 +96,9 @@ public class BossManager : MonoBehaviour
         isDead = true;
         SetDialogue(bossDefeated);
         // MySceneManager.Instance.PauseGame();
+        StopAllCoroutines();
         StopAttacking();
+        bossFightRestartButton.SetActive(false);
         TeddyMovement.Instance.Freeze();
         DialogueManager.Instance.SkipSequence();
     }
