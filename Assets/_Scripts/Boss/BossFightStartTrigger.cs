@@ -1,22 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class BossFightStartTrigger : MonoBehaviour
 {
-    [SerializeField] private GameObject restartBossFightButton;
     [SerializeField] private GameObject backtrackBlock;
-
-    private void Start()
-    {
-        restartBossFightButton.SetActive(false);
-    }
+    [SerializeField] private PlayableAsset bossCutscene;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) {
-            CutsceneManager.Instance.PlayBossCutscene();
-            restartBossFightButton.SetActive(true);
+            CutsceneManager.Instance.PlayCutscene(bossCutscene);
             backtrackBlock.SetActive(true);
             gameObject.SetActive(false);
         }

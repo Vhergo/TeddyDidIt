@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class BossManager : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class BossManager : MonoBehaviour
     [Header("Boss")]
     [SerializeField] private int maxHealth = 10;
     [SerializeField] private int currentHealth;
+    [SerializeField] private Transform healthBar;
+    [SerializeField] private GameObject healthPrefab;
     private bool isDead;
 
     [Header("Combat Cycle")]
@@ -30,6 +33,10 @@ public class BossManager : MonoBehaviour
     [HideInInspector] public Emotes currentEmote;
     [SerializeField] private Emotes startingEmote = Emotes.blinkClosedMouth;
     [SerializeField] private GameObject bossFightRestartButton;
+    [SerializeField] private PlayableAsset bossDeathCutscene;
+    [SerializeField] private DialogueSequence postBossFightSequence;
+
+
     public enum Emotes
     {
         blinkClosedMouth, blinkOpenMouth, madClosedMouth, madOpenMouth, neutralClosedMouth, neutralOpenMouth
@@ -37,26 +44,48 @@ public class BossManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
 
-    private void OnEnable() => BossFightManager.OnBossFightReset += ResetHealth;
-    private void OnDisable() => BossFightManager.OnBossFightReset -= ResetHealth;
+    private void OnEnable()
+    {
+        BossFightManager.OnBossFightReset += ResetHealth;
+        Player.OnPlayerDeath += PlayerDied;
+    }
+    private void OnDisable()
+    {
+        BossFightManager.OnBossFightReset -= ResetHealth;
+        Player.OnPlayerDeath -= PlayerDied;
+    }
 
     private void Start()
     {
         boss = GetComponent<Boss>();
         currentHealth = maxHealth;
+        for (int i = 0; i < maxHealth; i++) {
+            Instantiate(healthPrefab, healthBar);
+        }
+        healthBar.gameObject.SetActive(false);
 
         SetEmote(startingEmote);
 
         // StartCoroutine(BossCombatCycle());
     }
 
+    public void ShowBossHealth()
+    {
+        healthBar.gameObject.SetActive(true);
+    }
+
     private void ResetHealth()
     {
         currentHealth = maxHealth;
+        
+        foreach (Transform health in healthBar) {
+            health.gameObject.SetActive(true);
+        }
     }
 
     public void StartBossCombatCycle()
@@ -77,30 +106,56 @@ public class BossManager : MonoBehaviour
     }
 
     //called by boss when hit by player projectile
-    public void BossHit()
+    [ContextMenu("Boss Hit")]
+    public void BossHit(int damage)
     {
         OnBossHit?.Invoke();
-        currentHealth--;
 
+        int damageToApply = Mathf.Min(damage, currentHealth);
+        currentHealth -= damageToApply;
+
+        for (int i = 0; i < damageToApply; i++) {
+            healthBar.GetChild(currentHealth + i).gameObject.SetActive(false);
+        }
+
+        // Check if the boss is dead
         if (currentHealth <= 0) {
             if (!isDead) BossDeath();
-        }else {
+        } else {
             SetDialogue(BossHitDialogue());
         }
     }
 
     private void BossDeath()
     {
-        OnBossDeath?.Invoke();
-
         isDead = true;
-        SetDialogue(bossDefeated);
         // MySceneManager.Instance.PauseGame();
         StopAllCoroutines();
         StopAttacking();
+        StopAllProjectiles();
         bossFightRestartButton.SetActive(false);
         TeddyMovement.Instance.Freeze();
+        CutsceneManager.Instance.PlayCutscene(bossDeathCutscene);
+        Debug.Log("Boss Defeated");
+    }
+
+    public void DestroyBoss()
+    {
+        OnBossDeath?.Invoke();
+        SetDialogue(bossDefeated);
+        Debug.Log("Boss Destroyed");
         DialogueManager.Instance.SkipSequence();
+        //DialogueManager.Instance.UpdateSequence(postBossFightSequence);
+        HandlePostProcessing.Instance.ToggleDarkenVolume(true);
+        Destroy(gameObject);
+    }
+
+    private void StopAllProjectiles()
+    {
+        Projectile[] projectiles = FindObjectsOfType<Projectile>();
+        foreach (Projectile projectile in projectiles) {
+            Destroy(projectile.gameObject);
+        }
     }
 
     private void SetDialogue(Dialogue dialogue)
@@ -114,6 +169,11 @@ public class BossManager : MonoBehaviour
         return bossHit[randomeIndex];
     }
 
+    private void PlayerDied()
+    {
+        StopAllCoroutines();
+        StopAttacking();
+    }
 
     //set face emote of boss
     public void SetEmote(Emotes emote) => boss.SetEmote(emote);

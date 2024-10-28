@@ -58,5 +58,4 @@ public class GameUIManager : MonoBehaviour
     private void OnExitToMenuButtonClick() {
         MySceneManager.Instance.SwitchScene(SceneEnum.MainMenuScene);
     }
-
 }

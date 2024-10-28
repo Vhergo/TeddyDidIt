@@ -16,6 +16,7 @@ TagManager:
   - Legos
   - Boss
   - Bed
+  - IgnoreUI
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Wall
   - Grabbable
   - noSelfCollision
-  - 
+  - Player
   - 
   - 
   - 

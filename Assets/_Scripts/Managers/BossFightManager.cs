@@ -15,7 +15,12 @@ public class BossFightManager : MonoBehaviour
     [SerializeField] private List<GameObject> spawnableObjects;
     [SerializeField] private Transform respawnPoint;
     [SerializeField] private Transform bossRespawnPoint;
+    [SerializeField] private float bossObjectMass = 2f;
     private bool bossFightInProgress;
+    private Coroutine spawnCoroutine;
+
+    [Space(10)]
+    [SerializeField] private GameObject restartUI;
 
     public static Action OnBossFightReset;
 
@@ -27,23 +32,34 @@ public class BossFightManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Player.OnPlayerDeath += EndBossFight;
+        Player.OnPlayerDeath += PlayerDeath;
         GameManager.OnGameOver += EndBossFight;
+        BossManager.OnBossDeath += EndBossFight;
     }
 
     private void OnDisable()
     {
-        Player.OnPlayerDeath -= EndBossFight;
+        Player.OnPlayerDeath -= PlayerDeath;
         GameManager.OnGameOver -= EndBossFight;
+        BossManager.OnBossDeath -= EndBossFight;
+    }
+
+    private void Start()
+    {
+        restartUI.SetActive(false);
     }
 
     public void RestartBossFight()
     {
+        Debug.Log("Restarting Boss Fight");
+        StopAllCoroutines();
         RemoveAllBossRoomObjects();
         ResetPositions();
         BeginBossFight();
         UnpauseGame();
         OnBossFightReset.Invoke();
+        BeginSpawningBossFightObjects();
+        restartUI.SetActive(false);
     }
 
     private void RemoveAllBossRoomObjects()
@@ -56,6 +72,7 @@ public class BossFightManager : MonoBehaviour
 
     private void ResetPositions()
     {
+        TeddyMovement.Instance.Unfreeze();
         Player.Instance.transform.position = respawnPoint.position;
         BossManager.Instance.transform.position = bossRespawnPoint.position;
     }
@@ -67,19 +84,27 @@ public class BossFightManager : MonoBehaviour
 
     public void BeginSpawningBossFightObjects()
     {
+        BossManager.Instance.StartBossCombatCycle();
         bossFightInProgress = true;
-        StartCoroutine(SpawnObjects());
+        spawnCoroutine = StartCoroutine(SpawnObjects());
     }
 
     public void BeginBossFight()
     {
+        BossManager.Instance.ShowBossHealth();
         BossManager.Instance.StartBossCombatCycle();
     }
 
     public void EndBossFight()
     {
         bossFightInProgress = false;
-        BossManager.Instance.StopAttacking();
+        StopCoroutine(spawnCoroutine);
+    }
+
+    public void PlayerDeath()
+    {
+        restartUI.SetActive(true);
+        EndBossFight();
     }
 
     private IEnumerator SpawnObjects()
@@ -96,7 +121,8 @@ public class BossFightManager : MonoBehaviour
           
             BossRoomObject bossObj = obj.AddComponent<BossRoomObject>();
             bossObj.TriggerDestroy(objectDestroyTime);
-            PunchedOrThrown punchedOrThrown = obj.AddComponent<PunchedOrThrown>();
+            ObjectInteraction punchedOrThrown = obj.AddComponent<ObjectInteraction>();
+            SetBossObjectMass(rb: obj.GetComponent<Rigidbody>());
 
             yield return new WaitForSeconds(spawnRate);
             spawnCount++;
@@ -123,4 +149,5 @@ public class BossFightManager : MonoBehaviour
         return Quaternion.Euler(randomX, randomY, randomZ);
     }
 
+    private void SetBossObjectMass(Rigidbody rb) => rb.mass = bossObjectMass;
 }

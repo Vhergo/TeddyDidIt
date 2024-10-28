@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 1798196179478933140}
   - component: {fileID: 2736560573509337380}
   - component: {fileID: 98372047196297386}
-  - component: {fileID: 2219159592996564672}
   - component: {fileID: -1708398621766773326}
   - component: {fileID: -5499049312882344859}
+  - component: {fileID: 2219159592996564672}
+  - component: {fileID: -1576663177603370822}
   m_Layer: 8
   m_Name: JuiceBox_Original
   m_TagString: Food
@@ -86,25 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2219159592996564672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6143567658708773462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 081648cbfe8e9a9408cb27dec828497a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedThreshold: 0.1
-  isGrabbed: 0
-  collisonSounds:
-  - {fileID: 8300000, guid: dd4e3a43c8d2e524db13ef0b3e09b0bb, type: 3}
-  - {fileID: 8300000, guid: 75d7a99922e3de243b861dbc37c055c0, type: 3}
-  - {fileID: 8300000, guid: 424feae49556cbc4ebde6cd6b02bcfb8, type: 3}
-  - {fileID: 8300000, guid: 7e46ca8074a78aa44b7735c8aae03e0a, type: 3}
 --- !u!54 &-1708398621766773326
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -153,3 +135,36 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0609181, y: 0.68477696, z: 1.689965}
   m_Center: {x: 0.019821107, y: 0.057535604, z: 0.8483055}
+--- !u!114 &2219159592996564672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6143567658708773462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081648cbfe8e9a9408cb27dec828497a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedThreshold: 0.1
+  isGrabbed: 0
+  isInteracted: 0
+  collisonSounds:
+  - {fileID: 8300000, guid: dd4e3a43c8d2e524db13ef0b3e09b0bb, type: 3}
+  - {fileID: 8300000, guid: 75d7a99922e3de243b861dbc37c055c0, type: 3}
+  - {fileID: 8300000, guid: 424feae49556cbc4ebde6cd6b02bcfb8, type: 3}
+  - {fileID: 8300000, guid: 7e46ca8074a78aa44b7735c8aae03e0a, type: 3}
+--- !u!114 &-1576663177603370822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6143567658708773462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad99b7a354d6b8429cdcb95e808f3d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0

@@ -40,5 +40,16 @@ public class Projectile : MonoBehaviour
             ObjectPoolManager.Instance.GetPoolObject(explosion, transform.position, Quaternion.identity);
             ObjectPoolManager.Instance.ReturnPoolObject(gameObject);
         }
+
+        if (col.gameObject.layer == LayerMask.NameToLayer("Grabbable")) {
+            ObjectInteraction obj = col.GetComponent<ObjectInteraction>();
+            if (obj != null) {
+                if (obj.CheckCurrentState(ObjectInteractionState.Thrown) ||
+                    obj.CheckCurrentState(ObjectInteractionState.Charged)) {
+                    ObjectPoolManager.Instance.GetPoolObject(explosion, transform.position, Quaternion.identity);
+                    ObjectPoolManager.Instance.ReturnPoolObject(gameObject);
+                }
+            }
+        }
     }
 }

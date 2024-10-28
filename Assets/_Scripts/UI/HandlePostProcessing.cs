@@ -5,8 +5,11 @@ using UnityEngine.Rendering;
 
 public class HandlePostProcessing : MonoBehaviour
 {
-    [SerializeField] private Volume ppVolume;
-    [SerializeField] private Volume ppVolume2;
+    public static HandlePostProcessing Instance { get; private set; }
+
+    [SerializeField] private Volume blurVolume;
+    [SerializeField] private Volume GrungeVolume;
+    [SerializeField] private Volume darkenVolume;
 
     private void OnEnable()
     {
@@ -26,19 +29,31 @@ public class HandlePostProcessing : MonoBehaviour
         GameUIManager.OnMenuClose -= DisablePostProcessing;
     }
 
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
     private void Start()
     {
-        ppVolume.enabled = ppVolume2.enabled = true;
+        blurVolume.enabled = GrungeVolume.enabled = true;
     }
 
-    private void EnablePostProcessing()
+    public void EnablePostProcessing()
     {
-        ppVolume.enabled = true;
+        blurVolume.enabled = true;
     }
 
-    private void DisablePostProcessing()
+    public void DisablePostProcessing()
     {
-        ppVolume.enabled = false;
+        if (DialogueManager.Instance.IsAutoSequence) return;
+        blurVolume.enabled = false;
+    }
+
+    public void ToggleDarkenVolume(bool value)
+    {
+        darkenVolume.enabled = value;
     }
 
 }

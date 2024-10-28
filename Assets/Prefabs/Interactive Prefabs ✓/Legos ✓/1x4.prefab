@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 4769090670244472307}
   - component: {fileID: 5814496144555718711}
   - component: {fileID: -8842941306485311526}
-  - component: {fileID: 9132681767971301261}
   - component: {fileID: -4930561326310188130}
+  - component: {fileID: 9132681767971301261}
+  - component: {fileID: -7801616286143869183}
   m_Layer: 8
   m_Name: 1x4
   m_TagString: Legos
@@ -95,7 +96,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5254027640624794590}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 2
   m_Drag: 0.1
   m_AngularDrag: 0.005
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -135,6 +136,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.009363, y: 1.0023413, z: 2.0008647}
   m_Center: {x: 0.0011615319, y: -0.00068415294, z: 1.0003903}
+--- !u!114 &-4930561326310188130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5254027640624794590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4092cb47c23ea6242af9779542e745a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &9132681767971301261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,13 +162,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedThreshold: 0.1
   isGrabbed: 0
+  isInteracted: 0
   collisonSounds:
   - {fileID: 8300000, guid: ca99c005ac3c48642bdc43f47652f406, type: 3}
   - {fileID: 8300000, guid: 510c370cd01fa3847af4be548b33b2d8, type: 3}
   - {fileID: 8300000, guid: c2e1f3bc25e077a41b5508155d133c9b, type: 3}
   - {fileID: 8300000, guid: 251b6948670a5e943bbf1c12611c4f39, type: 3}
   - {fileID: 8300000, guid: b33297a18a079554e8073bd41197a839, type: 3}
---- !u!114 &-4930561326310188130
+--- !u!114 &-7801616286143869183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,6 +178,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5254027640624794590}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4092cb47c23ea6242af9779542e745a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ad99b7a354d6b8429cdcb95e808f3d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0

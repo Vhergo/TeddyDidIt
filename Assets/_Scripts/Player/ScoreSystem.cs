@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class ScoreSystem : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI scoreText;
+    // (REMOVED) [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private int punchScore;
     [SerializeField] private int grabAndThrowScore;
     [SerializeField] private int doubleJumpScore;
@@ -43,11 +43,12 @@ public class ScoreSystem : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
-    private void OnEnable() => BossManager.Instance.OnBossHit += BossDefeated;
-    private void OnDisable() => BossManager.Instance.OnBossHit -= BossDefeated;
+    // private void OnEnable() => BossManager.Instance.OnBossHit += BossDefeated;
+    // private void OnDisable() => BossManager.Instance.OnBossHit -= BossDefeated;
 
     private void Start()
     {
@@ -67,18 +68,20 @@ public class ScoreSystem : MonoBehaviour
 
     public void AddScore(String tag1)
     {
+        if (!score_book.ContainsKey(tag1)) return;
+
         int scoreToAdd = score_book[tag1];
         score = score + scoreToAdd;
-        scoreText.text = score.ToString("#,#");
         CheckThreshhold();
     }
 
     public void AddScore(float scalar, String tag1, String tag2)
     {
+        if (!score_book.ContainsKey(tag1) || !score_book.ContainsKey(tag2)) return;
+
         float scoreToAdd = (float) score_book[tag1] + score_book[tag2];
         scoreToAdd = Mathf.Floor(scalar * scoreToAdd);
         score = score + (int) scoreToAdd;
-        scoreText.text = score.ToString("#,#");
         // SoundManager.Instance.PlaySound(destroySound.clip);
         CheckThreshhold();
     }
@@ -87,28 +90,24 @@ public class ScoreSystem : MonoBehaviour
     public void AddScore()
     {
         score += 100;
-        scoreText.text = score.ToString("#,#");
         CheckThreshhold();
     }
 
     public void AddScorePrePunch()
     {
         score += prePunchScore;
-        scoreText.text = score.ToString("#,#");
         CheckThreshhold();
     }
 
     public void BossDefeated()
     {
         score += BossDefeatedScore;
-        scoreText.text = score.ToString("#,#");
         CheckThreshhold();
     }
 
     public void SpecialPickup()
     {
         score += specialScore;
-        scoreText.text = score.ToString("#,#");
         CheckThreshhold();
     }
 

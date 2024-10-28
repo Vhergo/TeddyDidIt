@@ -35,6 +35,7 @@ public class TeddyMovement : MonoBehaviour
     [SerializeField] private Vector3 groundDetectionSize = new(1f, 0.2f, 1f);
     [SerializeField] private bool isJumping = false;
     [SerializeField] private bool inAir = false;
+    [SerializeField] private float jumpAmplifier = 1f;
     [Space(10)]
     [SerializeField] private AudioClip jumpSoundNormal;
     [SerializeField] private AudioClip jumpSoundOnBed;
@@ -44,6 +45,7 @@ public class TeddyMovement : MonoBehaviour
     private AudioClip landSound;
     [SerializeField] private ParticleSystem dustParticles;
     private bool disableMovement;
+
 
     public bool allowDoubleJump = false;
     [SerializeField] private float doubleJumpForce = 45f;
@@ -226,7 +228,7 @@ public class TeddyMovement : MonoBehaviour
         isJumping = true; //ensure player can't jump until landed
         StartCoroutine(JumpTrigger()); //start cooldown for jump input
         anim.Play("TeddyJump", 0); //play jump animation
-        rb.velocity = new(rb.velocity.x, jumpForce); //add jump force
+        rb.velocity = new(rb.velocity.x, jumpForce * jumpAmplifier); //add jump force
 
         TriggerJumpSound();
     }
@@ -323,6 +325,8 @@ public class TeddyMovement : MonoBehaviour
         if (jumpBufferTimer > 0) Jump(jumpForce);
     }
 
+    public void SetJumpAmplifier(float value) => jumpAmplifier = value;
+
     private void Timers() => jumpBufferTimer -= Time.deltaTime;
 
     #endregion
@@ -353,8 +357,8 @@ public class TeddyMovement : MonoBehaviour
     {
         if (moveDirection.x == 0) return 1f; // No amplification if player is not moving
         else {
-            if (moveSpeed == maxSprintSpeed) return 2f;
-            else return 1.5f;
+            if (moveSpeed == maxSprintSpeed) return 1.25f;
+            else return 1.1f;
         }
     }
 }

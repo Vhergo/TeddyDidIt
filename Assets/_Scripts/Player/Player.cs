@@ -8,9 +8,13 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
 
+    [Header("Health")]
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private int currentHealth;
     [SerializeField] private float healthRegenDelay = 10f;
+    [SerializeField] private Transform healthBar;
+    [SerializeField] private GameObject healthPrefab;
+    [SerializeField] private List<AudioClip> teddySqueaks;
     private float healthRegenTimer;
 
     [Header("Dialogue")]
@@ -40,31 +44,46 @@ public class Player : MonoBehaviour
     {
         BossFightManager.OnBossFightReset += ResetHealth;
         BossManager.OnBossDeath += () => bossIsDead = true;
+        HealthPickup.OnHealthPickup += IncreaseHealth;
     }
     private void OnDisable()
     {
         BossFightManager.OnBossFightReset -= ResetHealth;
         BossManager.OnBossDeath -= () => bossIsDead = true;
+        HealthPickup.OnHealthPickup -= IncreaseHealth;
     }
 
     private void Start()
     {
-        currentHealth = maxHealth;
+        // currentHealth = maxHealth;
+        currentHealth = 0;
         healthRegenTimer = healthRegenDelay;
     }
 
     private void Update()
     {
-        Timer();
+        //Timer();
     }
 
     private void ResetHealth()
     {
         currentHealth = maxHealth;
+        foreach (Transform health in healthBar) {
+            health.gameObject.SetActive(true);
+        }
     }
 
     #region HEALTH
 
+    public void IncreaseHealth()
+    {
+        maxHealth++;
+        currentHealth++;
+        Instantiate(healthPrefab, healthBar);
+    }
+
+
+    [ContextMenu("Take Damage")]
     // Take Damage
     public void TakeDamage()
     {
@@ -85,15 +104,21 @@ public class Player : MonoBehaviour
         }
 
         currentHealth--;
+        if (currentHealth >= 0)
+            healthBar.GetChild(currentHealth).gameObject.SetActive(false);
         healthRegenTimer = healthRegenDelay;
-        if (currentHealth <= 0) PlayerDeath();
+        if (currentHealth <= 0) {
+            PlayerDeath();
+        }else {
+            SoundManager.Instance.PlaySound(teddySqueaks[UnityEngine.Random.Range(0, teddySqueaks.Count)], true);
+        }
     }
 
     private void PlayerDeath()
     {
         Debug.Log("TEDDY HAS DIED");
         OnPlayerDeath?.Invoke();
-        GetComponent<Rigidbody>().isKinematic = true;
+        TeddyMovement.Instance.Freeze();
 
         if (MySceneManager.Instance != null) {
             MySceneManager.Instance.PauseGame();
@@ -120,27 +145,6 @@ public class Player : MonoBehaviour
                 SetDialogue(BossTauntDialogue());
             }
         }   
-    }
-
-    // Regenerate Health
-    private void RegenHealth()
-    {
-        if (currentHealth >= maxHealth) return;
-
-        if (currentHealth == maxHealth - 1) {
-            SetDelayedDialogue(healthRegenFull);
-        }else if (currentHealth == maxHealth - 2) {
-            SetDelayedDialogue(GetRegenDialogue());
-        }
-
-        currentHealth++;
-    }
-    private void Timer() {
-        healthRegenTimer -= Time.deltaTime;
-        if (healthRegenTimer <= 0) {
-            healthRegenTimer = healthRegenDelay;
-            RegenHealth();
-        }
     }
     #endregion
 

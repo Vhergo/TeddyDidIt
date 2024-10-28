@@ -33,7 +33,7 @@ public class ObjectScoring : MonoBehaviour
             PlayCollisionSound();
             isGrabbed = false;
             isInteracted = false;
-            Debug.Log(speed.ToString());
+            // Debug.Log(speed.ToString());
         }
     }
 }

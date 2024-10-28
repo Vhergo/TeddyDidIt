@@ -83,10 +83,9 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.K)) NextDialogue();
-        //if (Input.GetKeyDown(KeyCode.L)) PreviousDialogue();
-
-        //if (Input.GetKeyDown(KeyCode.J)) SkipSequence();
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.J)) SkipSequence();
+#endif
 
         if (Input.GetKeyDown(KeyCode.Space) && !allTextIsDisplayed && currentSequence.autoplay) StartCoroutine(SkipTyping());
     }
@@ -112,6 +111,9 @@ public class DialogueManager : MonoBehaviour
 
     public void SkipSequence()
     {
+        Debug.Log("Current Sequence: " + currentSequence.sequenceName);
+        Debug.Log("Next Sequence: " + currentSequence.nextSequence.sequenceName);
+
         if (currentSequence.nextSequence == null) {
             Debug.Log("ALL SEQUENCES ARE COMPLETE");
             SoundManager.Instance.TriggerSwitchMusic(outroMusic);
@@ -127,7 +129,7 @@ public class DialogueManager : MonoBehaviour
         UpdateSequence(currentSequence.nextSequence);
     }
 
-    private void UpdateSequence(DialogueSequence sequence)
+    public void UpdateSequence(DialogueSequence sequence)
     {
         if (sequence == null) {
             Debug.Log("ALL SEQUENCES ARE COMPLETE");
@@ -147,7 +149,7 @@ public class DialogueManager : MonoBehaviour
             TeddyMovement.Instance.Freeze();
         } else {
             // Enable player input HERE
-            StartGameplaySequence();
+            StartCoroutine(StartGameplaySequence());
             TeddyMovement.Instance.Unfreeze();
         }
     }
@@ -160,7 +162,7 @@ public class DialogueManager : MonoBehaviour
         while (dialogueIndex < dialogues.Count) {
             Dialogue dialogue = GetDialogue(dialogueIndex);
             SetDialogue(dialogue);
-            // OnSpeakerChanged?.Invoke(dialogue.speaker); // Obsolete
+
             yield return new WaitUntil(() => allTextIsDisplayed);
 
             // Have some UI indication to press continue here
@@ -171,6 +173,7 @@ public class DialogueManager : MonoBehaviour
             dialogueIndex++;
             continueDialogueText.gameObject.SetActive(false);
         }
+
         Debug.Log("Sequence is over");
 
         if (currentSequence.nextSequence != null) {
@@ -188,12 +191,18 @@ public class DialogueManager : MonoBehaviour
 
     private void UseFullVisual(bool fullVisual)
     {
+        Debug.Log("USING FULL VISUAL");
         speakerFull.gameObject.SetActive(fullVisual);
+        speakerFull.sizeDelta = Vector3.zero;
+
         speakerIcon.gameObject.SetActive(!fullVisual);
     }
 
-    private void StartGameplaySequence()
+    private IEnumerator StartGameplaySequence()
     {
+        IntroductionGuide.Instance.TriggerIntroductionBasedOnSequence();
+        yield return new WaitUntil(() => IntroductionGuide.Instance.PanelClosed);
+
         SetDialogue(GetDialogue(dialogueIndex));
         UpdateDialogueUI(currentDialogue);
 

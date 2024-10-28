@@ -8,8 +8,6 @@ public class CutsceneManager : MonoBehaviour
     public static CutsceneManager Instance { get; private set; }
 
     [SerializeField] private PlayableAsset introCutscene;
-    [SerializeField] private PlayableAsset bossCutscene;
-    [SerializeField] private PlayableAsset outroCutscene;
 
     private PlayableDirector playableDirector;
     private DialogueManager dialogueSystem;
@@ -74,15 +72,9 @@ public class CutsceneManager : MonoBehaviour
         }
     }
 
-    public void PlayBossCutscene()
+    public void PlayCutscene(PlayableAsset cutscene)
     {
-        if (bossCutscene != null)
-            UpdateCutscene(bossCutscene);
-    }
-
-    public void PlayOutroCutscene()
-    {
-        if (outroCutscene != null)
-            UpdateCutscene(introCutscene);
+        if (cutscene != null)
+            UpdateCutscene(cutscene);
     }
 }

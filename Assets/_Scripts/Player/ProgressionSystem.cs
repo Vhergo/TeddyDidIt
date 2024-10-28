@@ -18,14 +18,24 @@ public class ProgressionSystem : MonoBehaviour
     [Header("Achivement")]
     [SerializeField] private Image achievementIcon;
     [SerializeField] private TMP_Text achievementTitle;
+    [SerializeField] private Image achievementGuide;
+    [Space(10)]
     [SerializeField] private Sprite powerPunch;
     [SerializeField] private Sprite grabAndThrow;
     [SerializeField] private Sprite doubleJump;
     [SerializeField] private Sprite chargeThrow;
-
+    [Space(10)]
+    [SerializeField] private Sprite powerPunchGuide;
+    [SerializeField] private Sprite grabAndThrowGuide;
+    [SerializeField] private Sprite doubleJumpGuide;
+    [SerializeField] private Sprite chargeThrowGuide;
+    [Space(10)]
     [SerializeField] private AudioClip achievementSound;
     [SerializeField] private Animator achievementAnim;
-    [SerializeField] private AnimationClip achievementClip;
+    [SerializeField] private AnimationClip achievementShow;
+    [SerializeField] private AnimationClip achievementHide;
+    [SerializeField] private Button achievementCloseButton;
+    [SerializeField] private float autoHideDelay = 20f;
 
     private ProgressStage currentState;
 
@@ -45,6 +55,16 @@ public class ProgressionSystem : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        BossManager.OnBossDeath += () => SetProgressionStage(ProgressStage.Base);
+    }
+
+    private void OnDisable()
+    {
+        BossManager.OnBossDeath -= () => SetProgressionStage(ProgressStage.Base);
+    }
+
     private void Start()
     {
         InitializeUI();
@@ -55,17 +75,19 @@ public class ProgressionSystem : MonoBehaviour
     {
         if (!allowProgressionShortcut) return;
 
-        //if (Input.GetKeyDown(KeyCode.Alpha1)) {
-        //    SetProgressionStage(ProgressStage.Base);
-        //} else if (Input.GetKeyDown(KeyCode.Alpha2)) {
-        //    SetProgressionStage(ProgressStage.Punch);
-        //} else if (Input.GetKeyDown(KeyCode.Alpha3)) {
-        //    SetProgressionStage(ProgressStage.GrabAndThrow);
-        //} else if (Input.GetKeyDown(KeyCode.Alpha4)) {
-        //    SetProgressionStage(ProgressStage.DoubleJump);
-        //} else if (Input.GetKeyDown(KeyCode.Alpha5)) {
-        //    SetProgressionStage(ProgressStage.ChargeThrow);
-        //}
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            SetProgressionStage(ProgressStage.Base);
+        } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            SetProgressionStage(ProgressStage.Punch);
+        } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
+            SetProgressionStage(ProgressStage.GrabAndThrow);
+        } else if (Input.GetKeyDown(KeyCode.Alpha4)) {
+            SetProgressionStage(ProgressStage.DoubleJump);
+        } else if (Input.GetKeyDown(KeyCode.Alpha5)) {
+            SetProgressionStage(ProgressStage.ChargeThrow);
+        }
+#endif
     }
 
     private void InitializeUI()
@@ -73,11 +95,13 @@ public class ProgressionSystem : MonoBehaviour
         foreach (GameObject indicator in progressionIndicators) {
             indicator.transform.GetChild(0).GetComponent<Image>().enabled = false;
         }
+
+        achievementCloseButton.onClick.AddListener(HideAchievementNotification);
     }
 
     public void SetProgressionStage(ProgressStage stage)
     {
-        Debug.Log("Entering Stage: " + stage.ToString());
+        // Debug.Log("Entering Stage: " + stage.ToString());
         switch (stage) {
             case ProgressStage.Base:
                 currentState = ProgressStage.Base;
@@ -88,28 +112,28 @@ public class ProgressionSystem : MonoBehaviour
                 OnPunchEnabled?.Invoke();
                 ActivateUIIndicator(1);
 
-                AchievementNotification(powerPunch, "Power Punch");
+                AchievementNotification(powerPunch, "Power Punch", powerPunchGuide);
                 break;
             case ProgressStage.GrabAndThrow:
                 currentState = ProgressStage.GrabAndThrow;
                 OnGrabAndThrowEnabled?.Invoke();
                 ActivateUIIndicator(2);
 
-                AchievementNotification(grabAndThrow, "Grab And Throw");
+                AchievementNotification(grabAndThrow, "Grab And Throw", grabAndThrowGuide);
                 break;
             case ProgressStage.DoubleJump:
                 currentState = ProgressStage.DoubleJump;
                 OnDoubleJumpEnabled?.Invoke();
                 ActivateUIIndicator(3);
 
-                AchievementNotification(doubleJump, "Double Jump");
+                AchievementNotification(doubleJump, "Double Jump", doubleJumpGuide);
                 break;
             case ProgressStage.ChargeThrow:
                 currentState = ProgressStage.ChargeThrow;
                 OnChargeThrowEnabled?.Invoke();
                 ActivateUIIndicator(4);
 
-                AchievementNotification(chargeThrow, "Charged Throw");
+                AchievementNotification(chargeThrow, "Charged Throw", chargeThrowGuide);
                 break;
         }
     }
@@ -143,15 +167,32 @@ public class ProgressionSystem : MonoBehaviour
         }
     }
 
-    private void AchievementNotification(Sprite icon, string title)
+    private void AchievementNotification(Sprite icon, string title, Sprite guide)
     {
         achievementIcon.sprite = icon;
         achievementTitle.text = title;
+        achievementGuide.sprite = guide;
+        achievementGuide.GetComponent<RectTransform>().sizeDelta = new Vector2(guide.rect.width, guide.rect.height);
 
         if (SoundManager.Instance != null)
             SoundManager.Instance.PlaySound(achievementSound);
 
-        achievementAnim.Play(achievementClip.name);
+        achievementAnim.Play(achievementShow.name);
+        Invoke("AutoHideAchievementNotification", autoHideDelay);
+
+    }
+
+    private void HideAchievementNotification()
+    {
+        achievementAnim.Play(achievementHide.name);
+    }
+
+    private void AutoHideAchievementNotification()
+    {
+        Debug.Log("Auto Hide Achievement Notification");
+        if (achievementAnim.GetCurrentAnimatorStateInfo(0).IsName("AchievementShow")) {
+            HideAchievementNotification();
+        }
     }
 }
 

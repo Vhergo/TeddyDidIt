@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5436405797766242219}
   - component: {fileID: 8890979099756411976}
   - component: {fileID: -244345209699531439}
+  - component: {fileID: -4525884929276140361}
   m_Layer: 8
   m_Name: Ramp
   m_TagString: Toys
@@ -149,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedThreshold: 0.1
   isGrabbed: 0
+  isInteracted: 0
   collisonSounds:
   - {fileID: 8300000, guid: 34d7d00710db0ee4bbfd0b3cfba9bf52, type: 3}
   - {fileID: 8300000, guid: 5f6fbb64b9777c3469d9bf82d0447e0c, type: 3}
@@ -156,3 +158,16 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 06f00542a3f8b9348863b6f479f69f18, type: 3}
   - {fileID: 8300000, guid: a73f52a7bc6f60942860ea68620ccad0, type: 3}
   - {fileID: 8300000, guid: c70e26df1a73226439ceffebe28080fe, type: 3}
+--- !u!114 &-4525884929276140361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2452041172367562894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad99b7a354d6b8429cdcb95e808f3d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0

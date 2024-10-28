@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 1997413037227012231}
   - component: {fileID: 4183049355658425720}
   - component: {fileID: 3743776007840918720}
-  - component: {fileID: 4718469450409821417}
   - component: {fileID: 155198747171945441}
+  - component: {fileID: 4718469450409821417}
   - component: {fileID: -4432948737262728384}
+  - component: {fileID: -2756708034172796977}
   m_Layer: 8
   m_Name: Candy_Red
   m_TagString: Food
@@ -86,22 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4718469450409821417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6250634392276040675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 081648cbfe8e9a9408cb27dec828497a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedThreshold: 0.1
-  isGrabbed: 0
-  collisonSounds:
-  - {fileID: 8300000, guid: 34d7d00710db0ee4bbfd0b3cfba9bf52, type: 3}
 --- !u!54 &155198747171945441
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -129,6 +114,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 1
+--- !u!114 &4718469450409821417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6250634392276040675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081648cbfe8e9a9408cb27dec828497a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedThreshold: 0.1
+  isGrabbed: 0
+  isInteracted: 0
+  collisonSounds:
+  - {fileID: 8300000, guid: 34d7d00710db0ee4bbfd0b3cfba9bf52, type: 3}
 --- !u!136 &-4432948737262728384
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -152,3 +154,16 @@ CapsuleCollider:
   m_Height: 1.83
   m_Direction: 0
   m_Center: {x: -0.0061540008, y: 0.003658689, z: 0.20074922}
+--- !u!114 &-2756708034172796977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6250634392276040675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad99b7a354d6b8429cdcb95e808f3d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0

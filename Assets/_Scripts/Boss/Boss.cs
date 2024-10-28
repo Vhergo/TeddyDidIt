@@ -42,6 +42,9 @@ public class Boss : MonoBehaviour
     private bool isStomping;
     private bool stompStarted;
 
+    [Space(10)]
+    [SerializeField] private AnimationClip deathAnimation;
+
     [Header("Projectile Variants")]
     [SerializeField] private GameObject slowPea;
     [SerializeField] private GameObject fastPea;
@@ -92,6 +95,7 @@ public class Boss : MonoBehaviour
         switch (state) {
             case CombatState.Idle:
                 // Do nothing
+                StopCoroutine(currentCombatCoroutine);
                 break;
             case CombatState.Firing:
                 StartFiring();
@@ -213,6 +217,7 @@ public class Boss : MonoBehaviour
                 rb.AddForce(Vector3.up * stompForce, ForceMode.Impulse);
 
             SoundManager.Instance.PlaySound(stompSound, true);
+            CameraShake.Instance.TriggerCameraShake();
         }
 
         stompStarted = false;
@@ -275,22 +280,35 @@ public class Boss : MonoBehaviour
     #region TAKE DAMAGE
 
     [ContextMenu("Take Damage")]
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
-        BossManager.Instance.BossHit();
+        BossManager.Instance.BossHit(damage);
+
         if (anim.GetCurrentAnimatorClipInfo(0)[0].clip != stompAnimation)
             anim.Play(takenDamageAnimation.name);
+
+
+    }
+
+    public void PlayDeathAnimation()
+    {
+        Debug.Log("BOSS DEATH ANIMATION");
+        anim.Play(deathAnimation.name, 0);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        //register hit if impact higher than threshold
         if (collision.impulse.magnitude > bossHitThreshold) {
             if (CheckCollisionTag(collision.gameObject.tag)) {
-                PunchedOrThrown punchedOrThrownRef = collision.gameObject.GetComponent<PunchedOrThrown>();
-                if (punchedOrThrownRef != null && punchedOrThrownRef.punchedOrThrown) {
-                    TakeDamage();
-                    punchedOrThrownRef.ResetNow();
+                ObjectInteraction obj = collision.gameObject.GetComponent<ObjectInteraction>();
+                if (obj != null) {
+                    if (obj.CheckCurrentState(ObjectInteractionState.Thrown)) {
+                        TakeDamage(1);
+                        obj.ResetNow();
+                    } else if (obj.CheckCurrentState(ObjectInteractionState.Charged)) {
+                        TakeDamage(2);
+                        obj.ResetNow();
+                    }
                 }
             }
         }

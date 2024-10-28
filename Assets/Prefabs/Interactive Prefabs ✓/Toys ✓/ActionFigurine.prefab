@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 6540364846559021478}
   - component: {fileID: 6260517502405753692}
   - component: {fileID: 5432848836292050056}
-  - component: {fileID: 4441462436134798300}
   - component: {fileID: 880479508115007073}
   - component: {fileID: 7357534264453062750}
+  - component: {fileID: 4441462436134798300}
+  - component: {fileID: -3156953191138627738}
   m_Layer: 8
   m_Name: ActionFigurine
   m_TagString: Toys
@@ -87,25 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4441462436134798300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681562621093395977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 081648cbfe8e9a9408cb27dec828497a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedThreshold: 0.1
-  isGrabbed: 0
-  collisonSounds:
-  - {fileID: 8300000, guid: dd4e3a43c8d2e524db13ef0b3e09b0bb, type: 3}
-  - {fileID: 8300000, guid: 75d7a99922e3de243b861dbc37c055c0, type: 3}
-  - {fileID: 8300000, guid: 424feae49556cbc4ebde6cd6b02bcfb8, type: 3}
-  - {fileID: 8300000, guid: 7e46ca8074a78aa44b7735c8aae03e0a, type: 3}
 --- !u!54 &880479508115007073
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -154,6 +136,39 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.9005704, y: 2.9358356, z: 5.9672947}
   m_Center: {x: -0.2067492, y: -0.23193741, z: 2.9401593}
+--- !u!114 &4441462436134798300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681562621093395977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081648cbfe8e9a9408cb27dec828497a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedThreshold: 0.1
+  isGrabbed: 0
+  isInteracted: 0
+  collisonSounds:
+  - {fileID: 8300000, guid: dd4e3a43c8d2e524db13ef0b3e09b0bb, type: 3}
+  - {fileID: 8300000, guid: 75d7a99922e3de243b861dbc37c055c0, type: 3}
+  - {fileID: 8300000, guid: 424feae49556cbc4ebde6cd6b02bcfb8, type: 3}
+  - {fileID: 8300000, guid: 7e46ca8074a78aa44b7735c8aae03e0a, type: 3}
+--- !u!114 &-3156953191138627738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681562621093395977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad99b7a354d6b8429cdcb95e808f3d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
 --- !u!1 &3834428527349478863
 GameObject:
   m_ObjectHideFlags: 0

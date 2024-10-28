@@ -15,12 +15,7 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private float punchForce = 10f;
     [SerializeField] private float punchRadius = 2f;
     [SerializeField] private AudioClip punchSound;
-    private bool punchOnCooldown;
-
-    [SerializeField] private bool poweredUp;
-    [SerializeField] private float powerAmp = 1f;
-
-    public bool PoweredUp => poweredUp;
+    [SerializeField] private bool punchOnCooldown;
 
     [Header("Grab and Throw"), Space(10)]
     [SerializeField] private Transform grabPos;
@@ -34,7 +29,7 @@ public class CombatSystem : MonoBehaviour
     [SerializeField] private AudioClip throwSound;
     private GameObject grabbedObject;
     private bool grabOnCooldown;
-    private bool hasGrabbed;
+    [SerializeField] private bool hasGrabbed;
 
     [Header("Charged Throw")]
     [SerializeField] private float chargedThrowForce = 20f;
@@ -134,8 +129,13 @@ public class CombatSystem : MonoBehaviour
         foreach (Collider punchableObjects in colliders) {
             Rigidbody rb = punchableObjects.GetComponent<Rigidbody>();
             if (rb != null) {
-                rb.AddForce(punchDirection * punchForce * ForceAmplification() * CheckPowerAmplification(), ForceMode.Impulse);
-                UpdateObjectPunchedOrThrown(rb.gameObject);
+                if (rb.gameObject.GetComponent<Unpunchable>() != null) {
+                    Invoke("ResetPunchCooldown", punchCooldown);
+                    return;
+                }
+
+                rb.AddForce(punchDirection * punchForce * ForceAmplification(), ForceMode.Impulse);
+                SetObjectPunched(rb.gameObject);
 
                 ScoreSystem.Instance.AddScore(punchableObjects.gameObject.tag);
                 SoundManager.Instance.PlaySound(punchSound);
@@ -232,7 +232,11 @@ public class CombatSystem : MonoBehaviour
         grabOnCooldown = true;
 
         // In case the object is destoryed before it is thrown
-        if (grabbedObject == null) return;
+        if (grabbedObject == null) {
+            // Can grab again immediately if you item is despawned/destroyed
+            Invoke("ResetThrowCooldown", 0.1f);
+            return;
+        }
 
         Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
         Collider col = grabbedObject.GetComponent<Collider>();
@@ -242,8 +246,8 @@ public class CombatSystem : MonoBehaviour
             col.enabled = true;
 
             Vector3 throwDirection = throwTarget.position - grabPos.position;
-            rb.AddForce(throwDirection.normalized * throwForce * ForceAmplification() * CheckPowerAmplification(), ForceMode.Impulse);
-            UpdateObjectPunchedOrThrown(rb.gameObject);
+            rb.AddForce(throwDirection.normalized * throwForce * ForceAmplification(), ForceMode.Impulse);
+            SetObjectThrown(rb.gameObject);
             grabbedObject = null;
 
             SoundManager.Instance.PlaySound(throwSound);
@@ -284,6 +288,12 @@ public class CombatSystem : MonoBehaviour
         hasGrabbed = false;
         chargeOnCooldown = true;
 
+        if (grabbedObject == null) {
+            // Can grab again immediately if you item is despawned/destroyed
+            Invoke("ResetChargedThrowCooldown", 0.1f);
+            return;
+        }
+
         Debug.Log("GRABBED OBJECT: " + grabbedObject.name);
         Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
         Collider col = grabbedObject.GetComponent<Collider>();
@@ -293,8 +303,8 @@ public class CombatSystem : MonoBehaviour
             col.enabled = true;
 
             Vector3 throwDirection = throwTarget.position - grabPos.position;
-            rb.AddForce(throwDirection.normalized * chargedThrowForce * ForceAmplification() * CheckPowerAmplification(), ForceMode.Impulse);
-            UpdateObjectPunchedOrThrown(rb.gameObject);
+            rb.AddForce(throwDirection.normalized * chargedThrowForce * ForceAmplification(), ForceMode.Impulse);
+            SetObjectCharged(rb.gameObject);
             grabbedObject = null;
         }
 
@@ -303,12 +313,33 @@ public class CombatSystem : MonoBehaviour
 
     #endregion
 
-    private void UpdateObjectPunchedOrThrown(GameObject obj)
+    private void SetObjectPunched(GameObject obj)
     {
-        PunchedOrThrown punchedOrThrown = obj.GetComponent<PunchedOrThrown>();
+        ObjectInteraction punchedOrThrown = obj.GetComponent<ObjectInteraction>();
         if (punchedOrThrown != null) {
-            punchedOrThrown.punchedOrThrown = true;
-            punchedOrThrown.ResetDelayed();
+            punchedOrThrown.SetPunched();
+        }
+
+        ObjectScoring objScoring = obj.GetComponent<ObjectScoring>();
+        if (objScoring != null) objScoring.isInteracted = true;
+    }
+
+    private void SetObjectThrown(GameObject obj)
+    {
+        ObjectInteraction punchedOrThrown = obj.GetComponent<ObjectInteraction>();
+        if (punchedOrThrown != null) {
+            punchedOrThrown.SetThrown();
+        }
+
+        ObjectScoring objScoring = obj.GetComponent<ObjectScoring>();
+        if (objScoring != null) objScoring.isInteracted = true;
+    }
+
+    private void SetObjectCharged(GameObject obj)
+    {
+        ObjectInteraction punchedOrThrown = obj.GetComponent<ObjectInteraction>();
+        if (punchedOrThrown != null) {
+            punchedOrThrown.SetCharged();
         }
 
         ObjectScoring objScoring = obj.GetComponent<ObjectScoring>();
@@ -320,23 +351,6 @@ public class CombatSystem : MonoBehaviour
     private void ResetChargedThrowCooldown() => chargeOnCooldown = false;
 
     private float ForceAmplification() => TeddyMovement.Instance.GetMovementAmplification();
-
-    private float CheckPowerAmplification()
-    {
-        if (poweredUp) {
-            float power = powerAmp;
-            powerAmp = 1;
-            poweredUp = false;
-            return power;
-        }else {
-            return powerAmp;
-        }
-    }
-
-    public void PowerUp(float amplification) {
-        poweredUp = true;
-        powerAmp = amplification;
-    }
 
     private void ChargeHoldTimer()
     {
